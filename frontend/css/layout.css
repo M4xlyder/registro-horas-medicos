@@ -1,0 +1,464 @@
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+    display: flex;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: var(--sidebar-width);
+
+    background: #ffffff;
+
+    border-right: 1px solid var(--border);
+
+    padding: 16px 10px;
+
+    overflow-y: auto;
+
+    z-index: 100;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.sidebar-logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px;
+
+    margin-bottom: 15px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.logo-text {
+    line-height: 1.2;
+}
+
+.logo-text strong {
+    display: block;
+
+    font-size: 11px;
+
+    color: var(--text);
+}
+
+.logo-text span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    color: var(--text-secondary);
+}
+
+
+/* =========================================
+   MENU
+========================================= */
+
+.nav-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+/* =========================================
+   ITEM MENU
+========================================= */
+
+.nav-item {
+    min-height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 12px;
+
+    border-radius: 8px;
+
+    color: #475467;
+
+    font-size: 11px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.nav-item:hover {
+    background: #f8fafc;
+
+    color: var(--primary);
+}
+
+
+/* =========================================
+   ICONO
+========================================= */
+
+.nav-icon {
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-icon svg {
+    width: 16px;
+    height: 16px;
+
+    display: block;
+}
+
+
+/* =========================================
+   SECCIÓN PROGRAMACIÓN
+========================================= */
+
+.nav-section {
+    margin-top: 3px;
+}
+
+.nav-section-title {
+    min-height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 12px;
+
+    border-radius: 8px;
+
+    color: #475467;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+.nav-section-title.active {
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-weight: 700;
+}
+
+.nav-section-title .arrow {
+    width: 14px;
+    height: 14px;
+
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-section-title .arrow svg {
+    width: 13px;
+    height: 13px;
+}
+
+
+/* =========================================
+   SUBMENU
+========================================= */
+
+.nav-submenu {
+    margin-top: 3px;
+
+    padding-left: 28px;
+}
+
+.nav-subitem {
+    display: block;
+
+    padding: 9px 12px;
+
+    border-radius: 7px;
+
+    color: #475467;
+
+    font-size: 10px;
+}
+
+.nav-subitem:hover {
+    background: #f8fafc;
+}
+
+.nav-subitem.active {
+    background: var(--primary);
+
+    color: #ffffff;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+    width: calc(
+        100% - var(--sidebar-width)
+    );
+
+    min-height: 100vh;
+
+    margin-left: var(--sidebar-width);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    height: var(--header-height);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* =========================================
+   HEADER IZQUIERDO
+========================================= */
+
+.header-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.hospital-name {
+    padding: 7px 10px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+.header-divider {
+    color: var(--text-light);
+
+    font-size: 12px;
+}
+
+.header-module {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   HEADER DERECHO
+========================================= */
+
+.header-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.header-button {
+    height: 32px;
+
+    padding: 0 10px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #475467;
+
+    font-size: 9px;
+}
+
+.header-button:hover {
+    background: #f8fafc;
+}
+
+.admin-button {
+    background: #eff6ff;
+
+    border-color: #dbeafe;
+
+    color: var(--primary);
+
+    font-weight: 700;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dbeafe;
+
+    color: var(--primary);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   CONTENIDO
+========================================= */
+
+.content {
+    padding: 25px;
+}
+
+.page-title {
+    margin-bottom: 20px;
+}
+
+.page-title h1 {
+    font-size: 22px;
+
+    line-height: 1.3;
+
+    color: var(--text);
+}
+
+.page-title p {
+    margin-top: 5px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   PLACEHOLDER
+========================================= */
+
+.module-placeholder {
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.module-placeholder h2 {
+    margin-bottom: 8px;
+
+    color: var(--text);
+
+    font-size: 15px;
+}
+
+.module-placeholder p {
+    color: var(--text-secondary);
+
+    font-size: 11px;
+}

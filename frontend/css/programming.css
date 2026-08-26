@@ -1,0 +1,1839 @@
+/* =========================================
+   CONTENIDO SUPERIOR
+========================================= */
+
+.page-title {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.page-actions {
+    display: flex;
+
+    gap: 8px;
+}
+
+.secondary-button {
+    height: 34px;
+
+    padding: 0 12px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+.secondary-button:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================================
+   LAYOUT PROGRAMACIÓN
+========================================= */
+
+.programming-layout {
+    display: grid;
+
+    grid-template-columns:
+        265px
+        minmax(0, 1fr);
+
+    gap: 16px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================
+   PANEL FILTROS
+========================================= */
+
+.filters-panel {
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    padding: 15px;
+
+    box-shadow: var(--shadow-sm);
+
+    min-height: 550px;
+}
+
+
+/* =========================================
+   GRUPO FILTRO
+========================================= */
+
+.filter-group {
+    margin-bottom: 16px;
+}
+
+.filter-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #344054;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   SELECT PERSONALIZADO
+========================================= */
+
+.custom-select {
+    position: relative;
+}
+
+.select-button {
+    width: 100%;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 10px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #667085;
+
+    font-size: 10px;
+
+    text-align: left;
+}
+
+.select-button:hover {
+    border-color: #b7c7e8;
+}
+
+.select-dropdown {
+    display: none;
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: calc(100% + 4px);
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    box-shadow: var(--shadow-md);
+
+    z-index: 1000;
+
+    overflow: hidden;
+}
+
+.custom-select.open
+.select-dropdown {
+    display: block;
+}
+
+
+/* =========================================
+   BUSCADOR SELECT
+========================================= */
+
+.select-search {
+    padding: 7px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.select-search input {
+    width: 100%;
+
+    height: 30px;
+
+    padding: 0 8px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 5px;
+
+    outline: none;
+
+    font-size: 10px;
+}
+
+.select-search input:focus {
+    border-color: var(--primary);
+}
+
+
+/* =========================================
+   OPCIONES
+========================================= */
+
+.select-options {
+    max-height: 190px;
+
+    overflow-y: auto;
+}
+
+.select-option {
+    padding: 9px 10px;
+
+    color: #344054;
+
+    font-size: 10px;
+
+    cursor: pointer;
+}
+
+.select-option:hover {
+    background: #eff6ff;
+
+    color: var(--primary);
+}
+
+
+/* =========================================
+   PERSONAL
+========================================= */
+
+.employees-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 18px;
+
+    margin-bottom: 8px;
+}
+
+.employees-title {
+    color: #344054;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.employees-count {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 18px;
+
+    height: 18px;
+
+    margin-left: 4px;
+
+    border-radius: 9px;
+
+    background: #dbeafe;
+
+    color: var(--primary);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   SWITCH
+========================================= */
+
+.active-switch {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    cursor: pointer;
+
+    text-transform: none !important;
+}
+
+.active-switch span:first-child {
+    margin: 0;
+
+    color: var(--success);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.active-switch input {
+    display: none;
+}
+
+.switch-slider {
+    width: 28px;
+
+    height: 16px;
+
+    position: relative;
+
+    border-radius: 10px;
+
+    background: #d0d5dd;
+}
+
+.switch-slider::after {
+    content: "";
+
+    width: 12px;
+    height: 12px;
+
+    position: absolute;
+
+    top: 2px;
+    left: 2px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    transition: left .2s;
+}
+
+.active-switch input:checked
++ .switch-slider {
+    background: var(--success);
+}
+
+.active-switch input:checked
++ .switch-slider::after {
+    left: 14px;
+}
+
+
+/* =========================================
+   BUSCADOR PERSONAL
+========================================= */
+
+.employee-search {
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 11px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #667085;
+}
+
+.employee-search .icon {
+    width: 18px;
+    height: 18px;
+}
+
+.employee-search input {
+    flex: 1;
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #172033;
+
+    font-size: 10px;
+}
+
+.employee-search input::placeholder {
+    color: #98a2b3;
+}
+
+
+/* =========================================
+   LISTA PERSONAL
+========================================= */
+
+.employees-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    max-height: 350px;
+
+    overflow-y: auto;
+}
+
+.employee-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-height: 50px;
+
+    padding: 7px 9px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease;
+}   
+
+.employee-item:hover {
+    background: #f8fafc;
+}
+
+.employee-item.selected {
+    background: #eff6ff;
+
+    color: var(--primary);
+}
+
+.employee-avatar {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.employee-info {
+    min-width: 0;
+}
+
+.employee-name {
+    display: block;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+    color: #344054;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+.employee-specialty {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #98a2b3;
+
+    font-size: 8px;
+}
+
+
+/* =========================================
+   CALENDARIO
+========================================= */
+
+.calendar-panel {
+    min-width: 0;
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow-sm);
+
+    overflow: hidden;
+}
+
+.calendar-header {
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    background: #ffffff;
+}
+
+.calendar-header h2 {
+    font-size: 18px;
+
+    line-height: 1.3;
+
+    color: #172033;
+
+    color: var(--text);
+}
+
+.calendar-header p {
+    margin-top: 4px;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+}
+
+.calendar-actions {
+    display: flex;
+
+    gap: 5px;
+}
+
+.calendar-actions button {
+    height: 34px;
+
+    min-width: 34px;
+
+    padding: 0 10px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+}
+
+.calendar-actions button:hover {
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+    color: var(--primary);
+}
+
+
+/* =========================================
+   CALENDARIO VACÍO
+========================================= */
+
+.calendar-container {
+    width: 100%;
+
+    min-height: 0;
+
+    display: block;
+}
+
+.calendar-empty {
+    max-width: 300px;
+
+    text-align: center;
+
+    color: var(--text-secondary);
+}
+
+.calendar-empty-icon {
+    margin-bottom: 10px;
+
+    font-size: 35px;
+}
+
+.calendar-empty h3 {
+    margin-bottom: 5px;
+
+    color: #344054;
+
+    font-size: 13px;
+}
+
+.calendar-empty p {
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .programming-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-panel {
+        min-height: auto;
+    }
+
+    .main {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main {
+        margin-left: 210px;
+
+        width: calc(
+            100% - 210px
+        );
+    }
+
+    .header-left .hospital-name {
+        display: none;
+    }
+
+    .page-title {
+        flex-direction: column;
+    }
+
+}
+
+/* =========================================
+   CALENDARIO REAL
+========================================= */
+
+.calendar-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, minmax(0, 1fr));
+
+    border-left:
+        1px solid var(--border);
+
+    border-top:
+        1px solid var(--border);
+}
+
+
+/* =========================================
+   CABECERA DÍAS
+========================================= */
+
+.calendar-weekday {
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #f8fafc;
+
+    border-right:
+        1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
+    color: #667085;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+.calendar-weekday.sunday {
+    color: #dc2626;
+}
+
+
+/* =========================================
+   CELDA DÍA
+========================================= */
+
+.calendar-day {
+    min-height: 96px;
+
+    position: relative;
+
+    padding: 8px;
+
+    background: #ffffff;
+
+    border-right:
+        1px solid var(--border);
+
+    border-bottom:
+        1px solid var(--border);
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        box-shadow .15s ease;
+}
+
+.calendar-day:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================================
+   NÚMERO DEL DÍA
+========================================= */
+
+.day-number {
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-left: auto;
+
+    border-radius: 50%;
+
+    color: #667085;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   DÍA ACTUAL
+========================================= */
+
+.calendar-day.today .day-number {
+    background: var(--primary);
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   DÍA SELECCIONADO
+========================================= */
+
+.calendar-day.selected {
+    background: #eff6ff;
+
+    box-shadow:
+        inset 0 0 0 2px var(--primary);
+}
+
+.calendar-day.selected .day-number {
+    background: var(--primary);
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   FINES DE SEMANA
+========================================= */
+
+.calendar-day.weekend {
+    background: #fafafa;
+}
+
+.calendar-day.sunday {
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #ffffff,
+            #ffffff 5px,
+            #fff1f2 5px,
+            #fff1f2 8px
+        );
+}
+
+.calendar-day.sunday:hover {
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #ffffff,
+            #ffffff 5px,
+            #ffe4e6 5px,
+            #ffe4e6 8px
+        );
+}
+
+
+/* =========================================
+   DÍAS FUERA DEL MES
+========================================= */
+
+.calendar-day.other-month {
+    background: #f8fafc;
+
+    cursor: default;
+}
+
+.calendar-day.other-month
+.day-number {
+    color: #d0d5dd;
+}
+
+
+/* =========================================
+   TEXTO DENTRO DEL DÍA
+========================================= */
+
+.day-content {
+    margin-top: 8px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+/* =========================================
+   TURNO
+========================================= */
+
+.schedule-item {
+    padding: 4px 5px;
+
+    border-radius: 4px;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================
+   DÍA DESHABILITADO
+========================================= */
+
+.calendar-day.disabled {
+    cursor: not-allowed;
+
+    opacity: .6;
+}
+
+
+/* =========================================
+   LEYENDA
+========================================= */
+
+.calendar-legend {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    padding: 12px 15px;
+
+    border-top:
+        1px solid var(--border);
+
+    background: #ffffff;
+}
+
+.legend-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #667085;
+
+    font-size: 8px;
+}
+
+.legend-color {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 3px;
+
+    border: 1px solid var(--border);
+}
+
+.legend-color.selected {
+    background: #eff6ff;
+
+    border-color: var(--primary);
+}
+
+.legend-color.today {
+    background: var(--primary);
+
+    border-color: var(--primary);
+}
+
+.legend-color.sunday {
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #ffffff,
+            #ffffff 3px,
+            #fecdd3 3px,
+            #fecdd3 5px
+        );
+}
+
+/* =========================================
+   BARRA DE SELECCIÓN
+========================================= */
+
+.selection-bar {
+    min-height: 64px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 10px 16px;
+
+    border-top: 1px solid var(--border);
+
+    background: #ffffff;
+}
+
+.selection-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #475467;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+.selection-count {
+    min-width: 22px;
+
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 6px;
+
+    border-radius: 11px;
+
+    background: #dbeafe;
+
+    color: var(--primary);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.selection-actions {
+    display: flex;
+
+    gap: 6px;
+}
+
+.selection-button {
+    height: 30px;
+
+    padding: 0 11px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #475467;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+.selection-button:hover {
+    background: #f8fafc;
+}
+
+.selection-button.primary {
+    min-width: 125px;
+
+    height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    border-color: var(--primary);
+
+    background: var(--primary);
+
+    color: #ffffff;
+}
+
+.selection-button.primary:hover {
+    background: var(--primary-dark);
+}
+
+.selection-button:disabled {
+    opacity: .5;
+
+    cursor: not-allowed;
+}
+
+/* =========================================
+   ICONOS SVG
+========================================= */
+
+.icon {
+    width: 17px;
+    height: 17px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.icon svg {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(15, 23, 42, .45);
+
+    backdrop-filter: blur(2px);
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+
+.modal {
+    width: min(560px, 100%);
+
+    max-height: calc(100vh - 40px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 20px 40px rgba(16, 24, 40, .18);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.modal-header {
+    min-height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 15px 18px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.modal-header h2 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+.modal-header p {
+    margin: 4px 0 0;
+
+    color: #667085;
+
+    font-size: 9px;
+}
+
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid transparent;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #667085;
+
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #f2f4f7;
+
+    color: #344054;
+}
+
+.modal-close .icon {
+    width: 16px;
+    height: 16px;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+.modal-body {
+    padding: 18px;
+
+    overflow-y: auto;
+}
+
+
+.form-section {
+    margin-bottom: 18px;
+}
+
+.form-section:last-child {
+    margin-bottom: 0;
+}
+
+
+.form-section-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 8px;
+
+    color: #344054;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.form-count {
+    min-width: 20px;
+    height: 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 5px;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 8px;
+}
+
+
+/* =========================================
+   PERSONAL SELECCIONADO
+========================================= */
+
+.selected-employee {
+    min-height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 9px 11px;
+
+    border: 1px solid #dbe4f0;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+}
+
+.selected-employee-name {
+    color: #172033;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.selected-employee-specialty {
+    margin-top: 2px;
+
+    color: #667085;
+
+    font-size: 8px;
+}
+
+
+/* =========================================
+   FECHAS
+========================================= */
+
+.selected-dates {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    padding: 10px;
+
+    min-height: 42px;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+}
+
+.selected-date {
+    padding: 5px 8px;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 6px;
+
+    background: #eff6ff;
+
+    color: #1d4ed8;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   FORMULARIOS
+========================================= */
+
+.form-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #344054;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.form-label-small {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #667085;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    transition:
+        border-color .15s ease,
+        box-shadow .15s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, .10);
+}
+
+textarea.form-control {
+    height: auto;
+
+    min-height: 78px;
+
+    padding: 9px 10px;
+
+    resize: vertical;
+}
+
+.time-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.modal-footer {
+    min-height: 64px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    border-top:
+        1px solid var(--border);
+
+    background: #f8fafc;
+}
+
+.modal-button {
+    height: 34px;
+
+    padding: 0 14px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.modal-button.secondary {
+    border: 1px solid #d0d5dd;
+
+    background: #ffffff;
+
+    color: #344054;
+}
+
+.modal-button.secondary:hover {
+    background: #f9fafb;
+}
+
+.modal-button.primary {
+    border: 1px solid var(--primary);
+
+    background: var(--primary);
+
+    color: #ffffff;
+}
+
+.modal-button.primary:hover {
+    background: var(--primary-dark);
+}
+
+/* ============================================================
+   TURNOS EN CALENDARIO
+============================================================ */
+
+.day-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    width: 100%;
+
+    padding: 5px 6px;
+
+    margin-top: 4px;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    line-height: 1.15;
+
+    border-left: 3px solid;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+
+/* CÓDIGO */
+
+.schedule-code {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: .3px;
+}
+
+
+/* DESCRIPCIÓN */
+
+.schedule-name {
+    font-size: 9px;
+
+    opacity: .8;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   GUARDIA DIURNA
+============================================================ */
+
+.shift-gd {
+    background: #e8f1ff;
+
+    color: #2456a6;
+
+    border-color: #3b82f6;
+}
+
+
+/* ============================================================
+   GUARDIA NOCTURNA
+============================================================ */
+
+.shift-gn {
+    background: #eee9ff;
+
+    color: #5b3dbb;
+
+    border-color: #7c3aed;
+}
+
+
+/* ============================================================
+   TURNO DÍA
+============================================================ */
+
+.shift-td {
+    background: #e8f7ee;
+
+    color: #19733f;
+
+    border-color: #22a45a;
+}
+
+
+/* ============================================================
+   TURNO NOCHE
+============================================================ */
+
+.shift-tn {
+    background: #e9f4f7;
+
+    color: #176779;
+
+    border-color: #1593a8;
+}
+
+
+/* ============================================================
+   MAÑANA
+============================================================ */
+
+.shift-m {
+    background: #fff4df;
+
+    color: #9a6515;
+
+    border-color: #e9a23b;
+}
+
+
+/* ============================================================
+   TARDE
+============================================================ */
+
+.shift-t {
+    background: #fff0e7;
+
+    color: #a6501c;
+
+    border-color: #e77935;
+}
+
+
+/* ============================================================
+   MAÑANA CONSULTORIO
+============================================================ */
+
+.shift-mc {
+    background: #e9f8f4;
+
+    color: #16745f;
+
+    border-color: #24a889;
+}
+
+
+/* ============================================================
+   TARDE CONSULTORIO
+============================================================ */
+
+.shift-tc {
+    background: #edf3f8;
+
+    color: #315b78;
+
+    border-color: #5184aa;
+}
+
+
+/* ============================================================
+   SALA DE OPERACIONES
+============================================================ */
+
+.shift-msop {
+    background: #f2ecf8;
+
+    color: #6c3d82;
+
+    border-color: #975bb2;
+}
+
+
+/* ============================================================
+   PROCEDIMIENTO
+============================================================ */
+
+.shift-tp {
+    background: #f4f1e8;
+
+    color: #76622b;
+
+    border-color: #ad9651;
+}
+
+
+/* ============================================================
+   TURNO DESCONOCIDO
+============================================================ */
+
+.shift-default {
+    background: #f1f3f5;
+
+    color: #495057;
+
+    border-color: #868e96;
+}
+
+/* ============================================================
+   ARCHIVOS
+============================================================ */
+
+.file-upload {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+
+.file-upload-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    border: 1px solid #d7deea;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #2456a6;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background .2s,
+        border-color .2s;
+}
+
+
+.file-upload-button:hover {
+    background: #f3f7ff;
+
+    border-color: #8fb2ef;
+}
+
+
+.file-upload-button .icon {
+    width: 16px;
+
+    height: 16px;
+}
+
+
+.selected-file-info {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 8px;
+
+    padding: 9px 11px;
+
+    border: 1px solid #e1e6ee;
+
+    border-radius: 6px;
+
+    background: #f8fafc;
+
+    color: #344054;
+
+    font-size: 12px;
+}
+
+
+.file-help {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #667085;
+
+    font-size: 11px;
+}
+
+/* ============================================================
+   BOTONES DE ACCIÓN DE PROGRAMACIÓN
+============================================================ */
+
+.selection-button.warning {
+    color: #8a5a00;
+
+    border-color: #e5c47a;
+
+    background: #fffaf0;
+}
+
+
+.selection-button.warning:hover:not(:disabled) {
+    background: #fff3d6;
+}
+
+
+.selection-button.danger {
+    color: #b42318;
+
+    border-color: #f0b4af;
+
+    background: #fff6f5;
+}
+
+
+.selection-button.danger:hover:not(:disabled) {
+    background: #ffe9e7;
+}
+
+
+.selection-button:disabled {
+    opacity: .45;
+
+    cursor: not-allowed;
+}

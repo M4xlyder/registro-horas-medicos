@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Registro y Control de Reportes
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/reset.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/variables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/layout.css"
+    >
+
+    <link
+    rel="stylesheet"
+    href="css/programming.css"
+    >
+
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <!-- =========================================
+     MODAL REGISTRAR TURNO
+========================================= -->
+
+<div
+    id="scheduleModal"
+    class="modal-overlay hidden"
+>
+
+    <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="scheduleModalTitle"
+    >
+
+        <!-- CABECERA -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="scheduleModalTitle">
+                    Registrar programación
+                </h2>
+
+                <p>
+                    Registre el turno para las fechas seleccionadas.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeScheduleModal"
+                aria-label="Cerrar"
+                title="Cerrar"
+            >
+                <span class="icon">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M6 6l12 12"/>
+                        <path d="M18 6L6 18"/>
+                    </svg>
+                </span>
+            </button>
+
+        </div>
+
+
+        <!-- CONTENIDO -->
+
+        <div class="modal-body">
+
+            <!-- PERSONAL -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    Personal
+                </div>
+
+                <div
+                    id="selectedEmployeeInfo"
+                    class="selected-employee"
+                >
+                </div>
+
+            </div>
+
+
+            <!-- FECHAS -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+
+                    Fechas seleccionadas
+
+                    <span
+                        id="modalDateCount"
+                        class="form-count"
+                    >
+                        0
+                    </span>
+
+                </div>
+
+                <div
+                    id="selectedDatesList"
+                    class="selected-dates"
+                >
+                </div>
+
+            </div>
+
+
+            <!-- TIPO DE TURNO -->
+
+            <div class="form-section">
+
+                <label
+                    for="shiftType"
+                    class="form-label"
+                >
+                    Tipo de turno
+                </label>
+
+                <select
+                    id="shiftType"
+                    class="form-control"
+                >
+
+                    <option value="">
+                        Seleccione un turno
+                    </option>
+
+                    <option value="GD">
+                        GD — Guardia Diurna
+                    </option>
+
+                    <option value="GN">
+                        GN — Guardia Nocturna
+                    </option>
+
+                    <option value="TD">
+                        TD — Turno Día
+                    </option>
+
+                    <option value="TN">
+                        TN — Turno Noche
+                    </option>
+
+                    <option value="M">
+                        M — Mañana
+                    </option>
+
+                    <option value="T">
+                        T — Tarde
+                    </option>
+
+                    <option value="MC">
+                        MC — Mañana Consultorio
+                    </option>
+
+                    <option value="TC">
+                        TC — Tarde Consultorio
+                    </option>
+
+                    <option value="MSOP">
+                        MSOP — Mañana Sala de Operaciones
+                    </option>
+
+                    <option value="TP">
+                        TP — Turno Procedimiento
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- HORARIO -->
+
+            <div class="form-section">
+
+                <div class="form-label">
+                    Horario
+                </div>
+
+                <div class="time-grid">
+
+                    <div>
+
+                        <label
+                            for="startTime"
+                            class="form-label-small"
+                        >
+                            Hora de entrada
+                        </label>
+
+                        <input
+                            type="time"
+                            id="startTime"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label
+                            for="endTime"
+                            class="form-label-small"
+                        >
+                            Hora de salida
+                        </label>
+
+                        <input
+                            type="time"
+                            id="endTime"
+                            class="form-control"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- OBSERVACIONES -->
+
+            <div class="form-section">
+
+                <label
+                    for="scheduleNotes"
+                    class="form-label"
+                >
+                    Observaciones
+                </label>
+
+                <textarea
+                    id="scheduleNotes"
+                    class="form-control textarea"
+                    rows="3"
+                    placeholder="Ingrese alguna observación..."
+                ></textarea>
+
+                <!-- ARCHIVO ADJUNTO -->
+
+<div class="form-section">
+
+    <label
+        for="scheduleFile"
+        class="form-label"
+    >
+        Archivo adjunto
+    </label>
+
+    <div class="file-upload">
+
+        <label
+            for="scheduleFile"
+            class="file-upload-button"
+        >
+
+            <span class="icon">
+                ${icons.documents}
+            </span>
+
+            Seleccionar archivo
+
+        </label>
+
+        <input
+            type="file"
+            id="scheduleFile"
+            accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
+        >
+
+    </div>
+
+    <div
+        id="selectedFileInfo"
+        class="selected-file-info"
+    >
+        No se ha seleccionado ningún archivo.
+    </div>
+
+    <small class="file-help">
+        PDF, Word, Excel o imágenes. Tamaño máximo: 5 MB.
+    </small>
+
+</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+<div class="modal-footer">
+
+    <button
+        type="button"
+        class="modal-button secondary"
+        id="cancelScheduleModal"
+    >
+        Cancelar
+    </button>
+
+    <button
+        type="button"
+        class="modal-button primary"
+        id="saveSchedule"
+    >
+        Guardar programación
+    </button>
+
+</div>
+
+    </div>
+
+</div>
+
+    <script
+        type="module"
+        src="js/app.js"
+    ></script>
+
+</body>
+
+</html>
