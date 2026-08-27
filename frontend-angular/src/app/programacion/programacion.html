@@ -1,0 +1,1630 @@
+<div class="programacion-page">
+
+  <!-- =====================================================
+       ENCABEZADO
+  ====================================================== -->
+
+  <div class="breadcrumb">
+    Hospital San Juan Bautista de Huaral / Programación
+  </div>
+
+  <div class="page-header">
+
+    <div>
+      <h1>Programación de Personal</h1>
+
+      <p>
+        Registro y control de la programación horaria del personal sanitario.
+      </p>
+    </div>
+
+    <div class="header-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="exportar()"
+      >
+        ↓ Exportar
+      </button>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="imprimir()"
+      >
+        🖨 Imprimir
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       CONTENIDO PRINCIPAL
+  ====================================================== -->
+
+  <div class="programacion-layout">
+
+
+    <!-- ===================================================
+         SIDEBAR
+    ==================================================== -->
+
+    <aside class="sidebar-panel">
+
+
+      <!-- DEPARTAMENTO -->
+
+      <div class="filter-group">
+
+        <label>DEPARTAMENTO</label>
+
+        <select
+          [(ngModel)]="departamentoSeleccionado"
+        >
+
+          <option value="">
+            Seleccione una opción
+          </option>
+
+          <option
+            *ngFor="let departamento of departamentos"
+            [value]="departamento"
+          >
+            {{ departamento }}
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- ESPECIALIDAD -->
+
+      <div class="filter-group">
+
+        <label>ESPECIALIDAD</label>
+
+        <select
+          [(ngModel)]="especialidadSeleccionada"
+        >
+
+          <option value="">
+            Seleccione una opción
+          </option>
+
+          <option
+            *ngFor="let especialidad of especialidades"
+            [value]="especialidad"
+          >
+            {{ especialidad }}
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- PERSONAL -->
+
+      <div class="personal-header">
+
+        <span>
+          PERSONAL
+          <b>
+            {{ personalFiltrado.length }}
+          </b>
+        </span>
+
+        <label class="switch-label">
+
+          Activos
+
+          <input
+            type="checkbox"
+            [(ngModel)]="mostrarActivos"
+          >
+
+          <span class="switch"></span>
+
+        </label>
+
+      </div>
+
+
+      <!-- BUSCADOR -->
+
+      <div class="search-box">
+
+        <span>🔍</span>
+
+        <input
+          type="text"
+          placeholder="Buscar personal..."
+          [(ngModel)]="buscarPersonal"
+        >
+
+      </div>
+
+
+      <!-- LISTA DE PERSONAL -->
+
+      <div class="personal-list">
+
+        <button
+          type="button"
+          *ngFor="let persona of personalFiltrado"
+          class="personal-item"
+          [class.selected]="
+            persona.id === personalSeleccionado?.id
+          "
+          (click)="seleccionarPersonal(persona)"
+        >
+
+          <span class="avatar">
+            {{ persona.iniciales }}
+          </span>
+
+          <span class="personal-info">
+
+            <strong>
+              {{ persona.nombres }} {{ persona.apellidos }}
+            </strong>
+
+            <small>
+              {{ persona.especialidad }}
+            </small>
+
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           INFORMACIÓN DE HORAS
+      ================================================== -->
+
+      <div class="monthly-summary">
+
+        <h3>Resumen mensual</h3>
+
+        <div class="summary-row">
+
+          <span>
+            Horas programadas
+          </span>
+
+          <strong>
+            {{ horasMensuales }} h
+          </strong>
+
+        </div>
+
+        <div class="summary-row">
+
+          <span>
+            Meta mensual
+          </span>
+
+          <strong>
+            {{ HORAS_MENSUALES }} h
+          </strong>
+
+        </div>
+
+        <div
+          class="summary-status"
+          [class.success]="cumpleHorasMensuales"
+          [class.warning]="!cumpleHorasMensuales"
+        >
+
+          <span
+            *ngIf="cumpleHorasMensuales"
+          >
+            ✓ Cumple horas mensuales
+          </span>
+
+          <span
+            *ngIf="!cumpleHorasMensuales"
+          >
+            ⚠ Faltan
+            {{ HORAS_MENSUALES - horasMensuales }}
+            horas
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           TIPOS DE TURNO
+      ================================================== -->
+
+      <div class="legend sidebar-legend">
+
+        <h3>Tipos de turno</h3>
+
+        <div
+          *ngFor="let turno of turnos"
+          class="legend-item"
+        >
+
+          <span
+            class="legend-color"
+            [class]="'turno-' + turno.color"
+          ></span>
+
+          <strong>
+            {{ turno.siglas }}
+          </strong>
+
+          <span>
+            - {{ turno.nombre }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         CALENDARIO
+    ==================================================== -->
+
+    <main class="calendar-panel">
+
+
+      <!-- CABECERA -->
+
+      <div class="calendar-header">
+
+        <div>
+
+          <h2>
+            {{ nombreMes }}
+          </h2>
+
+          <p>
+            Seleccione uno o más días para registrar la programación.
+          </p>
+
+        </div>
+
+
+        <div class="calendar-navigation">
+
+          <button
+            type="button"
+            (click)="mesAnterior()"
+          >
+            ‹
+          </button>
+
+          <button
+            type="button"
+            (click)="irHoy()"
+          >
+            Hoy
+          </button>
+
+          <button
+            type="button"
+            (click)="mesSiguiente()"
+          >
+            ›
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           DÍAS DE SEMANA
+      ================================================== -->
+
+      <div class="calendar-week">
+
+        <div
+          *ngFor="let dia of diasSemana"
+          class="week-day"
+          [class.sunday]="dia === 'DOM'"
+        >
+          {{ dia }}
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           CUADRÍCULA
+      ================================================== -->
+
+      <div class="calendar-grid">
+
+        <div
+          *ngFor="let dia of diasCalendario"
+
+          class="calendar-day"
+
+          [class.other-month]="
+            !esMesActual(dia)
+          "
+
+          [class.selected]="
+            estaSeleccionado(dia)
+          "
+
+          (click)="
+            seleccionarDia(dia)
+          "
+        >
+
+          <!-- NÚMERO DEL DÍA -->
+
+          <div class="day-number">
+
+            {{ dia.getDate() }}
+
+          </div>
+
+
+          <!-- =================================================
+               TURNOS DEL DÍA
+          ================================================== -->
+
+          <div class="day-shifts">
+
+            <div
+              *ngFor="
+                let programacion of getProgramaciones(dia)
+              "
+
+              class="shift-card"
+
+              [ngClass]="
+                obtenerClaseTurno(programacion)
+              "
+
+              (click)="
+                $event.stopPropagation()
+              "
+
+              (contextmenu)="
+                mostrarMenu(
+                  $event,
+                  programacion
+                )
+              "
+            >
+
+              <!-- SIGLAS -->
+
+              <div class="shift-code">
+
+                {{ programacion.siglas }}
+
+              </div>
+
+
+              <!-- SIGNIFICADO -->
+
+              <div class="shift-name">
+
+                {{ programacion.nombreTurno }}
+
+              </div>
+
+
+              <!-- DURACIÓN -->
+
+              <div class="shift-hours">
+
+                {{ programacion.duracion }} horas
+
+              </div>
+
+
+              <!-- OBSERVACIÓN -->
+
+              <div
+                class="shift-observation"
+                *ngIf="programacion.observacion"
+              >
+
+                {{ programacion.observacion }}
+
+              </div>
+
+
+              <!-- VARIANTE -->
+
+              <div
+                class="shift-variant"
+                *ngIf="
+                  programacion.tipo === 'VARIANTE'
+                "
+              >
+
+                Variante
+
+              </div>
+
+
+              <!-- DOCUMENTO -->
+
+              <button
+                *ngIf="
+                  programacion.archivoNombre
+                "
+
+                type="button"
+
+                class="document-button"
+
+                (click)="
+                  $event.stopPropagation();
+                  abrirDocumento(programacion)
+                "
+              >
+
+                📎
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           ACCIONES
+      ================================================== -->
+
+      <div class="calendar-actions">
+
+
+        <div class="selected-counter">
+
+          <strong>
+            {{ fechasSeleccionadas.length }}
+          </strong>
+
+          días seleccionados
+
+        </div>
+
+
+        <div class="action-buttons">
+
+
+          <!-- LIMPIAR -->
+
+          <button
+            type="button"
+            class="clear-button"
+            [disabled]="
+              fechasSeleccionadas.length === 0
+            "
+            (click)="limpiarSeleccion()"
+          >
+
+            Limpiar
+
+          </button>
+
+
+          <!-- MODIFICAR -->
+
+          <button
+            type="button"
+            class="modify-button"
+
+            [disabled]="
+              fechasSeleccionadas.length === 0
+            "
+
+            (click)="
+              modificarTurno()
+            "
+          >
+
+            ✎
+
+            <span>
+              Modificar turno
+            </span>
+
+          </button>
+
+
+          <!-- ELIMINAR -->
+
+          <button
+            type="button"
+            class="delete-button"
+
+            [disabled]="
+              fechasSeleccionadas.length === 0
+            "
+
+            (click)="
+              eliminarTurno()
+            "
+          >
+
+            🗑
+
+            <span>
+              Eliminar turno
+            </span>
+
+          </button>
+
+
+          <!-- REGISTRAR -->
+
+          <button
+            type="button"
+            class="register-button"
+
+            [disabled]="
+              fechasSeleccionadas.length === 0
+            "
+
+            (click)="
+              abrirModalRegistro()
+            "
+          >
+
+            +
+
+            <span>
+              Registrar turno
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     MENÚ CONTEXTUAL
+======================================================== -->
+
+<div
+  *ngIf="mostrarMenuContextual"
+
+  class="context-menu"
+
+  [style.left.px]="menuX"
+
+  [style.top.px]="menuY"
+>
+
+  <button
+    type="button"
+    (click)="modificarDesdeMenu()"
+  >
+
+    ✎
+
+    Modificar turno
+
+  </button>
+
+
+  <button
+    type="button"
+    class="danger"
+
+    (click)="eliminarDesdeMenu()"
+  >
+
+    🗑
+
+    Eliminar turno
+
+  </button>
+
+</div>
+
+
+<!-- =======================================================
+     MODAL REGISTRAR
+======================================================== -->
+
+<div
+  *ngIf="mostrarModal"
+
+  class="modal-overlay"
+
+  (click)="cerrarModal()"
+>
+
+  <div
+    class="modal"
+
+    (click)="$event.stopPropagation()"
+  >
+
+
+    <!-- HEADER -->
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2>
+          Registrar programación
+        </h2>
+
+        <p>
+          Complete la información del turno.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="modal-close"
+
+        (click)="cerrarModal()"
+      >
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <!-- BODY -->
+
+    <div class="modal-body">
+
+
+      <!-- PERSONAL -->
+
+      <div class="form-section">
+
+        <label>
+          Personal
+        </label>
+
+        <div class="selected-person">
+
+          <span class="avatar">
+
+            {{ personalSeleccionado?.iniciales }}
+
+          </span>
+
+          <div>
+
+            <strong>
+
+              {{ personalSeleccionado?.nombres }}
+
+              {{ personalSeleccionado?.apellidos }}
+
+            </strong>
+
+            <small>
+
+              {{ personalSeleccionado?.especialidad }}
+
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FECHAS -->
+
+      <div class="form-section">
+
+        <label>
+          Fechas seleccionadas
+        </label>
+
+        <div class="selected-dates">
+
+          <span
+            *ngFor="
+              let fecha of fechasSeleccionadas
+            "
+          >
+
+            {{ fecha }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           TIPO DE TURNO
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Tipo de turno
+        </label>
+
+        <select
+          class="form-input"
+
+          [(ngModel)]="turnoSeleccionadoId"
+
+          (ngModelChange)="cambioTurno()"
+        >
+
+          <option
+            *ngFor="let turno of turnos"
+
+            [ngValue]="turno.id"
+          >
+
+            {{ turno.siglas }}
+
+            -
+
+            {{ turno.nombre }}
+
+            -
+
+            {{ turno.duracion }}
+
+            horas
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- =================================================
+           INFORMACIÓN DEL TURNO
+      ================================================== -->
+
+      <div
+        class="turno-info"
+
+        *ngIf="turnoSeleccionado"
+      >
+
+        <div>
+
+          <span>
+            Siglas
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.siglas }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Significado
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.nombre }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Observación
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.observacion }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Duración base
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.duracion }} horas
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           DURACIÓN PERSONALIZADA
+      ================================================== -->
+
+      <div class="custom-duration-section">
+
+        <label class="checkbox-label">
+
+          <input
+            type="checkbox"
+
+            [(ngModel)]="
+              usarDuracionPersonalizada
+            "
+
+            (ngModelChange)="
+              cambioTurno()
+            "
+          >
+
+          Modificar duración para esta programación
+
+        </label>
+
+
+        <div
+          class="duration-editor"
+
+          *ngIf="
+            usarDuracionPersonalizada
+          "
+        >
+
+          <label>
+            Nueva duración
+          </label>
+
+          <div class="duration-input">
+
+            <input
+              type="number"
+
+              min="1"
+
+              max="24"
+
+              step="1"
+
+              [(ngModel)]="
+                duracionPersonalizada
+              "
+            >
+
+            <span>
+              horas
+            </span>
+
+          </div>
+
+
+          <div class="variant-warning">
+
+            <span>
+              !
+            </span>
+
+            <div>
+
+              <strong>
+                Se creará una variante del horario
+              </strong>
+
+              <p>
+                El horario base no será modificado.
+                Esta programación tendrá un nuevo ID.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           OBSERVACIÓN
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Observación
+        </label>
+
+        <textarea
+          class="form-input"
+
+          rows="3"
+
+          placeholder="Ingrese una observación..."
+
+          [(ngModel)]="observacion"
+        ></textarea>
+
+      </div>
+
+
+      <!-- =================================================
+           JUSTIFICACIÓN
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Justificación
+        </label>
+
+        <textarea
+          class="form-input"
+
+          rows="3"
+
+          placeholder="Ingrese la justificación si corresponde..."
+
+          [(ngModel)]="justificacion"
+        ></textarea>
+
+      </div>
+
+
+      <!-- =================================================
+           DOCUMENTO
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Documento adjunto
+        </label>
+
+        <div class="file-upload">
+
+          <input
+            id="archivoProgramacion"
+
+            type="file"
+
+            accept="
+              .pdf,
+              .doc,
+              .docx,
+              .jpg,
+              .jpeg,
+              .png,
+              .webp
+            "
+
+            (change)="
+              seleccionarArchivo($event)
+            "
+          >
+
+          <label
+            for="archivoProgramacion"
+
+            class="file-label"
+          >
+
+            📎
+
+            <span>
+
+              {{
+                archivoNombre ||
+                'Seleccionar documento'
+              }}
+
+            </span>
+
+          </label>
+
+          <small>
+            PDF, Word, JPG, PNG o WEBP · Máximo 7 MB
+          </small>
+
+        </div>
+
+
+        <!-- ARCHIVO SELECCIONADO -->
+
+        <div
+          *ngIf="archivoNombre"
+
+          class="file-selected"
+        >
+
+          <span>
+            ✓
+          </span>
+
+          <span>
+            {{ archivoNombre }}
+          </span>
+
+          <button
+            type="button"
+
+            (click)="
+              eliminarArchivo()
+            "
+          >
+
+            ×
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+
+        class="cancel-button"
+
+        (click)="cerrarModal()"
+      >
+
+        Cancelar
+
+      </button>
+
+
+      <button
+        type="button"
+
+        class="save-button"
+
+        (click)="guardarProgramacion()"
+      >
+
+        ✓
+
+        Registrar turno
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     MODAL MODIFICAR
+======================================================== -->
+
+<div
+  *ngIf="mostrarModalModificar"
+
+  class="modal-overlay"
+
+  (click)="cerrarModalModificar()"
+>
+
+  <div
+    class="modal"
+
+    (click)="$event.stopPropagation()"
+  >
+
+
+    <!-- HEADER -->
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2>
+          Modificar programación
+        </h2>
+
+        <p>
+          Modifique la información sin alterar el turno base.
+        </p>
+
+      </div>
+
+
+      <button
+        type="button"
+
+        class="modal-close"
+
+        (click)="cerrarModalModificar()"
+      >
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <!-- BODY -->
+
+    <div class="modal-body">
+
+
+      <!-- PERSONAL -->
+
+      <div class="form-section">
+
+        <label>
+          Personal
+        </label>
+
+        <div class="selected-person">
+
+          <span class="avatar">
+
+            {{ personalSeleccionado?.iniciales }}
+
+          </span>
+
+          <div>
+
+            <strong>
+
+              {{ personalSeleccionado?.nombres }}
+
+              {{ personalSeleccionado?.apellidos }}
+
+            </strong>
+
+            <small>
+
+              {{ personalSeleccionado?.especialidad }}
+
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FECHAS -->
+
+      <div class="form-section">
+
+        <label>
+          Fechas seleccionadas
+        </label>
+
+        <div class="selected-dates">
+
+          <span
+            *ngFor="
+              let programacion of programacionesEditando
+            "
+          >
+
+            {{ programacion.fecha }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           TIPO DE TURNO
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Tipo de turno
+        </label>
+
+        <select
+          class="form-input"
+
+          [(ngModel)]="turnoSeleccionadoId"
+
+          (ngModelChange)="cambioTurno()"
+        >
+
+          <option
+            *ngFor="let turno of turnos"
+
+            [ngValue]="turno.id"
+          >
+
+            {{ turno.siglas }}
+
+            -
+
+            {{ turno.nombre }}
+
+            -
+
+            {{ turno.duracion }}
+
+            horas
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- =================================================
+           INFORMACIÓN
+      ================================================== -->
+
+      <div
+        class="turno-info"
+
+        *ngIf="turnoSeleccionado"
+      >
+
+        <div>
+
+          <span>
+            Siglas
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.siglas }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Significado
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.nombre }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Observación
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.observacion }}
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Duración base
+          </span>
+
+          <strong>
+            {{ turnoSeleccionado.duracion }} horas
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           MODIFICAR DURACIÓN
+      ================================================== -->
+
+      <div class="custom-duration-section">
+
+        <label class="checkbox-label">
+
+          <input
+            type="checkbox"
+
+            [(ngModel)]="
+              usarDuracionPersonalizada
+            "
+
+            (ngModelChange)="
+              cambioTurno()
+            "
+          >
+
+          Modificar duración
+
+        </label>
+
+
+        <div
+          class="duration-editor"
+
+          *ngIf="
+            usarDuracionPersonalizada
+          "
+        >
+
+          <label>
+            Nueva duración
+          </label>
+
+          <div class="duration-input">
+
+            <input
+              type="number"
+
+              min="1"
+
+              max="24"
+
+              step="1"
+
+              [(ngModel)]="
+                duracionPersonalizada
+              "
+            >
+
+            <span>
+              horas
+            </span>
+
+          </div>
+
+
+          <div class="variant-warning">
+
+            <span>
+              !
+            </span>
+
+            <div>
+
+              <strong>
+                Se creará una nueva variante
+              </strong>
+
+              <p>
+                El horario original permanecerá intacto.
+                La modificación tendrá su propio ID.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           OBSERVACIÓN
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Observación
+        </label>
+
+        <textarea
+          class="form-input"
+
+          rows="3"
+
+          placeholder="Ingrese una observación..."
+
+          [(ngModel)]="observacion"
+        ></textarea>
+
+      </div>
+
+
+      <!-- =================================================
+           JUSTIFICACIÓN
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Justificación
+        </label>
+
+        <textarea
+          class="form-input"
+
+          rows="3"
+
+          placeholder="Ingrese la justificación si corresponde..."
+
+          [(ngModel)]="justificacion"
+        ></textarea>
+
+      </div>
+
+
+      <!-- =================================================
+           DOCUMENTO
+      ================================================== -->
+
+      <div class="form-section">
+
+        <label>
+          Documento adjunto
+        </label>
+
+        <div class="file-upload">
+
+          <input
+            id="archivoModificar"
+
+            type="file"
+
+            accept="
+              .pdf,
+              .doc,
+              .docx,
+              .jpg,
+              .jpeg,
+              .png,
+              .webp
+            "
+
+            (change)="
+              seleccionarArchivo($event)
+            "
+          >
+
+          <label
+            for="archivoModificar"
+
+            class="file-label"
+          >
+
+            📎
+
+            <span>
+
+              {{
+                archivoNombre ||
+                'Seleccionar documento'
+              }}
+
+            </span>
+
+          </label>
+
+          <small>
+            PDF, Word, JPG, PNG o WEBP · Máximo 7 MB
+          </small>
+
+        </div>
+
+
+        <div
+          *ngIf="archivoNombre"
+
+          class="file-selected"
+        >
+
+          <span>
+            ✓
+          </span>
+
+          <span>
+            {{ archivoNombre }}
+          </span>
+
+          <button
+            type="button"
+
+            (click)="
+              eliminarArchivo()
+            "
+          >
+
+            ×
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="modal-footer">
+
+      <button
+        type="button"
+
+        class="cancel-button"
+
+        (click)="
+          cerrarModalModificar()
+        "
+      >
+
+        Cancelar
+
+      </button>
+
+
+      <button
+        type="button"
+
+        class="save-button"
+
+        (click)="
+          guardarCambios()
+        "
+      >
+
+        ✓
+
+        Guardar cambios
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

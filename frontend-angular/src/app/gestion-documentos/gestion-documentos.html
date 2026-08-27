@@ -1,0 +1,804 @@
+<div class="documentos-page">
+
+  <!-- =====================================================
+       BREADCRUMB
+       ===================================================== -->
+
+  <div class="breadcrumb">
+
+    <span>
+      Hospital San Juan Bautista de Huaral
+    </span>
+
+    <span>/</span>
+
+    <span>
+      Gestión de documentos
+    </span>
+
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="page-header">
+
+    <div>
+
+      <h1>
+        Gestión de documentos
+      </h1>
+
+      <p>
+        Consulta y administración de los documentos
+        asociados a la programación del personal.
+      </p>
+
+    </div>
+
+
+    <div class="header-period">
+
+      <span>
+        PERIODO
+      </span>
+
+      <strong>
+        Agosto 2026
+      </strong>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       CONTENIDO
+       ===================================================== -->
+
+  <main class="documentos-content">
+
+
+    <!-- ===================================================
+         ESTADÍSTICAS
+         =================================================== -->
+
+    <section class="stats-grid">
+
+
+      <!-- TOTAL -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon blue">
+          ▣
+        </div>
+
+        <div>
+
+          <span>
+            Total documentos
+          </span>
+
+          <strong>
+            {{ totalDocumentos }}
+          </strong>
+
+          <small>
+            registrados
+          </small>
+
+        </div>
+
+      </article>
+
+
+      <!-- PENDIENTES -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon yellow">
+          !
+        </div>
+
+        <div>
+
+          <span>
+            Pendientes
+          </span>
+
+          <strong>
+            {{ documentosPendientes }}
+          </strong>
+
+          <small>
+            requieren revisión
+          </small>
+
+        </div>
+
+      </article>
+
+
+      <!-- REVISADOS -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon green">
+          ✓
+        </div>
+
+        <div>
+
+          <span>
+            Revisados
+          </span>
+
+          <strong>
+            {{ documentosRevisados }}
+          </strong>
+
+          <small>
+            documentos verificados
+          </small>
+
+        </div>
+
+      </article>
+
+
+      <!-- LÍMITE -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon purple">
+          MB
+        </div>
+
+        <div>
+
+          <span>
+            Límite por archivo
+          </span>
+
+          <strong>
+            5
+          </strong>
+
+          <small>
+            MB máximo
+          </small>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- ===================================================
+         FILTROS
+         =================================================== -->
+
+    <section class="filter-card">
+
+      <div class="filter-title">
+
+        <h2>
+          Documentos registrados
+        </h2>
+
+        <span>
+          {{ documentosFiltrados.length }} resultados
+        </span>
+
+      </div>
+
+
+      <div class="filters">
+
+
+        <!-- BUSCAR -->
+
+        <div class="search-box">
+
+          <span>
+            🔎
+          </span>
+
+          <input
+            type="text"
+            placeholder="Buscar médico, especialidad o archivo..."
+            [(ngModel)]="busqueda"
+          />
+
+        </div>
+
+
+        <!-- ESPECIALIDAD -->
+
+        <div class="filter-field">
+
+          <label>
+            Especialidad
+          </label>
+
+          <select
+            [(ngModel)]="filtroEspecialidad"
+          >
+
+            <option
+              *ngFor="let especialidad of especialidades"
+              [value]="especialidad"
+            >
+              {{ especialidad }}
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- ESTADO -->
+
+        <div class="filter-field">
+
+          <label>
+            Estado
+          </label>
+
+          <select
+            [(ngModel)]="filtroEstado"
+          >
+
+            <option value="Todos">
+              Todos
+            </option>
+
+            <option value="Pendiente">
+              Pendiente
+            </option>
+
+            <option value="Revisado">
+              Revisado
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- LIMPIAR -->
+
+        <button
+          class="clear-button"
+          type="button"
+          (click)="limpiarFiltros()"
+        >
+          Limpiar filtros
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         TABLA
+         =================================================== -->
+
+    <section class="table-card">
+
+      <div class="table-container">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                MÉDICO
+              </th>
+
+              <th>
+                ESPECIALIDAD
+              </th>
+
+              <th>
+                FECHA
+              </th>
+
+              <th>
+                TURNO
+              </th>
+
+              <th>
+                HORAS
+              </th>
+
+              <th>
+                DOCUMENTO
+              </th>
+
+              <th>
+                ESTADO
+              </th>
+
+              <th>
+                ACCIONES
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <tr
+              *ngFor="
+                let documento of documentosFiltrados
+              "
+            >
+
+
+              <!-- MÉDICO -->
+
+              <td>
+
+                <div class="doctor-cell">
+
+                  <div class="doctor-avatar">
+                    {{ documento.iniciales }}
+                  </div>
+
+                  <strong>
+                    {{ documento.medico }}
+                  </strong>
+
+                </div>
+
+              </td>
+
+
+              <!-- ESPECIALIDAD -->
+
+              <td>
+
+                <span class="specialty">
+                  {{ documento.especialidad }}
+                </span>
+
+              </td>
+
+
+              <!-- FECHA -->
+
+              <td>
+
+                <span class="date">
+                  {{ documento.fecha }}
+                </span>
+
+              </td>
+
+
+              <!-- TURNO -->
+
+              <td>
+
+                <div class="shift-cell">
+
+                  <span
+                    class="shift-code"
+                    [ngClass]="{
+                      'green': documento.turno === 'GD',
+                      'blue': documento.turno === 'GN',
+                      'cyan': documento.turno === 'TD',
+                      'teal': documento.turno === 'TN',
+                      'yellow': documento.turno === 'M',
+                      'red': documento.turno === 'T'
+                    }"
+                  >
+                    {{ documento.turno }}
+                  </span>
+
+                  <span>
+                    {{ documento.nombreTurno }}
+                  </span>
+
+                </div>
+
+              </td>
+
+
+              <!-- HORAS -->
+
+              <td>
+
+                <strong class="hours">
+                  {{ documento.horas }} h
+                </strong>
+
+              </td>
+
+
+              <!-- DOCUMENTO -->
+
+              <td>
+
+                <div class="file-cell">
+
+                  <div class="file-icon">
+                    PDF
+                  </div>
+
+                  <div class="file-information">
+
+                    <strong>
+                      {{ documento.nombreArchivo }}
+                    </strong>
+
+                    <small>
+                      {{ documento.tipoArchivo }}
+                      ·
+                      {{ documento.tamanio }}
+                    </small>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <!-- ESTADO -->
+
+              <td>
+
+                <button
+                  type="button"
+                  class="status"
+                  [class.pending]="
+                    documento.estado === 'Pendiente'
+                  "
+                  [class.reviewed]="
+                    documento.estado === 'Revisado'
+                  "
+                  (click)="cambiarEstado(documento)"
+                  title="Cambiar estado"
+                >
+
+                  <span>
+                    {{
+                      documento.estado === 'Revisado'
+                        ? '✓'
+                        : '!'
+                    }}
+                  </span>
+
+                  {{ documento.estado }}
+
+                </button>
+
+              </td>
+
+
+              <!-- ACCIONES -->
+
+              <td>
+
+                <div class="actions">
+
+                  <button
+                    type="button"
+                    class="action-button view"
+                    title="Ver documento"
+                    (click)="verDocumento(documento)"
+                  >
+                    👁
+                  </button>
+
+                  <button
+                    type="button"
+                    class="action-button download"
+                    title="Descargar"
+                    (click)="descargarDocumento(documento)"
+                  >
+                    ↓
+                  </button>
+
+                  <button
+                    type="button"
+                    class="action-button delete"
+                    title="Eliminar"
+                    (click)="eliminarDocumento(documento)"
+                  >
+                    🗑
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+
+            <!-- =================================================
+                 SIN RESULTADOS
+                 ================================================= -->
+
+            <tr
+              *ngIf="documentosFiltrados.length === 0"
+            >
+
+              <td
+                colspan="8"
+                class="empty-state"
+              >
+
+                <div>
+
+                  <span>
+                    📄
+                  </span>
+
+                  <strong>
+                    No se encontraron documentos
+                  </strong>
+
+                  <small>
+                    Prueba modificando los filtros de búsqueda.
+                  </small>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         INFORMACIÓN
+         =================================================== -->
+
+    <div class="information-note">
+
+      <span>
+        i
+      </span>
+
+      <div>
+
+        <strong>
+          Documentos asociados a programación
+        </strong>
+
+        <p>
+          Los documentos mostrados corresponden a archivos
+          adjuntados desde el módulo de Programación.
+          El límite establecido actualmente es de 5 MB por archivo.
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================================
+       MODAL VISTA PREVIA
+       ===================================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarVistaPrevia"
+    (click)="cerrarVistaPrevia()"
+  >
+
+    <div
+      class="modal"
+      (click)="$event.stopPropagation()"
+    >
+
+
+      <!-- HEADER -->
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            Documento
+          </h2>
+
+          <p>
+            Información del archivo seleccionado
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="close-button"
+          (click)="cerrarVistaPrevia()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- BODY -->
+
+      <div
+        class="modal-body"
+        *ngIf="documentoSeleccionado"
+      >
+
+        <div class="preview-icon">
+          PDF
+        </div>
+
+
+        <h3>
+          {{ documentoSeleccionado.nombreArchivo }}
+        </h3>
+
+
+        <p class="preview-size">
+
+          {{ documentoSeleccionado.tipoArchivo }}
+
+          ·
+
+          {{ documentoSeleccionado.tamanio }}
+
+        </p>
+
+
+        <div class="document-details">
+
+
+          <div>
+
+            <span>
+              Médico
+            </span>
+
+            <strong>
+              {{ documentoSeleccionado.medico }}
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Especialidad
+            </span>
+
+            <strong>
+              {{ documentoSeleccionado.especialidad }}
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Fecha
+            </span>
+
+            <strong>
+              {{ documentoSeleccionado.fecha }}
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Turno
+            </span>
+
+            <strong>
+              {{ documentoSeleccionado.turno }}
+              -
+              {{ documentoSeleccionado.nombreTurno }}
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Duración
+            </span>
+
+            <strong>
+              {{ documentoSeleccionado.horas }} horas
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              Estado
+            </span>
+
+            <strong>
+              {{ documentoSeleccionado.estado }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="preview-placeholder">
+
+          <span>
+            📄
+          </span>
+
+          <strong>
+            Vista previa del documento
+          </strong>
+
+          <small>
+            La visualización real del archivo se habilitará
+            cuando conectemos el almacenamiento con el backend.
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="cancel-button"
+          (click)="cerrarVistaPrevia()"
+        >
+          Cerrar
+        </button>
+
+        <button
+          type="button"
+          class="download-button"
+          *ngIf="documentoSeleccionado"
+          (click)="descargarDocumento(documentoSeleccionado)"
+        >
+          Descargar documento
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

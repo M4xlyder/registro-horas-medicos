@@ -1,0 +1,3262 @@
+<div class="configuracion-page">
+
+  <!-- =====================================================
+       BREADCRUMB
+       ===================================================== -->
+
+  <div class="breadcrumb">
+
+    <span>Hospital San Juan Bautista de Huaral</span>
+
+    <span>/</span>
+
+    <span>Configuración</span>
+
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="page-header">
+
+    <div>
+
+      <h1>Configuración</h1>
+
+      <p>
+        Administración de parámetros y catálogos del sistema.
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       CONTENIDO
+       ===================================================== -->
+
+  <main class="configuracion-content">
+
+
+    <!-- ===================================================
+         MENÚ LATERAL
+         =================================================== -->
+
+    <aside class="config-sidebar">
+
+
+      <!-- APARIENCIA -->
+
+      <button
+        type="button"
+        [class.active]="seccionActiva === 'apariencia'"
+        (click)="cambiarSeccion('apariencia')"
+      >
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="M4.93 4.93l1.41 1.41"></path>
+          <path d="M17.66 17.66l1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="M4.93 19.07l1.41-1.41"></path>
+          <path d="M17.66 6.34l1.41-1.41"></path>
+        </svg>
+
+        <div>
+          <strong>Apariencia</strong>
+          <small>Tema del sistema</small>
+        </div>
+
+      </button>
+
+
+      <!-- EMPLEADOS -->
+
+      <button
+        type="button"
+        [class.active]="seccionActiva === 'empleados'"
+        (click)="cambiarSeccion('empleados')"
+      >
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="9" cy="8" r="3"></circle>
+          <path d="M3 20c0-3.2 2.5-5 6-5s6 1.8 6 5"></path>
+          <circle cx="17" cy="9" r="2.5"></circle>
+          <path d="M15 15c3.2 0 5 1.6 5 4"></path>
+        </svg>
+
+        <div>
+          <strong>Empleados</strong>
+          <small>Personal sanitario</small>
+        </div>
+
+      </button>
+
+
+      <!-- HORARIOS -->
+
+      <button
+        type="button"
+        [class.active]="seccionActiva === 'horarios'"
+        (click)="cambiarSeccion('horarios')"
+      >
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 7v5l3 2"></path>
+        </svg>
+
+        <div>
+          <strong>Horarios</strong>
+          <small>Turnos disponibles</small>
+        </div>
+
+      </button>
+
+
+      <!-- DEPARTAMENTOS -->
+
+      <button
+        type="button"
+        [class.active]="seccionActiva === 'departamentos'"
+        (click)="cambiarSeccion('departamentos')"
+      >
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 21V5h11v16"></path>
+          <path d="M14 9h7v12"></path>
+          <path d="M7 9h2"></path>
+          <path d="M7 13h2"></path>
+          <path d="M7 17h2"></path>
+          <path d="M17 13h1"></path>
+          <path d="M17 17h1"></path>
+          <path d="M3 21h18"></path>
+        </svg>
+
+        <div>
+          <strong>Departamentos</strong>
+          <small>Áreas del hospital</small>
+        </div>
+
+      </button>
+
+
+      <!-- ESPECIALIDADES -->
+
+      <button
+        type="button"
+        [class.active]="seccionActiva === 'especialidades'"
+        (click)="cambiarSeccion('especialidades')"
+      >
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3v18"></path>
+          <path d="M5 10h14"></path>
+          <path d="M7 6h10"></path>
+          <path d="M7 14h10"></path>
+          <circle cx="12" cy="3" r="1"></circle>
+          <circle cx="12" cy="21" r="1"></circle>
+        </svg>
+
+        <div>
+          <strong>Especialidades</strong>
+          <small>Especialidades médicas</small>
+        </div>
+
+      </button>
+
+
+      <!-- CONTRATOS -->
+
+      <button
+        type="button"
+        [class.active]="seccionActiva === 'contratos'"
+        (click)="cambiarSeccion('contratos')"
+      >
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 3h11l3 3v15H5z"></path>
+          <path d="M16 3v4h4"></path>
+          <path d="M8 11h8"></path>
+          <path d="M8 15h8"></path>
+          <path d="M8 7h4"></path>
+        </svg>
+
+        <div>
+          <strong>Tipos de contrato</strong>
+          <small>Modalidades laborales</small>
+        </div>
+
+      </button>
+
+
+    </aside>
+
+
+    <!-- ===================================================
+         PANEL PRINCIPAL
+         =================================================== -->
+
+    <section class="config-panel">
+
+
+      <!-- =================================================
+           APARIENCIA
+           ================================================= -->
+
+      <div
+        *ngIf="seccionActiva === 'apariencia'"
+        class="configuration-section"
+      >
+
+        <div class="section-header">
+
+          <h2>Apariencia</h2>
+
+          <p>
+            Personaliza la apariencia visual de la aplicación.
+          </p>
+
+        </div>
+
+
+        <div class="appearance-card">
+
+          <div class="appearance-title">
+
+            <div class="appearance-icon">
+
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="M4.9 4.9l1.4 1.4"></path>
+                <path d="M17.7 17.7l1.4 1.4"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+              </svg>
+
+            </div>
+
+            <div>
+
+              <h3>
+                Tema de la aplicación
+              </h3>
+
+              <p>
+                Selecciona el modo de visualización.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="theme-options">
+
+
+            <!-- TEMA CLARO -->
+
+            <button
+              type="button"
+              class="theme-option"
+              [class.selected]="temaActual === 'claro'"
+              (click)="cambiarTema('claro')"
+            >
+
+              <div class="theme-preview light-preview">
+
+                <div class="preview-top"></div>
+
+                <div class="preview-body">
+
+                  <div class="preview-sidebar"></div>
+
+                  <div class="preview-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="theme-name">
+
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                </svg>
+
+                <strong>Modo claro</strong>
+
+              </div>
+
+              <div
+                class="selected-indicator"
+                *ngIf="temaActual === 'claro'"
+              >
+                ✓
+              </div>
+
+            </button>
+
+
+            <!-- TEMA GRIS -->
+
+            <button
+              type="button"
+              class="theme-option"
+              [class.selected]="temaActual === 'gris'"
+              (click)="cambiarTema('gris')"
+            >
+
+              <div class="theme-preview gray-preview">
+
+                <div class="preview-top"></div>
+
+                <div class="preview-body">
+
+                  <div class="preview-sidebar"></div>
+
+                  <div class="preview-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="theme-name">
+
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="8"></circle>
+                  <path d="M12 4v16"></path>
+                </svg>
+
+                <strong>Gris claro</strong>
+
+              </div>
+
+              <div
+                class="selected-indicator"
+                *ngIf="temaActual === 'gris'"
+              >
+                ✓
+              </div>
+
+            </button>
+
+
+            <!-- TEMA OSCURO -->
+
+            <button
+              type="button"
+              class="theme-option"
+              [class.selected]="temaActual === 'oscuro'"
+              (click)="cambiarTema('oscuro')"
+            >
+
+              <div class="theme-preview dark-preview">
+
+                <div class="preview-top"></div>
+
+                <div class="preview-body">
+
+                  <div class="preview-sidebar"></div>
+
+                  <div class="preview-content">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="theme-name">
+
+                <svg viewBox="0 0 24 24">
+                  <path d="M20 15.5A8 8 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5z"></path>
+                </svg>
+
+                <strong>Modo oscuro</strong>
+
+              </div>
+
+              <div
+                class="selected-indicator"
+                *ngIf="temaActual === 'oscuro'"
+              >
+                ✓
+              </div>
+
+            </button>
+
+          </div>
+
+
+          <div class="theme-information">
+
+            <span>i</span>
+
+            <p>
+              El tema se aplica a toda la aplicación y
+              se guarda automáticamente.
+            </p>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="reset-theme"
+            (click)="restablecerTema()"
+          >
+            Restablecer modo claro
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           EMPLEADOS
+           ================================================= -->
+
+      <div
+        *ngIf="seccionActiva === 'empleados'"
+        class="configuration-section"
+      >
+
+        <div class="section-header-row">
+
+          <div class="section-header">
+
+            <h2>Empleados</h2>
+
+            <p>
+              Administración del personal sanitario.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="abrirAgregarEmpleado()"
+          >
+
+            <span class="button-icon">+</span>
+
+            Agregar empleado
+
+          </button>
+
+        </div>
+
+
+        <!-- FILTROS -->
+
+        <div class="filter-card">
+
+          <div class="filter-title">
+            Buscar y filtrar empleados
+          </div>
+
+
+          <!-- BUSCADOR GENERAL -->
+
+          <div class="employee-search">
+
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-4-4"></path>
+            </svg>
+
+            <input
+              type="text"
+              placeholder="Buscar por DNI, nombres o apellidos..."
+              [(ngModel)]="busquedaEmpleado"
+            />
+
+          </div>
+
+
+          <div class="filters-grid employee-filters">
+
+
+            <!-- DEPARTAMENTO -->
+
+            <div class="filter-field">
+
+              <label>Departamento</label>
+
+              <div class="search-select">
+
+                <svg
+                  class="filter-icon"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M3 21V5h11v16"></path>
+                  <path d="M14 9h7v12"></path>
+                  <path d="M7 9h2"></path>
+                  <path d="M7 13h2"></path>
+                  <path d="M7 17h2"></path>
+                </svg>
+
+                <input
+                  type="text"
+                  placeholder="Buscar departamento..."
+                  [(ngModel)]="
+                    busquedaEmpleadoDepartamento
+                  "
+                  (focus)="
+                    dropdownEmpleadoDepartamento = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownEmpleadoDepartamento =
+                    !dropdownEmpleadoDepartamento
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownEmpleadoDepartamento
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesEmpleadoDepartamento
+                    "
+                    (click)="
+                      seleccionarEmpleadoDepartamento(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ESPECIALIDAD -->
+
+            <div class="filter-field">
+
+              <label>Especialidad</label>
+
+              <div class="search-select">
+
+                <svg
+                  class="filter-icon"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 3v18"></path>
+                  <path d="M5 10h14"></path>
+                  <path d="M7 6h10"></path>
+                  <path d="M7 14h10"></path>
+                </svg>
+
+                <input
+                  type="text"
+                  placeholder="Buscar especialidad..."
+                  [(ngModel)]="
+                    busquedaEmpleadoEspecialidad
+                  "
+                  (focus)="
+                    dropdownEmpleadoEspecialidad = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownEmpleadoEspecialidad =
+                    !dropdownEmpleadoEspecialidad
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownEmpleadoEspecialidad
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesEmpleadoEspecialidad
+                    "
+                    (click)="
+                      seleccionarEmpleadoEspecialidad(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- CONTRATO -->
+
+            <div class="filter-field">
+
+              <label>Tipo de contrato</label>
+
+              <div class="search-select">
+
+                <svg
+                  class="filter-icon"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 3h11l3 3v15H5z"></path>
+                  <path d="M16 3v4h4"></path>
+                  <path d="M8 11h8"></path>
+                  <path d="M8 15h8"></path>
+                </svg>
+
+                <input
+                  type="text"
+                  placeholder="Buscar contrato..."
+                  [(ngModel)]="
+                    busquedaEmpleadoContrato
+                  "
+                  (focus)="
+                    dropdownEmpleadoContrato = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownEmpleadoContrato =
+                    !dropdownEmpleadoContrato
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownEmpleadoContrato
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesEmpleadoContrato
+                    "
+                    (click)="
+                      seleccionarEmpleadoContrato(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ESTADO -->
+
+            <div class="filter-field">
+
+              <label>Estado</label>
+
+              <div class="search-select">
+
+                <svg
+                  class="filter-icon"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M4 6h16"></path>
+                  <path d="M4 12h16"></path>
+                  <path d="M4 18h16"></path>
+                  <circle cx="8" cy="6" r="2"></circle>
+                  <circle cx="15" cy="12" r="2"></circle>
+                  <circle cx="10" cy="18" r="2"></circle>
+                </svg>
+
+                <input
+                  type="text"
+                  placeholder="Buscar estado..."
+                  [(ngModel)]="
+                    busquedaEmpleadoEstado
+                  "
+                  (focus)="
+                    dropdownEmpleadoEstado = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownEmpleadoEstado =
+                    !dropdownEmpleadoEstado
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownEmpleadoEstado
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesEmpleadoEstado
+                    "
+                    (click)="
+                      seleccionarEmpleadoEstado(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+          <button
+            type="button"
+            class="clear-button"
+            (click)="limpiarFiltrosEmpleados()"
+          >
+            Limpiar filtros
+          </button>
+
+        </div>
+
+
+        <!-- TABLA -->
+
+        <div class="table-card employee-table">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+
+                <th>DNI</th>
+
+                <th>EMPLEADO</th>
+
+                <th>DEPARTAMENTO</th>
+
+                <th>ESPECIALIDAD</th>
+
+                <th>CONTRATO</th>
+
+                <th>META</th>
+
+                <th>TELÉFONO</th>
+
+                <th>ESTADO</th>
+
+                <th>ACCIONES</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="
+                  let empleado of empleadosFiltrados
+                "
+              >
+
+                <td>
+                  {{ empleado.id }}
+                </td>
+
+                <td>
+                  {{ empleado.dni }}
+                </td>
+
+
+                <td>
+
+                  <div class="employee-name">
+
+                    <div class="employee-avatar">
+
+                      {{
+                        empleado.nombres.charAt(0)
+                      }}{{
+                        empleado.apellidos.charAt(0)
+                      }}
+
+                    </div>
+
+                    <strong>
+
+                      {{ empleado.nombres }}
+                      {{ empleado.apellidos }}
+
+                    </strong>
+
+                  </div>
+
+                </td>
+
+
+                <td>
+                  {{ empleado.departamento }}
+                </td>
+
+
+                <td>
+                  {{ empleado.especialidad }}
+                </td>
+
+
+                <td>
+                  {{ empleado.contrato }}
+                </td>
+
+
+                <td>
+
+                  <span class="fixed-hours">
+                    150 h
+                  </span>
+
+                </td>
+
+
+                <td>
+                  {{ empleado.telefono || '—' }}
+                </td>
+
+
+                <td>
+
+                  <button
+                    type="button"
+                    class="switch"
+                    [class.on]="empleado.activo"
+                    [attr.aria-label]="
+                      empleado.activo
+                        ? 'Empleado activo'
+                        : 'Empleado inactivo'
+                    "
+                    (click)="
+                      cambiarEstadoEmpleado(
+                        empleado
+                      )
+                    "
+                  >
+
+                    <span></span>
+
+                  </button>
+
+                </td>
+
+
+                <td>
+
+                  <div class="actions">
+
+                    <button
+                      type="button"
+                      class="icon-button edit"
+                      title="Editar empleado"
+                      (click)="
+                        editarEmpleado(empleado)
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 20h4L19 9l-4-4L4 16z"></path>
+                        <path d="m13 6 4 4"></path>
+                      </svg>
+
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="icon-button delete"
+                      title="Eliminar empleado"
+                      (click)="
+                        eliminarEmpleado(empleado)
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 7h16"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M6 7l1 14h10l1-14"></path>
+                        <path d="M9 7V4h6v3"></path>
+                      </svg>
+
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+
+              <tr
+                *ngIf="
+                  empleadosFiltrados.length === 0
+                "
+              >
+
+                <td
+                  colspan="10"
+                  class="empty-row"
+                >
+                  No se encontraron empleados.
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           HORARIOS
+           ================================================= -->
+
+      <div
+        *ngIf="seccionActiva === 'horarios'"
+        class="configuration-section"
+      >
+
+        <div class="section-header-row">
+
+          <div class="section-header">
+
+            <h2>Horarios y turnos</h2>
+
+            <p>
+              Administra los horarios base disponibles.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="abrirAgregarHorario()"
+          >
+            <span class="button-icon">+</span>
+            Agregar horario
+          </button>
+
+        </div>
+
+
+        <!-- FILTROS HORARIOS -->
+
+        <div class="filter-card">
+
+          <div class="filter-title">
+            Filtrar horarios
+          </div>
+
+
+          <div class="filters-grid">
+
+
+            <!-- SIGLA -->
+
+            <div class="filter-field">
+
+              <label>Sigla</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar sigla..."
+                  [(ngModel)]="
+                    busquedaHorarioSigla
+                  "
+                  (focus)="
+                    dropdownHorarioSigla = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownHorarioSigla =
+                    !dropdownHorarioSigla
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="dropdownHorarioSigla"
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesHorarioSigla
+                    "
+                    (click)="
+                      seleccionarHorarioSigla(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- SIGNIFICADO -->
+
+            <div class="filter-field">
+
+              <label>Significado</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar significado..."
+                  [(ngModel)]="
+                    busquedaHorarioSignificado
+                  "
+                  (focus)="
+                    dropdownHorarioSignificado = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownHorarioSignificado =
+                    !dropdownHorarioSignificado
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownHorarioSignificado
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesHorarioSignificado
+                    "
+                    (click)="
+                      seleccionarHorarioSignificado(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ESTADO -->
+
+            <div class="filter-field">
+
+              <label>Estado</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar estado..."
+                  [(ngModel)]="
+                    busquedaHorarioEstado
+                  "
+                  (focus)="
+                    dropdownHorarioEstado = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownHorarioEstado =
+                    !dropdownHorarioEstado
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownHorarioEstado
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesHorarioEstado
+                    "
+                    (click)="
+                      seleccionarHorarioEstado(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="clear-button"
+              (click)="limpiarFiltrosHorarios()"
+            >
+              Limpiar
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- TABLA HORARIOS -->
+
+        <div class="table-card">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+                <th>SIGLA</th>
+                <th>SIGNIFICADO</th>
+                <th>DURACIÓN</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="
+                  let horario of horariosFiltrados
+                "
+              >
+
+                <td>
+                  {{ horario.id }}
+                </td>
+
+                <td>
+
+                  <span class="shift-code">
+                    {{ horario.sigla }}
+                  </span>
+
+                </td>
+
+                <td>
+                  {{ horario.significado }}
+                </td>
+
+                <td>
+                  <strong>
+                    {{ horario.horas }} h
+                  </strong>
+                </td>
+
+                <td>
+
+                  <button
+                    type="button"
+                    class="switch"
+                    [class.on]="horario.activo"
+                    (click)="
+                      cambiarEstadoHorario(horario)
+                    "
+                  >
+                    <span></span>
+                  </button>
+
+                </td>
+
+                <td>
+
+                  <div class="actions">
+
+                    <button
+                      type="button"
+                      class="icon-button edit"
+                      title="Editar horario"
+                      (click)="
+                        editarHorario(horario)
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 20h4L19 9l-4-4L4 16z"></path>
+                        <path d="m13 6 4 4"></path>
+                      </svg>
+
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="icon-button delete"
+                      title="Eliminar horario"
+                      (click)="
+                        eliminarHorario(horario)
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 7h16"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M6 7l1 14h10l1-14"></path>
+                        <path d="M9 7V4h6v3"></path>
+                      </svg>
+
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           DEPARTAMENTOS
+           ================================================= -->
+
+      <div
+        *ngIf="seccionActiva === 'departamentos'"
+        class="configuration-section"
+      >
+
+        <div class="section-header-row">
+
+          <div class="section-header">
+
+            <h2>Departamentos</h2>
+
+            <p>
+              Administra los departamentos del hospital.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="abrirAgregarDepartamento()"
+          >
+            <span class="button-icon">+</span>
+            Agregar departamento
+          </button>
+
+        </div>
+
+
+        <div class="filter-card">
+
+          <div class="filter-title">
+            Filtrar departamentos
+          </div>
+
+
+          <div class="filters-grid">
+
+
+            <div class="filter-field">
+
+              <label>Departamento</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar departamento..."
+                  [(ngModel)]="
+                    busquedaDepartamento
+                  "
+                  (focus)="
+                    dropdownDepartamento = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownDepartamento =
+                    !dropdownDepartamento
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="dropdownDepartamento"
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesDepartamento
+                    "
+                    (click)="
+                      seleccionarDepartamento(opcion)
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="filter-field">
+
+              <label>Estado</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar estado..."
+                  [(ngModel)]="
+                    busquedaDepartamentoEstado
+                  "
+                  (focus)="
+                    dropdownDepartamentoEstado = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownDepartamentoEstado =
+                    !dropdownDepartamentoEstado
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownDepartamentoEstado
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesDepartamentoEstado
+                    "
+                    (click)="
+                      seleccionarDepartamentoEstado(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="clear-button"
+              (click)="
+                limpiarFiltrosDepartamentos()
+              "
+            >
+              Limpiar
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-card">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+                <th>DEPARTAMENTO</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="
+                  let departamento of
+                  departamentosFiltrados
+                "
+              >
+
+                <td>
+                  {{ departamento.id }}
+                </td>
+
+                <td>
+
+                  <strong class="catalog-name">
+                    {{ departamento.nombre }}
+                  </strong>
+
+                </td>
+
+                <td>
+
+                  <button
+                    type="button"
+                    class="switch"
+                    [class.on]="departamento.activo"
+                    (click)="
+                      cambiarEstadoDepartamento(
+                        departamento
+                      )
+                    "
+                  >
+                    <span></span>
+                  </button>
+
+                </td>
+
+                <td>
+
+                  <div class="actions">
+
+                    <button
+                      type="button"
+                      class="icon-button edit"
+                      title="Editar departamento"
+                      (click)="
+                        editarDepartamento(
+                          departamento
+                        )
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 20h4L19 9l-4-4L4 16z"></path>
+                        <path d="m13 6 4 4"></path>
+                      </svg>
+
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="icon-button delete"
+                      title="Eliminar departamento"
+                      (click)="
+                        eliminarDepartamento(
+                          departamento
+                        )
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 7h16"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M6 7l1 14h10l1-14"></path>
+                        <path d="M9 7V4h6v3"></path>
+                      </svg>
+
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           ESPECIALIDADES
+           ================================================= -->
+
+      <div
+        *ngIf="seccionActiva === 'especialidades'"
+        class="configuration-section"
+      >
+
+        <div class="section-header-row">
+
+          <div class="section-header">
+
+            <h2>Especialidades</h2>
+
+            <p>
+              Administra las especialidades médicas.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="abrirAgregarEspecialidad()"
+          >
+            <span class="button-icon">+</span>
+            Agregar especialidad
+          </button>
+
+        </div>
+
+
+        <div class="filter-card">
+
+          <div class="filter-title">
+            Filtrar especialidades
+          </div>
+
+
+          <div class="filters-grid">
+
+
+            <!-- ESPECIALIDAD -->
+
+            <div class="filter-field">
+
+              <label>Especialidad</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar especialidad..."
+                  [(ngModel)]="
+                    busquedaEspecialidad
+                  "
+                  (focus)="
+                    dropdownEspecialidad = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownEspecialidad =
+                    !dropdownEspecialidad
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="dropdownEspecialidad"
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesEspecialidad
+                    "
+                    (click)="
+                      seleccionarEspecialidad(opcion)
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- DEPARTAMENTO -->
+
+            <div class="filter-field">
+
+              <label>Departamento</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar departamento..."
+                  [(ngModel)]="
+                    busquedaEspecialidadDepartamento
+                  "
+                  (focus)="
+                    dropdownEspecialidadDepartamento =
+                    true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownEspecialidadDepartamento =
+                    !dropdownEspecialidadDepartamento
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownEspecialidadDepartamento
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesEspecialidadDepartamento
+                    "
+                    (click)="
+                      seleccionarEspecialidadDepartamento(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ESTADO -->
+
+            <div class="filter-field">
+
+              <label>Estado</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar estado..."
+                  [(ngModel)]="
+                    busquedaEspecialidadEstado
+                  "
+                  (focus)="
+                    dropdownEspecialidadEstado =
+                    true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownEspecialidadEstado =
+                    !dropdownEspecialidadEstado
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownEspecialidadEstado
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesEspecialidadEstado
+                    "
+                    (click)="
+                      seleccionarEspecialidadEstado(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="clear-button"
+              (click)="
+                limpiarFiltrosEspecialidades()
+              "
+            >
+              Limpiar
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-card">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+                <th>ESPECIALIDAD</th>
+                <th>DEPARTAMENTO</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="
+                  let especialidad of
+                  especialidadesFiltradas
+                "
+              >
+
+                <td>
+                  {{ especialidad.id }}
+                </td>
+
+                <td>
+
+                  <strong class="catalog-name">
+                    {{ especialidad.nombre }}
+                  </strong>
+
+                </td>
+
+                <td>
+
+                  <span class="department-tag">
+                    {{ especialidad.departamento }}
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <button
+                    type="button"
+                    class="switch"
+                    [class.on]="especialidad.activo"
+                    (click)="
+                      cambiarEstadoEspecialidad(
+                        especialidad
+                      )
+                    "
+                  >
+                    <span></span>
+                  </button>
+
+                </td>
+
+                <td>
+
+                  <div class="actions">
+
+                    <button
+                      type="button"
+                      class="icon-button edit"
+                      title="Editar especialidad"
+                      (click)="
+                        editarEspecialidad(
+                          especialidad
+                        )
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 20h4L19 9l-4-4L4 16z"></path>
+                        <path d="m13 6 4 4"></path>
+                      </svg>
+
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="icon-button delete"
+                      title="Eliminar especialidad"
+                      (click)="
+                        eliminarEspecialidad(
+                          especialidad
+                        )
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 7h16"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M6 7l1 14h10l1-14"></path>
+                        <path d="M9 7V4h6v3"></path>
+                      </svg>
+
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           CONTRATOS
+           ================================================= -->
+
+      <div
+        *ngIf="seccionActiva === 'contratos'"
+        class="configuration-section"
+      >
+
+        <div class="section-header-row">
+
+          <div class="section-header">
+
+            <h2>Tipos de contrato</h2>
+
+            <p>
+              Administra las modalidades de contratación.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="primary-button"
+            (click)="abrirAgregarContrato()"
+          >
+            <span class="button-icon">+</span>
+            Agregar contrato
+          </button>
+
+        </div>
+
+
+        <div class="filter-card">
+
+          <div class="filter-title">
+            Filtrar tipos de contrato
+          </div>
+
+
+          <div class="filters-grid">
+
+
+            <!-- CONTRATO -->
+
+            <div class="filter-field">
+
+              <label>Tipo de contrato</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar contrato..."
+                  [(ngModel)]="
+                    busquedaContrato
+                  "
+                  (focus)="
+                    dropdownContrato = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownContrato =
+                    !dropdownContrato
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="dropdownContrato"
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesContrato
+                    "
+                    (click)="
+                      seleccionarContrato(opcion)
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ESTADO -->
+
+            <div class="filter-field">
+
+              <label>Estado</label>
+
+              <div class="search-select">
+
+                <input
+                  type="text"
+                  placeholder="Buscar estado..."
+                  [(ngModel)]="
+                    busquedaContratoEstado
+                  "
+                  (focus)="
+                    dropdownContratoEstado = true
+                  "
+                />
+
+                <button
+                  type="button"
+                  class="dropdown-arrow"
+                  (click)="
+                    dropdownContratoEstado =
+                    !dropdownContratoEstado
+                  "
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d="m6 9 6 6 6-6"></path>
+                  </svg>
+                </button>
+
+
+                <div
+                  class="search-select-menu"
+                  *ngIf="
+                    dropdownContratoEstado
+                  "
+                >
+
+                  <button
+                    type="button"
+                    *ngFor="
+                      let opcion of
+                      opcionesContratoEstado
+                    "
+                    (click)="
+                      seleccionarContratoEstado(
+                        opcion
+                      )
+                    "
+                  >
+                    {{ opcion }}
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="clear-button"
+              (click)="
+                limpiarFiltrosContratos()
+              "
+            >
+              Limpiar
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-card">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>ID</th>
+                <th>TIPO DE CONTRATO</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr
+                *ngFor="
+                  let contrato of
+                  contratosFiltrados
+                "
+              >
+
+                <td>
+                  {{ contrato.id }}
+                </td>
+
+                <td>
+
+                  <strong class="catalog-name">
+                    {{ contrato.nombre }}
+                  </strong>
+
+                </td>
+
+                <td>
+
+                  <button
+                    type="button"
+                    class="switch"
+                    [class.on]="contrato.activo"
+                    (click)="
+                      cambiarEstadoContrato(
+                        contrato
+                      )
+                    "
+                  >
+                    <span></span>
+                  </button>
+
+                </td>
+
+                <td>
+
+                  <div class="actions">
+
+                    <button
+                      type="button"
+                      class="icon-button edit"
+                      title="Editar contrato"
+                      (click)="
+                        editarContrato(
+                          contrato
+                        )
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 20h4L19 9l-4-4L4 16z"></path>
+                        <path d="m13 6 4 4"></path>
+                      </svg>
+
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="icon-button delete"
+                      title="Eliminar contrato"
+                      (click)="
+                        eliminarContrato(
+                          contrato
+                        )
+                      "
+                    >
+
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 7h16"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                        <path d="M6 7l1 14h10l1-14"></path>
+                        <path d="M9 7V4h6v3"></path>
+                      </svg>
+
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       MODAL EMPLEADO
+       ===================================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarModalEmpleado"
+    (click)="cerrarModalEmpleado()"
+  >
+
+    <div
+      class="modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            {{
+              modoEdicion
+                ? 'Editar empleado'
+                : 'Agregar empleado'
+            }}
+          </h2>
+
+          <p>
+            Registra la información personal y laboral.
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          (click)="cerrarModalEmpleado()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+
+        <div class="form-section-title">
+          Información personal
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <div class="form-field">
+
+            <label>DNI *</label>
+
+            <input
+              type="text"
+              maxlength="8"
+              [(ngModel)]="
+                empleadoFormulario.dni
+              "
+              placeholder="Ingrese DNI"
+            />
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label>Nombres *</label>
+
+            <input
+              type="text"
+              [(ngModel)]="
+                empleadoFormulario.nombres
+              "
+              placeholder="Ingrese nombres"
+            />
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label>Apellidos *</label>
+
+            <input
+              type="text"
+              [(ngModel)]="
+                empleadoFormulario.apellidos
+              "
+              placeholder="Ingrese apellidos"
+            />
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label>Teléfono</label>
+
+            <input
+              type="text"
+              maxlength="9"
+              [(ngModel)]="
+                empleadoFormulario.telefono
+              "
+              placeholder="Ingrese teléfono"
+            />
+
+          </div>
+
+        </div>
+
+
+        <div class="form-section-title">
+          Información laboral
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- =================================================
+               DEPARTAMENTO BUSCABLE
+          ================================================== -->
+
+          <div class="form-field">
+
+            <label>Departamento *</label>
+
+            <div class="search-select form-search-select">
+
+              <input
+                type="text"
+                placeholder="Buscar departamento..."
+                [(ngModel)]="empleadoFormulario.departamento"
+                (focus)="dropdownEmpleadoDepartamentoModal = true"
+              />
+
+              <button
+                type="button"
+                class="dropdown-arrow"
+                aria-label="Mostrar departamentos"
+                (click)="dropdownEmpleadoDepartamentoModal = !dropdownEmpleadoDepartamentoModal"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+
+              <div
+                class="search-select-menu"
+                *ngIf="dropdownEmpleadoDepartamentoModal"
+              >
+
+                <button
+                  type="button"
+                  *ngFor="let departamento of departamentosEmpleadoModalFiltrados"
+                  (click)="seleccionarDepartamentoEmpleadoModal(departamento.nombre)"
+                >
+                  {{ departamento.nombre }}
+                </button>
+
+                <div
+                  class="search-select-empty"
+                  *ngIf="departamentosEmpleadoModalFiltrados.length === 0"
+                >
+                  No se encontraron departamentos.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               ESPECIALIDAD BUSCABLE
+          ================================================== -->
+
+          <div class="form-field">
+
+            <label>Especialidad *</label>
+
+            <div class="search-select form-search-select">
+
+              <input
+                type="text"
+                placeholder="Buscar especialidad..."
+                [(ngModel)]="empleadoFormulario.especialidad"
+                (focus)="dropdownEmpleadoEspecialidadModal = true"
+              />
+
+              <button
+                type="button"
+                class="dropdown-arrow"
+                aria-label="Mostrar especialidades"
+                (click)="dropdownEmpleadoEspecialidadModal = !dropdownEmpleadoEspecialidadModal"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+
+              <div
+                class="search-select-menu"
+                *ngIf="dropdownEmpleadoEspecialidadModal"
+              >
+
+                <button
+                  type="button"
+                  *ngFor="let especialidad of especialidadesEmpleadoModalFiltradas"
+                  (click)="seleccionarEspecialidadEmpleadoModal(especialidad.nombre)"
+                >
+                  {{ especialidad.nombre }}
+                </button>
+
+                <div
+                  class="search-select-empty"
+                  *ngIf="especialidadesEmpleadoModalFiltradas.length === 0"
+                >
+                  No se encontraron especialidades.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               TIPO DE CONTRATO BUSCABLE
+          ================================================== -->
+
+          <div class="form-field">
+
+            <label>Tipo de contrato *</label>
+
+            <div class="search-select form-search-select">
+
+              <input
+                type="text"
+                placeholder="Buscar tipo de contrato..."
+                [(ngModel)]="empleadoFormulario.contrato"
+                (focus)="dropdownEmpleadoContratoModal = true"
+              />
+
+              <button
+                type="button"
+                class="dropdown-arrow"
+                aria-label="Mostrar tipos de contrato"
+                (click)="dropdownEmpleadoContratoModal = !dropdownEmpleadoContratoModal"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </button>
+
+              <div
+                class="search-select-menu"
+                *ngIf="dropdownEmpleadoContratoModal"
+              >
+
+                <button
+                  type="button"
+                  *ngFor="let contrato of contratosEmpleadoModalFiltrados"
+                  (click)="seleccionarContratoEmpleadoModal(contrato.nombre)"
+                >
+                  {{ contrato.nombre }}
+                </button>
+
+                <div
+                  class="search-select-empty"
+                  *ngIf="contratosEmpleadoModalFiltrados.length === 0"
+                >
+                  No se encontraron tipos de contrato.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- META FIJA -->
+
+          <div class="form-field">
+
+            <label>Meta mensual</label>
+
+            <div class="fixed-hours-field">
+
+              <strong>150 horas</strong>
+
+              <span>
+                Meta fija del sistema
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- ESTADO -->
+
+          <div class="form-field">
+
+            <label>Estado</label>
+
+            <div class="form-switch-container">
+
+              <button
+                type="button"
+                class="switch"
+                [class.on]="
+                  empleadoFormulario.activo
+                "
+                (click)="
+                  empleadoFormulario.activo =
+                  !empleadoFormulario.activo
+                "
+              >
+
+                <span></span>
+
+              </button>
+
+              <span>
+                {{
+                  empleadoFormulario.activo
+                    ? 'Activo'
+                    : 'Inactivo'
+                }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cerrarModalEmpleado()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="guardarEmpleado()"
+        >
+          {{
+            modoEdicion
+              ? 'Guardar cambios'
+              : 'Agregar empleado'
+          }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MODAL HORARIO
+       ===================================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarModalHorario"
+    (click)="cerrarModalHorario()"
+  >
+
+    <div
+      class="modal small-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            {{
+              modoEdicion
+                ? 'Editar horario'
+                : 'Agregar horario'
+            }}
+          </h2>
+
+          <p>
+            Define el horario base del sistema.
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          (click)="cerrarModalHorario()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="form-grid">
+
+
+          <div class="form-field">
+
+            <label>Sigla *</label>
+
+            <input
+              type="text"
+              maxlength="5"
+              [(ngModel)]="
+                horarioFormulario.sigla
+              "
+              placeholder="Ej. GD"
+            />
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label>Duración *</label>
+
+            <input
+              type="number"
+              min="1"
+              max="24"
+              [(ngModel)]="
+                horarioFormulario.horas
+              "
+              placeholder="Horas"
+            />
+
+          </div>
+
+
+          <div class="form-field form-field-full">
+
+            <label>Significado *</label>
+
+            <input
+              type="text"
+              [(ngModel)]="
+                horarioFormulario.significado
+              "
+              placeholder="Ej. Guardia Diurna"
+            />
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label>Estado</label>
+
+            <div class="form-switch-container">
+
+              <button
+                type="button"
+                class="switch"
+                [class.on]="
+                  horarioFormulario.activo
+                "
+                (click)="
+                  horarioFormulario.activo =
+                  !horarioFormulario.activo
+                "
+              >
+                <span></span>
+              </button>
+
+              <span>
+                {{
+                  horarioFormulario.activo
+                    ? 'Activo'
+                    : 'Inactivo'
+                }}
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cerrarModalHorario()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="guardarHorario()"
+        >
+          ✓ Guardar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MODAL DEPARTAMENTO
+       ===================================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarModalDepartamento"
+    (click)="cerrarModalDepartamento()"
+  >
+
+    <div
+      class="modal small-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            {{
+              modoEdicion
+                ? 'Editar departamento'
+                : 'Agregar departamento'
+            }}
+          </h2>
+
+          <p>
+            Define el área del hospital.
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          (click)="cerrarModalDepartamento()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="form-field">
+
+          <label>
+            Nombre del departamento *
+          </label>
+
+          <input
+            type="text"
+            [(ngModel)]="
+              departamentoFormulario.nombre
+            "
+            placeholder="Ej. Medicina"
+          />
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label>Estado</label>
+
+          <div class="form-switch-container">
+
+            <button
+              type="button"
+              class="switch"
+              [class.on]="
+                departamentoFormulario.activo
+              "
+              (click)="
+                departamentoFormulario.activo =
+                !departamentoFormulario.activo
+              "
+            >
+              <span></span>
+            </button>
+
+            <span>
+              {{
+                departamentoFormulario.activo
+                  ? 'Activo'
+                  : 'Inactivo'
+              }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cerrarModalDepartamento()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="guardarDepartamento()"
+        >
+          ✓ Guardar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MODAL ESPECIALIDAD
+       ===================================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarModalEspecialidad"
+    (click)="cerrarModalEspecialidad()"
+  >
+
+    <div
+      class="modal small-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            {{
+              modoEdicion
+                ? 'Editar especialidad'
+                : 'Agregar especialidad'
+            }}
+          </h2>
+
+          <p>
+            Asocia una especialidad con un departamento.
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          (click)="cerrarModalEspecialidad()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="form-field">
+
+          <label>Especialidad *</label>
+
+          <input
+            type="text"
+            [(ngModel)]="
+              especialidadFormulario.nombre
+            "
+            placeholder="Ej. Cardiología"
+          />
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label>Departamento *</label>
+
+          <select
+            [(ngModel)]="
+              especialidadFormulario.departamento
+            "
+          >
+
+            <option value="">
+              Seleccione un departamento
+            </option>
+
+            <option
+              *ngFor="
+                let departamento of departamentos
+              "
+              [value]="departamento.nombre"
+            >
+              {{ departamento.nombre }}
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label>Estado</label>
+
+          <div class="form-switch-container">
+
+            <button
+              type="button"
+              class="switch"
+              [class.on]="
+                especialidadFormulario.activo
+              "
+              (click)="
+                especialidadFormulario.activo =
+                !especialidadFormulario.activo
+              "
+            >
+              <span></span>
+            </button>
+
+            <span>
+              {{
+                especialidadFormulario.activo
+                  ? 'Activo'
+                  : 'Inactivo'
+              }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cerrarModalEspecialidad()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="guardarEspecialidad()"
+        >
+          ✓ Guardar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       MODAL CONTRATO
+       ===================================================== -->
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarModalContrato"
+    (click)="cerrarModalContrato()"
+  >
+
+    <div
+      class="modal small-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            {{
+              modoEdicion
+                ? 'Editar contrato'
+                : 'Agregar contrato'
+            }}
+          </h2>
+
+          <p>
+            Define una modalidad de contratación.
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="modal-close"
+          (click)="cerrarModalContrato()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="form-field">
+
+          <label>
+            Tipo de contrato *
+          </label>
+
+          <input
+            type="text"
+            [(ngModel)]="
+              contratoFormulario.nombre
+            "
+            placeholder="Ej. Contrato a plazo fijo"
+          />
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label>Estado</label>
+
+          <div class="form-switch-container">
+
+            <button
+              type="button"
+              class="switch"
+              [class.on]="
+                contratoFormulario.activo
+              "
+              (click)="
+                contratoFormulario.activo =
+                !contratoFormulario.activo
+              "
+            >
+              <span></span>
+            </button>
+
+            <span>
+              {{
+                contratoFormulario.activo
+                  ? 'Activo'
+                  : 'Inactivo'
+              }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cerrarModalContrato()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="primary-button"
+          (click)="guardarContrato()"
+        >
+          ✓ Guardar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

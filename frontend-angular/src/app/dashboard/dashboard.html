@@ -1,0 +1,610 @@
+<div class="dashboard-page">
+
+  <!-- =====================================================
+       BREADCRUMB
+       ===================================================== -->
+
+  <div class="breadcrumb">
+
+    <span>
+      Hospital San Juan Bautista de Huaral
+    </span>
+
+    <span>/</span>
+
+    <span>
+      Dashboard
+    </span>
+
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <header class="dashboard-header">
+
+    <div>
+
+      <h1>
+        Dashboard
+      </h1>
+
+      <p>
+        Resumen general de la programación y cumplimiento
+        de horas del personal sanitario.
+      </p>
+
+    </div>
+
+
+    <div class="header-month">
+
+      <span>
+        PERIODO
+      </span>
+
+      <strong>
+        {{ mesActual }}
+      </strong>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       CONTENIDO
+       ===================================================== -->
+
+  <main class="dashboard-content">
+
+
+    <!-- ===================================================
+         TARJETAS PRINCIPALES
+         =================================================== -->
+
+    <section class="stats-grid">
+
+
+      <!-- PERSONAL ACTIVO -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon blue">
+          👥
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-label">
+            Personal activo
+          </span>
+
+          <strong class="stat-value">
+            {{ personalActivo }}
+          </strong>
+
+          <small>
+            de {{ totalPersonal }} registrados
+          </small>
+
+        </div>
+
+      </article>
+
+
+      <!-- HORAS PROGRAMADAS -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon purple">
+          ◷
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-label">
+            Horas programadas
+          </span>
+
+          <strong class="stat-value">
+            {{ horasProgramadas }}
+          </strong>
+
+          <small>
+            horas este mes
+          </small>
+
+        </div>
+
+      </article>
+
+
+      <!-- CUMPLIMIENTO -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon green">
+          ✓
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-label">
+            Cumplimiento general
+          </span>
+
+          <strong class="stat-value">
+            {{ porcentajeCumplimiento }}%
+          </strong>
+
+          <small>
+            de la meta mensual
+          </small>
+
+        </div>
+
+      </article>
+
+
+      <!-- ALERTAS -->
+
+      <article class="stat-card">
+
+        <div class="stat-icon red">
+          !
+        </div>
+
+        <div class="stat-information">
+
+          <span class="stat-label">
+            Alertas
+          </span>
+
+          <strong class="stat-value">
+            {{ totalPendientes }}
+          </strong>
+
+          <small>
+            médicos pendientes
+          </small>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- ===================================================
+         CUMPLIMIENTO + ALERTAS
+         =================================================== -->
+
+    <section class="dashboard-columns">
+
+
+      <!-- =================================================
+           CUMPLIMIENTO DE HORAS
+           ================================================= -->
+
+      <article class="dashboard-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <h2>
+              Cumplimiento de horas
+            </h2>
+
+            <p>
+              Meta mensual: 150 horas por médico
+            </p>
+
+          </div>
+
+          <span class="card-period">
+            {{ mesActual }}
+          </span>
+
+        </div>
+
+
+        <div class="medical-list">
+
+          <div
+            class="medical-row"
+            *ngFor="let medico of medicos"
+          >
+
+
+            <!-- PERSONAL -->
+
+            <div class="medical-person">
+
+              <div class="medical-avatar">
+                {{ medico.iniciales }}
+              </div>
+
+              <div>
+
+                <strong>
+                  {{ medico.nombre }}
+                </strong>
+
+                <small>
+                  {{ medico.especialidad }}
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <!-- PROGRESO -->
+
+            <div class="medical-progress">
+
+              <div class="progress-information">
+
+                <span>
+                  {{ medico.horas }} / {{ medico.meta }} horas
+                </span>
+
+                <strong>
+                  {{ porcentajeMedico(medico) }}%
+                </strong>
+
+              </div>
+
+
+              <div class="progress-bar">
+
+                <div
+                  class="progress-value"
+                  [class.complete]="medico.horas >= medico.meta"
+                  [style.width.%]="porcentajeMedico(medico)"
+                ></div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ESTADO -->
+
+            <div
+              class="medical-status"
+              [ngClass]="obtenerClaseEstado(medico)"
+            >
+
+              <span
+                *ngIf="medico.horas >= medico.meta"
+              >
+                ✓
+              </span>
+
+              <span
+                *ngIf="medico.horas < medico.meta"
+              >
+                !
+              </span>
+
+              {{ obtenerTextoEstado(medico) }}
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           ALERTAS
+           ================================================= -->
+
+      <article class="dashboard-card alerts-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <h2>
+              Alertas
+            </h2>
+
+            <p>
+              Personal que requiere atención
+            </p>
+
+          </div>
+
+
+          <span class="alert-count">
+            {{ totalPendientes }}
+          </span>
+
+        </div>
+
+
+        <!-- LISTA DE ALERTAS -->
+
+        <div
+          class="alert-list"
+          *ngIf="medicosPendientes.length > 0"
+        >
+
+          <div
+            class="alert-item"
+            *ngFor="let medico of medicosPendientes"
+          >
+
+            <div class="alert-icon">
+              !
+            </div>
+
+            <div class="alert-information">
+
+              <strong>
+                {{ medico.nombre }}
+              </strong>
+
+              <span>
+                No alcanza las 150 horas mensuales.
+              </span>
+
+              <small>
+                Faltan {{ horasRestantes(medico) }} horas
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SIN ALERTAS -->
+
+        <div
+          class="no-alerts"
+          *ngIf="medicosPendientes.length === 0"
+        >
+
+          <span>
+            ✓
+          </span>
+
+          <strong>
+            No existen alertas
+          </strong>
+
+          <small>
+            Todo el personal cumple la meta mensual.
+          </small>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- ===================================================
+         TURNOS + RESUMEN MENSUAL
+         =================================================== -->
+
+    <section class="dashboard-columns bottom-columns">
+
+
+      <!-- =================================================
+           TURNOS
+           ================================================= -->
+
+      <article class="dashboard-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <h2>
+              Turnos programados
+            </h2>
+
+            <p>
+              Distribución por tipo de turno
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="shift-summary">
+
+          <div
+            class="shift-summary-item"
+            *ngFor="let turno of turnos"
+          >
+
+            <div
+              class="shift-color"
+              [ngClass]="turno.clase"
+            >
+
+              {{ turno.siglas }}
+
+            </div>
+
+
+            <div class="shift-summary-information">
+
+              <strong>
+                {{ turno.nombre }}
+              </strong>
+
+              <span>
+                {{ turno.cantidad }} turnos
+              </span>
+
+            </div>
+
+
+            <strong class="shift-hours">
+              {{ turno.horas }} h
+            </strong>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           RESUMEN MENSUAL
+           ================================================= -->
+
+      <article class="dashboard-card monthly-card">
+
+        <div class="card-header">
+
+          <div>
+
+            <h2>
+              Resumen mensual
+            </h2>
+
+            <p>
+              Estado general del periodo
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="monthly-content">
+
+
+          <!-- CÍRCULO -->
+
+          <div
+            class="monthly-circle"
+            [style.--percentage]="porcentajeCumplimiento"
+          >
+
+            <div>
+
+              <strong>
+                {{ porcentajeCumplimiento }}%
+              </strong>
+
+              <span>
+                Cumplimiento
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- DETALLES -->
+
+          <div class="monthly-details">
+
+
+            <div>
+
+              <span>
+                Meta total
+              </span>
+
+              <strong>
+                {{ horasMeta }} h
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Programadas
+              </span>
+
+              <strong>
+                {{ horasProgramadas }} h
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Pendientes
+              </span>
+
+              <strong class="pending-text">
+                {{ horasPendientes }} h
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Personal que cumple
+              </span>
+
+              <strong class="success-text">
+                {{ totalCumplen }} / {{ totalPersonal }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- ===================================================
+         INFORMACIÓN
+         =================================================== -->
+
+    <div class="dashboard-note">
+
+      <span>
+        i
+      </span>
+
+      <div>
+
+        <strong>
+          Control mensual
+        </strong>
+
+        <p>
+          El cumplimiento se calcula tomando como referencia
+          una meta de 150 horas mensuales por médico.
+          Las alertas son informativas y no aplican descuentos
+          automáticamente.
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>

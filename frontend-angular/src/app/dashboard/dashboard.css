@@ -1,0 +1,1034 @@
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+:host {
+  display: block;
+
+  min-height: 100vh;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  color: #243b5a;
+
+  background: #f7f9fc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PÁGINA
+   ========================================================= */
+
+.dashboard-page {
+  min-height: 100vh;
+
+  background: #f7f9fc;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.breadcrumb {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 28px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e5eaf0;
+
+  color: #66788e;
+
+  font-size: 11px;
+}
+
+.breadcrumb span:nth-child(2) {
+  color: #a0adbb;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.dashboard-header {
+  min-height: 94px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 28px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e4e9ef;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+
+  color: #193d68;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  margin: 7px 0 0;
+
+  color: #718198;
+
+  font-size: 12px;
+}
+
+.header-month {
+  min-width: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 3px;
+}
+
+.header-month span {
+  color: #8794a5;
+
+  font-size: 9px;
+
+  letter-spacing: 0.4px;
+}
+
+.header-month strong {
+  color: #294b72;
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
+.dashboard-content {
+  padding: 20px 28px 30px;
+}
+
+
+/* =========================================================
+   ESTADÍSTICAS
+   ========================================================= */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  min-height: 104px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 15px;
+
+  border: 1px solid #e0e7ef;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.025);
+}
+
+.stat-icon {
+  width: 45px;
+  height: 45px;
+
+  flex: 0 0 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  font-size: 19px;
+
+  font-weight: 700;
+}
+
+.stat-icon.blue {
+  background: #edf4ff;
+
+  color: #2867dc;
+}
+
+.stat-icon.purple {
+  background: #f2efff;
+
+  color: #7655d9;
+}
+
+.stat-icon.green {
+  background: #eaf8f0;
+
+  color: #14914e;
+}
+
+.stat-icon.red {
+  background: #fff0f1;
+
+  color: #d9343e;
+}
+
+.stat-information {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  color: #7a899b;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+.stat-value {
+  margin-top: 3px;
+
+  color: #243e60;
+
+  font-size: 23px;
+
+  line-height: 1.1;
+}
+
+.stat-information small {
+  margin-top: 3px;
+
+  color: #98a4b3;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   COLUMNAS
+   ========================================================= */
+
+.dashboard-columns {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(320px, 1fr);
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+}
+
+.bottom-columns {
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(360px, 0.85fr);
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.dashboard-card {
+  min-width: 0;
+
+  border: 1px solid #e0e7ef;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.025);
+}
+
+.card-header {
+  min-height: 66px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 13px 15px;
+
+  border-bottom: 1px solid #e7ecf1;
+}
+
+.card-header h2 {
+  margin: 0;
+
+  color: #29496d;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.card-header p {
+  margin: 4px 0 0;
+
+  color: #8a97a7;
+
+  font-size: 9px;
+}
+
+.card-period {
+  padding: 5px 8px;
+
+  border-radius: 5px;
+
+  background: #f1f5fa;
+
+  color: #61738a;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   MÉDICOS
+   ========================================================= */
+
+.medical-list {
+  padding: 4px 15px 9px;
+}
+
+.medical-row {
+  min-height: 66px;
+
+  display: grid;
+
+  grid-template-columns:
+    190px minmax(150px, 1fr) 130px;
+
+  align-items: center;
+
+  gap: 15px;
+
+  border-bottom: 1px solid #eef1f5;
+}
+
+.medical-row:last-child {
+  border-bottom: none;
+}
+
+.medical-person {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.medical-avatar {
+  width: 32px;
+  height: 32px;
+
+  flex: 0 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #edf4ff;
+
+  color: #2866d7;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+.medical-person div:last-child {
+  min-width: 0;
+}
+
+.medical-person strong {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+  color: #304967;
+
+  font-size: 10px;
+}
+
+.medical-person small {
+  display: block;
+
+  margin-top: 2px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+  color: #8a97a7;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   PROGRESO
+   ========================================================= */
+
+.medical-progress {
+  min-width: 0;
+}
+
+.progress-information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 5px;
+
+  color: #8190a1;
+
+  font-size: 8px;
+}
+
+.progress-information strong {
+  color: #4b6078;
+
+  font-size: 8px;
+}
+
+.progress-bar {
+  width: 100%;
+
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #e9eef4;
+}
+
+.progress-value {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #e6a72b;
+
+  transition: width 0.3s ease;
+}
+
+.progress-value.complete {
+  background: #1ba15a;
+}
+
+
+/* =========================================================
+   ESTADOS
+   ========================================================= */
+
+.medical-status {
+  justify-self: end;
+
+  padding: 5px 7px;
+
+  border-radius: 5px;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.estado-cumple {
+  background: #eaf8f0;
+
+  color: #18864b;
+}
+
+.estado-pendiente {
+  background: #fff6df;
+
+  color: #9a6a08;
+}
+
+
+/* =========================================================
+   ALERTAS
+   ========================================================= */
+
+.alert-count {
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fff0f1;
+
+  color: #d93740;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+.alert-list {
+  padding: 5px 15px 10px;
+}
+
+.alert-item {
+  display: flex;
+
+  gap: 10px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #eef1f5;
+}
+
+.alert-item:last-child {
+  border-bottom: none;
+}
+
+.alert-icon {
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fff0f1;
+
+  color: #d93740;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.alert-information {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.alert-information strong {
+  color: #3b526d;
+
+  font-size: 10px;
+}
+
+.alert-information span {
+  margin-top: 3px;
+
+  color: #7f8da0;
+
+  font-size: 8px;
+
+  line-height: 1.4;
+}
+
+.alert-information small {
+  margin-top: 3px;
+
+  color: #d18c16;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   SIN ALERTAS
+   ========================================================= */
+
+.no-alerts {
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  color: #738397;
+}
+
+.no-alerts > span {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eaf8f0;
+
+  color: #1b9956;
+
+  font-weight: 700;
+}
+
+.no-alerts strong {
+  color: #496078;
+
+  font-size: 10px;
+}
+
+.no-alerts small {
+  color: #929eac;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   TURNOS
+   ========================================================= */
+
+.shift-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  padding: 12px 15px 15px;
+}
+
+.shift-summary-item {
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 7px;
+
+  border: 1px solid #e7ecf1;
+
+  border-radius: 7px;
+
+  background: #fbfcfd;
+}
+
+.shift-color {
+  width: 31px;
+  height: 31px;
+
+  flex: 0 0 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-left: 3px solid;
+
+  border-radius: 5px;
+
+  font-size: 8px;
+
+  font-weight: 800;
+}
+
+.shift-color.turno-verde {
+  background: #eaf8f0;
+
+  border-color: #13a45b;
+
+  color: #08723c;
+}
+
+.shift-color.turno-azul {
+  background: #eaf2ff;
+
+  border-color: #2166d5;
+
+  color: #174b9c;
+}
+
+.shift-color.turno-celeste {
+  background: #e9f6fb;
+
+  border-color: #1b9ac0;
+
+  color: #14758f;
+}
+
+.shift-color.turno-turquesa {
+  background: #e8f5f6;
+
+  border-color: #159aa5;
+
+  color: #13727a;
+}
+
+.shift-color.turno-amarillo {
+  background: #fff7df;
+
+  border-color: #e5a51c;
+
+  color: #966b09;
+}
+
+.shift-color.turno-rojo {
+  background: #fff0f1;
+
+  border-color: #ed3f48;
+
+  color: #bd2934;
+}
+
+.shift-summary-information {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.shift-summary-information strong {
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+  color: #40566f;
+
+  font-size: 9px;
+}
+
+.shift-summary-information span {
+  margin-top: 2px;
+
+  color: #8b98a8;
+
+  font-size: 8px;
+}
+
+.shift-hours {
+  color: #52677f;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   RESUMEN MENSUAL
+   ========================================================= */
+
+.monthly-content {
+  min-height: 177px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+
+  padding: 15px 20px;
+}
+
+.monthly-circle {
+  width: 125px;
+  height: 125px;
+
+  flex: 0 0 125px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #2d68df 0deg,
+      #2d68df calc(var(--percentage) * 3.6deg),
+      #e9eef5 calc(var(--percentage) * 3.6deg),
+      #e9eef5 360deg
+    );
+
+  position: relative;
+}
+
+.monthly-circle::after {
+  content: "";
+
+  position: absolute;
+
+  width: 91px;
+  height: 91px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+}
+
+.monthly-circle > div {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.monthly-circle strong {
+  color: #294a70;
+
+  font-size: 21px;
+}
+
+.monthly-circle span {
+  margin-top: 2px;
+
+  color: #8b98a8;
+
+  font-size: 7px;
+}
+
+.monthly-details {
+  flex: 1;
+}
+
+.monthly-details > div {
+  min-height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #eef1f5;
+}
+
+.monthly-details > div:last-child {
+  border-bottom: none;
+}
+
+.monthly-details span {
+  color: #8492a3;
+
+  font-size: 9px;
+}
+
+.monthly-details strong {
+  color: #405873;
+
+  font-size: 10px;
+}
+
+.pending-text {
+  color: #c88917 !important;
+}
+
+.success-text {
+  color: #19894d !important;
+}
+
+
+/* =========================================================
+   NOTA
+   ========================================================= */
+
+.dashboard-note {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dbe5f0;
+
+  border-radius: 7px;
+
+  background: #f4f8fd;
+}
+
+.dashboard-note > span {
+  width: 21px;
+  height: 21px;
+
+  flex: 0 0 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #dceaff;
+
+  color: #2867d8;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+.dashboard-note strong {
+  color: #405a76;
+
+  font-size: 9px;
+}
+
+.dashboard-note p {
+  margin: 3px 0 0;
+
+  color: #7c8b9d;
+
+  font-size: 8px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1150px) {
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-columns,
+  .bottom-columns {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .dashboard-content {
+    padding: 15px;
+  }
+
+  .dashboard-header {
+    padding: 15px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .header-month {
+    align-items: flex-start;
+  }
+
+  .medical-row {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    padding: 12px 0;
+  }
+
+  .medical-status {
+    justify-self: start;
+  }
+
+}
+
+
+@media (max-width: 550px) {
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shift-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .monthly-content {
+    flex-direction: column;
+
+    padding: 20px;
+  }
+
+}

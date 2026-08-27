@@ -1,0 +1,1809 @@
+/* =========================================================
+   PROGRAMACIÓN - DISEÑO PRINCIPAL
+   ========================================================= */
+
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  color: #243b5a;
+  background: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================= */
+
+.programacion-page {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.breadcrumb {
+  height: 42px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 24px;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  color: #64748b;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e5eaf0;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 22px 28px 18px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e6ebf1;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  font-size: 25px;
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #183b66;
+}
+
+.page-header p {
+  margin: 7px 0 0;
+
+  font-size: 13px;
+
+  color: #64748b;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* =========================================================
+   BOTONES GENERALES
+   ========================================================= */
+
+.secondary-button {
+  height: 38px;
+
+  padding: 0 14px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border: 1px solid #d5dfeb;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #42566f;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.secondary-button:hover {
+  background: #f4f7fa;
+  border-color: #b9c7d7;
+}
+
+/* =========================================================
+   LAYOUT PRINCIPAL
+   ========================================================= */
+
+.programacion-layout {
+  display: grid;
+
+  grid-template-columns: 250px minmax(700px, 1fr);
+
+  min-height: calc(100vh - 130px);
+
+  background: #f8fafc;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar-panel {
+  width: 250px;
+
+  padding: 18px 12px 24px;
+
+  background: #ffffff;
+
+  border-right: 1px solid #dfe6ee;
+
+  overflow-y: auto;
+}
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+
+.filter-group {
+  margin-bottom: 18px;
+}
+
+.filter-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+
+  color: #50647c;
+}
+
+.filter-group select {
+  width: 100%;
+
+  height: 38px;
+
+  padding: 0 11px;
+
+  border: 1px solid #d7e0ea;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #52657b;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.filter-group select:focus {
+  border-color: #2b66dc;
+  box-shadow: 0 0 0 2px rgba(43, 102, 220, 0.08);
+}
+
+/* =========================================================
+   PERSONAL HEADER
+   ========================================================= */
+
+.personal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 4px 4px 9px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  color: #3e526b;
+}
+
+.personal-header b {
+  margin-left: 4px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 19px;
+  height: 19px;
+
+  border-radius: 50%;
+
+  background: #e8f0ff;
+
+  color: #2864d7;
+
+  font-size: 9px;
+}
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.switch-label {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #20a35a;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.switch-label input {
+  display: none;
+}
+
+.switch {
+  position: relative;
+
+  width: 30px;
+  height: 17px;
+
+  border-radius: 20px;
+
+  background: #22a45a;
+
+  transition: 0.2s;
+}
+
+.switch::after {
+  content: "";
+
+  position: absolute;
+
+  width: 13px;
+  height: 13px;
+
+  top: 2px;
+  right: 2px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  transition: 0.2s;
+}
+
+.switch-label input:not(:checked) + .switch {
+  background: #cbd5e1;
+}
+
+.switch-label input:not(:checked) + .switch::after {
+  right: 15px;
+}
+
+/* =========================================================
+   BUSCADOR
+   ========================================================= */
+
+.search-box {
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  padding: 0 11px;
+
+  border: 1px solid #dce4ed;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+}
+
+.search-box span {
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.search-box input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #334155;
+
+  font-size: 11px;
+}
+
+.search-box input::placeholder {
+  color: #9aa8b8;
+}
+
+/* =========================================================
+   LISTA PERSONAL
+   ========================================================= */
+
+.personal-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.personal-item {
+  width: 100%;
+
+  min-height: 49px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 7px 9px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.personal-item:hover {
+  background: #f3f7fc;
+}
+
+.personal-item.selected {
+  background: #edf4ff;
+
+  box-shadow:
+    inset 3px 0 0 #2867df;
+}
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.avatar {
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #edf4ff;
+
+  color: #2867dc;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.personal-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.personal-info strong {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: 11px;
+
+  color: #263e5d;
+}
+
+.personal-info small {
+  margin-top: 2px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: 8px;
+
+  color: #8190a3;
+}
+
+/* =========================================================
+   RESUMEN MENSUAL
+   ========================================================= */
+
+.monthly-summary {
+  margin-top: 20px;
+
+  padding: 13px;
+
+  border: 1px solid #e1e8f0;
+
+  border-radius: 8px;
+
+  background: #f8fafc;
+}
+
+.monthly-summary h3 {
+  margin: 0 0 10px;
+
+  font-size: 11px;
+
+  color: #304866;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 5px 0;
+
+  font-size: 9px;
+
+  color: #718096;
+}
+
+.summary-row strong {
+  color: #304866;
+
+  font-size: 10px;
+}
+
+.summary-status {
+  margin-top: 8px;
+
+  padding: 7px;
+
+  border-radius: 5px;
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.summary-status.success {
+  background: #e9f8ef;
+  color: #168448;
+}
+
+.summary-status.warning {
+  background: #fff6df;
+  color: #9a6900;
+}
+
+/* =========================================================
+   LEYENDA
+   ========================================================= */
+
+.sidebar-legend {
+  margin-top: 20px;
+}
+
+.legend h3 {
+  margin: 0 0 8px;
+
+  font-size: 11px;
+
+  color: #304866;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  margin-bottom: 5px;
+
+  font-size: 8px;
+
+  color: #65758a;
+}
+
+.legend-item strong {
+  font-size: 8px;
+
+  color: #334b67;
+}
+
+.legend-color {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 2px;
+}
+
+/* =========================================================
+   CALENDARIO
+   ========================================================= */
+
+.calendar-panel {
+  min-width: 0;
+
+  margin: 14px 16px 18px;
+
+  border: 1px solid #dbe3ec;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+/* =========================================================
+   HEADER CALENDARIO
+   ========================================================= */
+
+.calendar-header {
+  min-height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 14px;
+
+  border-bottom: 1px solid #e0e7ef;
+}
+
+.calendar-header h2 {
+  margin: 0;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  color: #1e4675;
+
+  text-transform: capitalize;
+}
+
+.calendar-header p {
+  margin: 3px 0 0;
+
+  font-size: 8px;
+
+  color: #8593a4;
+}
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.calendar-navigation button {
+  height: 31px;
+
+  min-width: 31px;
+
+  padding: 0 8px;
+
+  border: 1px solid #d8e1eb;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #52667f;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.calendar-navigation button:hover {
+  background: #f2f6fb;
+
+  border-color: #c1cfde;
+}
+
+/* =========================================================
+   SEMANA
+   ========================================================= */
+
+.calendar-week {
+  display: grid;
+
+  grid-template-columns: repeat(7, 1fr);
+
+  border-bottom: 1px solid #dfe6ee;
+}
+
+.week-day {
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  color: #617186;
+
+  border-right: 1px solid #e1e7ee;
+}
+
+.week-day:last-child {
+  border-right: none;
+}
+
+.week-day.sunday {
+  color: #df3b43;
+}
+
+/* =========================================================
+   GRID CALENDARIO
+   ========================================================= */
+
+.calendar-grid {
+  display: grid;
+
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  border-left: 1px solid #e1e7ee;
+}
+
+.calendar-day {
+  position: relative;
+
+  min-height: 118px;
+
+  padding: 7px;
+
+  background: #ffffff;
+
+  border-right: 1px solid #e1e7ee;
+  border-bottom: 1px solid #e1e7ee;
+
+  cursor: pointer;
+
+  transition:
+    background 0.12s ease;
+}
+
+.calendar-day:hover {
+  background: #fafcff;
+}
+
+.calendar-day.other-month {
+  background: #f8fafc;
+
+  color: #b5bfca;
+}
+
+.calendar-day.selected {
+  background: #f2f7ff;
+
+  box-shadow:
+    inset 0 0 0 2px #2e6bea;
+}
+
+/* =========================================================
+   NÚMERO DÍA
+   ========================================================= */
+
+.day-number {
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 3px;
+
+  border-radius: 50%;
+
+  font-size: 10px;
+
+  color: #4d6077;
+}
+
+.calendar-day.selected .day-number {
+  background: #2d68df;
+
+  color: #ffffff;
+
+  font-weight: 700;
+}
+
+/* =========================================================
+   TURNOS DEL DÍA
+   ========================================================= */
+
+.day-shifts {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+/* =========================================================
+   TARJETA TURNO
+   ========================================================= */
+
+.shift-card {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 35px;
+
+  padding: 5px 7px;
+
+  border-radius: 6px;
+
+  border-left: 3px solid;
+
+  cursor: context-menu;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.shift-card:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 2px 6px rgba(15, 23, 42, 0.09);
+}
+
+/* =========================================================
+   TEXTO DEL TURNO
+   ========================================================= */
+
+.shift-code,
+.shift-name,
+.shift-hours,
+.shift-observation,
+.shift-variant {
+  font-size: 8px;
+
+  line-height: 1.35;
+}
+
+.shift-code {
+  font-weight: 800;
+
+  letter-spacing: 0.3px;
+}
+
+.shift-name {
+  font-weight: 500;
+}
+
+.shift-hours {
+  margin-top: 1px;
+
+  font-weight: 600;
+}
+
+.shift-observation {
+  margin-top: 1px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+.shift-variant {
+  margin-top: 2px;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  opacity: 0.7;
+}
+
+/* =========================================================
+   COLORES DE TURNOS
+   ========================================================= */
+
+/* GUARDIA DIURNA */
+
+.turno-verde {
+  background: #eaf8f0;
+
+  border-left-color: #13a45b;
+
+  color: #08723c;
+}
+
+/* GUARDIA NOCTURNA */
+
+.turno-azul {
+  background: #eaf2ff;
+
+  border-left-color: #2166d5;
+
+  color: #174b9c;
+}
+
+/* TURNO DÍA */
+
+.turno-celeste {
+  background: #e9f6fb;
+
+  border-left-color: #1b9ac0;
+
+  color: #14758f;
+}
+
+/* TURNO NOCHE */
+
+.turno-turquesa {
+  background: #e8f5f6;
+
+  border-left-color: #159aa5;
+
+  color: #13727a;
+}
+
+/* MAÑANA */
+
+.turno-amarillo {
+  background: #fff7df;
+
+  border-left-color: #e5a51c;
+
+  color: #966b09;
+}
+
+/* TARDE */
+
+.turno-rojo {
+  background: #fff0f1;
+
+  border-left-color: #ed3f48;
+
+  color: #bd2934;
+}
+
+/* DEFAULT */
+
+.turno-default {
+  background: #f1f5f9;
+
+  border-left-color: #64748b;
+
+  color: #475569;
+}
+
+/* =========================================================
+   DOCUMENTO
+   ========================================================= */
+
+.document-button {
+  position: absolute;
+
+  right: 5px;
+  top: 5px;
+
+  width: 19px;
+  height: 19px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   ACCIONES CALENDARIO
+   ========================================================= */
+
+.calendar-actions {
+  min-height: 92px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px;
+
+  background: #ffffff;
+}
+
+.selected-counter {
+  color: #4b6078;
+
+  font-size: 11px;
+}
+
+.selected-counter strong {
+  color: #1f4f87;
+
+  font-size: 18px;
+
+  margin-right: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: stretch;
+
+  gap: 6px;
+}
+
+/* =========================================================
+   BOTONES ACCIONES
+   ========================================================= */
+
+.clear-button,
+.modify-button,
+.delete-button,
+.register-button {
+  min-height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 13px;
+
+  border-radius: 7px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.clear-button {
+  min-height: 36px;
+
+  border: 1px solid #d5dde7;
+
+  background: #ffffff;
+
+  color: #748398;
+}
+
+.modify-button {
+  border: 1px solid #d6dce5;
+
+  background: #ffffff;
+
+  color: #6c7b8e;
+}
+
+.delete-button {
+  border: 1px solid #e22c32;
+
+  background: #ef292f;
+
+  color: #ffffff;
+}
+
+.register-button {
+  min-width: 132px;
+
+  border: 1px solid #2867df;
+
+  background: #2867df;
+
+  color: #ffffff;
+}
+
+.modify-button:first-letter,
+.delete-button:first-letter,
+.register-button:first-letter {
+  font-size: 18px;
+}
+
+.clear-button:hover,
+.modify-button:hover,
+.delete-button:hover,
+.register-button:hover {
+  transform: translateY(-1px);
+}
+
+.clear-button:disabled,
+.modify-button:disabled,
+.delete-button:disabled,
+.register-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+/* =========================================================
+   MENÚ CONTEXTUAL
+   ========================================================= */
+
+.context-menu {
+  position: fixed;
+
+  z-index: 10000;
+
+  min-width: 175px;
+
+  padding: 5px;
+
+  border: 1px solid #d9e1ea;
+
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.15);
+}
+
+.context-menu button {
+  width: 100%;
+
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 10px;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: transparent;
+
+  color: #40546c;
+
+  text-align: left;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+.context-menu button:hover {
+  background: #f2f6fb;
+}
+
+.context-menu button.danger {
+  color: #dc3038;
+}
+
+.context-menu button.danger:hover {
+  background: #fff0f1;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal-overlay {
+  position: fixed;
+
+  z-index: 9999;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(20, 37, 58, 0.48);
+
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  width: min(560px, 100%);
+
+  max-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.22);
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   MODAL HEADER
+   ========================================================= */
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 18px;
+
+  border-bottom: 1px solid #e3e8ee;
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  font-size: 18px;
+
+  color: #203d61;
+}
+
+.modal-header p {
+  margin: 4px 0 0;
+
+  font-size: 10px;
+
+  color: #8290a1;
+}
+
+.modal-close {
+  width: 30px;
+  height: 30px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #718096;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #f1f5f9;
+}
+
+/* =========================================================
+   MODAL BODY
+   ========================================================= */
+
+.modal-body {
+  padding: 18px;
+
+  overflow-y: auto;
+}
+
+.form-section {
+  margin-bottom: 15px;
+}
+
+.form-section > label,
+.custom-duration-section > label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  color: #425873;
+}
+
+/* =========================================================
+   PERSONA SELECCIONADA
+   ========================================================= */
+
+.selected-person {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px;
+
+  border: 1px solid #dce4ed;
+
+  border-radius: 7px;
+
+  background: #f8fafc;
+}
+
+.selected-person strong {
+  display: block;
+
+  font-size: 11px;
+
+  color: #263f5d;
+}
+
+.selected-person small {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 9px;
+
+  color: #7d8da0;
+}
+
+/* =========================================================
+   FECHAS
+   ========================================================= */
+
+.selected-dates {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  padding: 9px;
+
+  min-height: 38px;
+
+  border: 1px solid #dce4ed;
+
+  border-radius: 7px;
+
+  background: #f8fafc;
+}
+
+.selected-dates span {
+  padding: 5px 8px;
+
+  border-radius: 5px;
+
+  background: #eaf2ff;
+
+  color: #2865d5;
+
+  font-size: 9px;
+}
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.form-input {
+  width: 100%;
+
+  min-height: 38px;
+
+  padding: 8px 10px;
+
+  border: 1px solid #d6e0ea;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #40536b;
+
+  font-size: 10px;
+}
+
+textarea.form-input {
+  min-height: 80px;
+
+  resize: vertical;
+}
+
+.form-input:focus {
+  border-color: #2867df;
+
+  box-shadow:
+    0 0 0 2px rgba(40, 103, 223, 0.08);
+}
+
+/* =========================================================
+   INFORMACIÓN TURNO
+   ========================================================= */
+
+.turno-info {
+  margin-top: -7px;
+
+  margin-bottom: 16px;
+
+  padding: 9px 10px;
+
+  border: 1px solid #dce4ed;
+
+  border-radius: 7px;
+
+  background: #f8fafc;
+}
+
+.turno-info > div {
+  display: grid;
+
+  grid-template-columns: 100px 1fr;
+
+  min-height: 27px;
+
+  align-items: center;
+
+  border-bottom: 1px solid #e3e9ef;
+}
+
+.turno-info > div:last-child {
+  border-bottom: none;
+}
+
+.turno-info span {
+  font-size: 9px;
+
+  color: #8290a2;
+}
+
+.turno-info strong {
+  font-size: 10px;
+
+  color: #3c5069;
+}
+
+/* =========================================================
+   DURACIÓN PERSONALIZADA
+   ========================================================= */
+
+.custom-duration-section {
+  margin-bottom: 16px;
+}
+
+.checkbox-label {
+  display: flex !important;
+  align-items: center;
+
+  gap: 7px;
+
+  cursor: pointer;
+
+  font-size: 10px !important;
+
+  font-weight: 600 !important;
+}
+
+.checkbox-label input {
+  width: 14px;
+  height: 14px;
+
+  accent-color: #2867df;
+}
+
+.duration-editor {
+  margin-top: 9px;
+
+  padding: 11px;
+
+  border: 1px solid #dce5ef;
+
+  border-radius: 7px;
+
+  background: #f8fafc;
+}
+
+.duration-editor > label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  color: #64748b;
+}
+
+.duration-input {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.duration-input input {
+  width: 90px;
+
+  height: 36px;
+
+  padding: 0 9px;
+
+  border: 1px solid #d5dfe9;
+
+  border-radius: 6px;
+
+  outline: none;
+
+  font-size: 11px;
+}
+
+.duration-input span {
+  font-size: 10px;
+
+  color: #65758a;
+}
+
+/* =========================================================
+   AVISO VARIANTE
+   ========================================================= */
+
+.variant-warning {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 9px;
+
+  padding: 9px;
+
+  border-radius: 6px;
+
+  background: #fff8e5;
+
+  color: #8c6508;
+}
+
+.variant-warning > span {
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #f0b72b;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.variant-warning strong {
+  display: block;
+
+  font-size: 9px;
+}
+
+.variant-warning p {
+  margin: 2px 0 0;
+
+  font-size: 8px;
+
+  line-height: 1.4;
+}
+
+/* =========================================================
+   ARCHIVOS
+   ========================================================= */
+
+.file-upload {
+  padding: 11px;
+
+  border: 1px dashed #b9c8d9;
+
+  border-radius: 7px;
+
+  background: #f9fbfd;
+}
+
+.file-upload input {
+  display: none;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  color: #2865d5;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+.file-upload small {
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 8px;
+
+  color: #8996a7;
+}
+
+.file-selected {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 7px;
+
+  padding: 8px;
+
+  border: 1px solid #cce5d7;
+
+  border-radius: 6px;
+
+  background: #eefaf2;
+
+  color: #27834d;
+
+  font-size: 9px;
+}
+
+.file-selected span:nth-child(2) {
+  flex: 1;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.file-selected button {
+  width: 22px;
+  height: 22px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  background: transparent;
+
+  color: #d34a51;
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   MODAL FOOTER
+   ========================================================= */
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  padding: 13px 18px;
+
+  border-top: 1px solid #e1e7ee;
+
+  background: #fbfcfd;
+}
+
+.cancel-button,
+.save-button {
+  height: 37px;
+
+  padding: 0 14px;
+
+  border-radius: 6px;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cancel-button {
+  border: 1px solid #d6dfe8;
+
+  background: #ffffff;
+
+  color: #65758a;
+}
+
+.save-button {
+  border: 1px solid #2867df;
+
+  background: #2867df;
+
+  color: #ffffff;
+}
+
+.cancel-button:hover {
+  background: #f5f7fa;
+}
+
+.save-button:hover {
+  background: #225dcc;
+}
+
+/* =========================================================
+   SCROLLBARS
+   ========================================================= */
+
+.sidebar-panel::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-panel::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+
+  border-radius: 10px;
+}
+
+.sidebar-panel::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .programacion-layout {
+    grid-template-columns: 220px minmax(650px, 1fr);
+  }
+
+  .sidebar-panel {
+    width: 220px;
+  }
+
+  .calendar-day {
+    min-height: 105px;
+  }
+
+  .shift-card {
+    padding: 5px;
+  }
+
+}
+
+@media (max-width: 850px) {
+
+  .programacion-layout {
+    display: block;
+  }
+
+  .sidebar-panel {
+    width: 100%;
+
+    border-right: none;
+    border-bottom: 1px solid #dfe6ee;
+  }
+
+  .personal-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calendar-panel {
+    margin: 10px;
+  }
+
+}
+
+@media (max-width: 650px) {
+
+  .page-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .calendar-actions {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .action-buttons {
+    width: 100%;
+
+    overflow-x: auto;
+  }
+
+  .calendar-day {
+    min-height: 95px;
+
+    padding: 4px;
+  }
+
+  .shift-card {
+    padding: 4px;
+
+    border-left-width: 2px;
+  }
+
+  .shift-code,
+  .shift-name,
+  .shift-hours,
+  .shift-observation {
+    font-size: 7px;
+  }
+
+}

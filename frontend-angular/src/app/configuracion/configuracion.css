@@ -1,0 +1,2660 @@
+/* =========================================================
+   CONFIGURACIÓN
+   ========================================================= */
+
+:host {
+  display: block;
+  min-height: 100vh;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  color: #243b5a;
+
+  background: #f7f9fc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PÁGINA
+   ========================================================= */
+
+.configuracion-page {
+  min-height: 100vh;
+
+  background: #f7f9fc;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.breadcrumb {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 28px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e5eaf0;
+
+  color: #66788e;
+
+  font-size: 11px;
+}
+
+.breadcrumb span:nth-child(2) {
+  color: #a0adbb;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.page-header {
+  min-height: 94px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 18px 28px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e4e9ef;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  color: #193d68;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+.page-header p {
+  margin: 7px 0 0;
+
+  color: #718198;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
+.configuracion-content {
+  display: grid;
+
+  grid-template-columns:
+    235px minmax(0, 1fr);
+
+  gap: 18px;
+
+  padding: 20px 28px 30px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.config-sidebar {
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 7px;
+
+  border: 1px solid #e0e7ef;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+}
+
+.config-sidebar button {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #60738a;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.config-sidebar button:hover {
+  background: #f5f8fc;
+}
+
+.config-sidebar button.active {
+  background: #edf4ff;
+
+  color: #2867d7;
+}
+
+.config-sidebar button svg {
+  width: 19px;
+
+  height: 19px;
+
+  flex: 0 0 19px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+.config-sidebar button div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.config-sidebar button strong {
+  font-size: 10px;
+}
+
+.config-sidebar button small {
+  color: #96a3b1;
+
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.config-panel {
+  min-width: 0;
+}
+
+.configuration-section {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   HEADER SECCIÓN
+   ========================================================= */
+
+.section-header {
+  margin-bottom: 14px;
+}
+
+.section-header h2 {
+  margin: 0;
+
+  color: #29496d;
+
+  font-size: 17px;
+}
+
+.section-header p {
+  margin: 4px 0 0;
+
+  color: #8a97a7;
+
+  font-size: 9px;
+}
+
+.section-header-row {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 14px;
+}
+
+.section-header-row .section-header {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.primary-button {
+  min-height: 35px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 13px;
+
+  border: 1px solid #2867df;
+
+  border-radius: 6px;
+
+  background: #2867df;
+
+  color: #ffffff;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.15s ease,
+    border 0.15s ease;
+}
+
+.primary-button:hover {
+  background: #1f58c2;
+
+  border-color: #1f58c2;
+}
+
+.button-icon {
+  font-size: 15px;
+
+  line-height: 1;
+}
+
+.secondary-button {
+  min-height: 35px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d5dfe9;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #60738a;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  background: #f4f7fa;
+}
+
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+
+.filter-card {
+  margin-bottom: 14px;
+
+  padding: 14px;
+
+  border: 1px solid #e0e7ef;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+}
+
+.filter-title {
+  margin-bottom: 11px;
+
+  color: #405873;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+.filters-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  align-items: end;
+
+  gap: 9px;
+}
+
+.filter-field {
+  min-width: 0;
+}
+
+.filter-field label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #61738a;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   BUSCADOR EMPLEADOS
+   ========================================================= */
+
+.employee-search {
+  position: relative;
+
+  margin-bottom: 12px;
+}
+
+.employee-search svg {
+  position: absolute;
+
+  left: 10px;
+
+  top: 50%;
+
+  width: 14px;
+
+  height: 14px;
+
+  transform: translateY(-50%);
+
+  fill: none;
+
+  stroke: #7d8c9e;
+
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  pointer-events: none;
+}
+
+.employee-search input {
+  width: 100%;
+
+  height: 37px;
+
+  padding:
+    0
+    12px
+    0
+    31px;
+
+  border: 1px solid #d8e1ea;
+
+  border-radius: 6px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #52657b;
+
+  font-size: 9px;
+}
+
+.employee-search input:focus {
+  border-color: #2867df;
+}
+
+
+/* =========================================================
+   SELECTOR BUSCABLE
+   ========================================================= */
+
+.search-select {
+  position: relative;
+
+  width: 100%;
+}
+
+.search-select > input {
+  width: 100%;
+
+  height: 36px;
+
+  padding:
+    0
+    38px
+    0
+    11px;
+
+  border: 1px solid #d8e1ea;
+
+  border-radius: 6px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #52657b;
+
+  font-size: 9px;
+}
+
+.search-select > input:focus {
+  border-color: #2867df;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(40, 103, 223, 0.08);
+}
+
+.search-select > input::placeholder {
+  color: #9aa7b5;
+}
+
+
+/* =========================================================
+   ICONO DEL FILTRO
+   ========================================================= */
+
+.filter-icon {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 9px;
+
+  top: 50%;
+
+  width: 13px;
+
+  height: 13px;
+
+  transform: translateY(-50%);
+
+  fill: none;
+
+  stroke: #7d8c9e;
+
+  stroke-width: 1.6;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  pointer-events: none;
+}
+
+.search-select .filter-icon + input {
+  padding-left: 30px;
+}
+
+
+/* =========================================================
+   FLECHA
+   ========================================================= */
+
+.dropdown-arrow {
+  position: absolute;
+
+  z-index: 3;
+
+  right: 0;
+
+  top: 0;
+
+  width: 36px;
+
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: #65778b;
+
+  cursor: pointer;
+}
+
+.dropdown-arrow svg {
+  width: 13px;
+
+  height: 13px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   DROPDOWN
+   ========================================================= */
+
+.search-select-menu {
+  position: absolute;
+
+  z-index: 9999;
+
+  top: calc(100% + 3px);
+
+  left: 0;
+
+  right: 0;
+
+  max-height: 210px;
+
+  overflow-y: auto;
+
+  padding: 4px 0;
+
+  border: 1px solid #d6dfe8;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 7px 18px
+    rgba(24, 49, 77, 0.16);
+}
+
+.search-select-menu button {
+  width: 100%;
+
+  min-height: 32px;
+
+  padding: 6px 10px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #52657b;
+
+  font-size: 9px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.search-select-menu button:hover {
+  background: #edf4ff;
+
+  color: #2867d7;
+}
+
+.form-search-select {
+  z-index: 20;
+}
+
+.form-search-select .search-select-menu {
+  z-index: 10001;
+}
+
+.search-select-empty {
+  padding: 10px;
+
+  color: #9aa7b5;
+
+  font-size: 9px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   LIMPIAR
+   ========================================================= */
+
+.clear-button {
+  height: 36px;
+
+  padding: 0 13px;
+
+  border: 1px solid #d6dfe8;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  color: #68798d;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  background: #f5f7fa;
+}
+
+
+/* =========================================================
+   TABLA
+   ========================================================= */
+
+.table-card {
+  overflow: auto;
+
+  border: 1px solid #e0e7ef;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+}
+
+.table-card table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 700px;
+}
+
+.table-card thead {
+  background: #f7f9fc;
+}
+
+.table-card th {
+  height: 42px;
+
+  padding: 0 12px;
+
+  border-bottom: 1px solid #dfe6ee;
+
+  color: #748398;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  text-align: left;
+
+  white-space: nowrap;
+}
+
+.table-card td {
+  min-height: 54px;
+
+  padding: 9px 12px;
+
+  border-bottom: 1px solid #edf1f5;
+
+  color: #60738a;
+
+  font-size: 9px;
+
+  vertical-align: middle;
+}
+
+.table-card tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-card tbody tr:hover {
+  background: #fbfcfe;
+}
+
+
+/* =========================================================
+   TABLA EMPLEADOS
+   ========================================================= */
+
+.employee-table table {
+  min-width: 1250px;
+}
+
+.employee-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 170px;
+}
+
+.employee-avatar {
+  width: 30px;
+
+  height: 30px;
+
+  flex: 0 0 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #edf4ff;
+
+  color: #2867d7;
+
+  font-size: 8px;
+
+  font-weight: 800;
+}
+
+.employee-name strong {
+  color: #405873;
+
+  font-size: 9px;
+}
+
+.fixed-hours {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 48px;
+
+  height: 25px;
+
+  padding: 0 7px;
+
+  border-radius: 4px;
+
+  background: #edf4ff;
+
+  color: #2867d7;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   SIGLA
+   ========================================================= */
+
+.shift-code {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 32px;
+
+  height: 25px;
+
+  padding: 0 6px;
+
+  border-radius: 4px;
+
+  background: #edf4ff;
+
+  color: #2867d7;
+
+  font-size: 8px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CATÁLOGOS
+   ========================================================= */
+
+.catalog-name {
+  color: #405873;
+
+  font-size: 9px;
+}
+
+.department-tag {
+  display: inline-block;
+
+  max-width: 260px;
+
+  padding: 5px 7px;
+
+  border-radius: 4px;
+
+  background: #f2f6fa;
+
+  color: #687b90;
+
+  font-size: 7px;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   ACCIONES
+   ========================================================= */
+
+.actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+.icon-button {
+  width: 29px;
+
+  height: 29px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #dce4ec;
+
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  cursor: pointer;
+
+  transition: 0.15s ease;
+}
+
+.icon-button svg {
+  width: 14px;
+
+  height: 14px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+.icon-button.edit {
+  color: #2867d7;
+}
+
+.icon-button.edit:hover {
+  background: #edf4ff;
+
+  border-color: #bcd1f1;
+}
+
+.icon-button.delete {
+  color: #dc3c45;
+}
+
+.icon-button.delete:hover {
+  background: #fff0f1;
+
+  border-color: #f0b9bd;
+}
+
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.switch {
+  position: relative;
+
+  width: 39px;
+
+  height: 21px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 20px;
+
+  background: #cbd4de;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.switch span {
+  position: absolute;
+
+  top: 3px;
+
+  left: 3px;
+
+  width: 15px;
+
+  height: 15px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 1px 3px
+    rgba(0, 0, 0, 0.2);
+
+  transition: 0.2s ease;
+}
+
+.switch.on {
+  background: #20a45a;
+}
+
+.switch.on span {
+  transform: translateX(18px);
+}
+
+
+/* =========================================================
+   APARIENCIA
+   ========================================================= */
+
+.appearance-card {
+  padding: 18px;
+
+  border: 1px solid #e0e7ef;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+}
+
+.appearance-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 18px;
+}
+
+.appearance-icon {
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #edf4ff;
+
+  color: #2867d7;
+}
+
+.appearance-icon svg {
+  width: 20px;
+
+  height: 20px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+.appearance-title h3 {
+  margin: 0;
+
+  color: #405873;
+
+  font-size: 12px;
+}
+
+.appearance-title p {
+  margin: 4px 0 0;
+
+  color: #929eac;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   TEMAS
+   ========================================================= */
+
+.theme-options {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 13px;
+}
+
+.theme-option {
+  position: relative;
+
+  padding: 10px;
+
+  border: 2px solid #e2e8ef;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.15s ease;
+}
+
+.theme-option:hover {
+  border-color: #bdcfe4;
+}
+
+.theme-option.selected {
+  border-color: #2867df;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(40, 103, 223, 0.08);
+}
+
+
+/* =========================================================
+   PREVIEWS
+   ========================================================= */
+
+.theme-preview {
+  height: 140px;
+
+  overflow: hidden;
+
+  border: 1px solid #dbe2ea;
+
+  border-radius: 6px;
+}
+
+.light-preview {
+  background: #f5f7fa;
+}
+
+.gray-preview {
+  background: #dfe2e6;
+}
+
+.dark-preview {
+  background: #1d2733;
+}
+
+.preview-top {
+  height: 25px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #dce3ea;
+}
+
+.gray-preview .preview-top {
+  background: #f0f1f2;
+}
+
+.dark-preview .preview-top {
+  background: #263442;
+
+  border-color: #354454;
+}
+
+.preview-body {
+  height:
+    calc(100% - 25px);
+
+  display: flex;
+}
+
+.preview-sidebar {
+  width: 24%;
+
+  background: #ffffff;
+
+  border-right: 1px solid #dce3ea;
+}
+
+.gray-preview .preview-sidebar {
+  background: #e8e9eb;
+}
+
+.dark-preview .preview-sidebar {
+  background: #222e3a;
+
+  border-color: #354454;
+}
+
+.preview-content {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 13px;
+}
+
+.preview-content span {
+  display: block;
+
+  height: 8px;
+
+  width: 70%;
+
+  border-radius: 3px;
+
+  background: #dce4ec;
+}
+
+.preview-content span:nth-child(2) {
+  width: 90%;
+}
+
+.preview-content span:nth-child(3) {
+  width: 55%;
+}
+
+.gray-preview .preview-content span {
+  background: #c3c6ca;
+}
+
+.dark-preview .preview-content span {
+  background: #3d4c5b;
+}
+
+
+/* =========================================================
+   NOMBRE TEMA
+   ========================================================= */
+
+.theme-name {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 10px;
+
+  color: #405873;
+
+  font-size: 10px;
+}
+
+.theme-name svg {
+  width: 15px;
+
+  height: 15px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.7;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+.theme-name strong {
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   INDICADOR
+   ========================================================= */
+
+.selected-indicator {
+  position: absolute;
+
+  top: 12px;
+
+  right: 12px;
+
+  width: 23px;
+
+  height: 23px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #2867df;
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   INFORMACIÓN TEMA
+   ========================================================= */
+
+.theme-information {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 15px;
+
+  padding: 10px;
+
+  border-radius: 6px;
+
+  background: #f4f8fd;
+}
+
+.theme-information > span {
+  width: 19px;
+
+  height: 19px;
+
+  flex: 0 0 19px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #dceaff;
+
+  color: #2867d8;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+.theme-information p {
+  margin: 0;
+
+  color: #7c8b9d;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   RESTABLECER
+   ========================================================= */
+
+.reset-theme {
+  margin-top: 13px;
+
+  padding: 7px 10px;
+
+  border: 1px solid #d6dfe8;
+
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  color: #68798d;
+
+  font-size: 8px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MODALES
+   ========================================================= */
+
+.modal-overlay {
+  position: fixed;
+
+  z-index: 10000;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(23, 38, 55, 0.52);
+
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  width: min(760px, 100%);
+
+  max-height: 90vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 18px 50px
+    rgba(15, 35, 55, 0.25);
+}
+
+.small-modal {
+  width: min(520px, 100%);
+}
+
+
+/* =========================================================
+   MODAL HEADER
+   ========================================================= */
+
+.modal-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 17px 20px;
+
+  border-bottom: 1px solid #e4e9ef;
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  color: #263f61;
+
+  font-size: 16px;
+}
+
+.modal-header p {
+  margin: 4px 0 0;
+
+  color: #8a98a8;
+
+  font-size: 8px;
+}
+
+.modal-close {
+  width: 28px;
+
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: transparent;
+
+  color: #75869a;
+
+  font-size: 21px;
+
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #f1f4f7;
+}
+
+
+/* =========================================================
+   MODAL BODY
+   ========================================================= */
+
+.modal-body {
+  overflow-y: auto;
+
+  padding: 20px;
+}
+
+.form-section-title {
+  margin:
+    2px
+    0
+    12px;
+
+  padding-bottom: 7px;
+
+  border-bottom: 1px solid #edf1f5;
+
+  color: #405873;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+.form-section-title:not(:first-child) {
+  margin-top: 20px;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 13px;
+}
+
+.form-field {
+  min-width: 0;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #61738a;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+
+  height: 37px;
+
+  padding: 0 10px;
+
+  border: 1px solid #d8e1ea;
+
+  border-radius: 6px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #52657b;
+
+  font-size: 9px;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #2867df;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(40, 103, 223, 0.08);
+}
+
+
+/* =========================================================
+   META FIJA
+   ========================================================= */
+
+.fixed-hours-field {
+  height: 37px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 0 10px;
+
+  border: 1px solid #d8e1ea;
+
+  border-radius: 6px;
+
+  background: #f7f9fc;
+}
+
+.fixed-hours-field strong {
+  color: #2867d7;
+
+  font-size: 9px;
+}
+
+.fixed-hours-field span {
+  color: #9aa7b5;
+
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   SWITCH FORMULARIO
+   ========================================================= */
+
+.form-switch-container {
+  height: 37px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #65778b;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+   ========================================================= */
+
+.modal-footer {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  padding: 12px 20px;
+
+  border-top: 1px solid #e4e9ef;
+
+  background: #fafbfd;
+}
+
+
+/* =========================================================
+   VACÍO
+   ========================================================= */
+
+.empty-row {
+  height: 110px !important;
+
+  text-align: center;
+
+  color: #98a4b2 !important;
+}
+
+
+/* =========================================================
+   TEMA GRIS
+   ========================================================= */
+
+html.gray-theme,
+body.gray-theme {
+  background: #dfe2e6 !important;
+}
+
+body.gray-theme .configuracion-page {
+  background: #dfe2e6;
+}
+
+body.gray-theme .breadcrumb,
+body.gray-theme .page-header {
+  background: #eceeef;
+
+  border-color: #cbd0d5;
+}
+
+body.gray-theme .config-sidebar,
+body.gray-theme .filter-card,
+body.gray-theme .table-card,
+body.gray-theme .appearance-card {
+  background: #eceeef;
+
+  border-color: #cbd0d5;
+}
+
+body.gray-theme .table-card thead {
+  background: #e1e3e5;
+}
+
+body.gray-theme .table-card td {
+  border-color: #d4d8dc;
+}
+
+body.gray-theme .search-select > input,
+body.gray-theme .employee-search input,
+body.gray-theme .form-field input,
+body.gray-theme .form-field select,
+body.gray-theme .form-search-select > input {
+  background: #f4f5f6;
+
+  border-color: #cbd0d5;
+}
+
+body.gray-theme .search-select-menu {
+  background: #f1f2f3;
+
+  border-color: #c7ccd1;
+}
+
+body.gray-theme .search-select-menu button:hover {
+  background: #dfe7f2;
+}
+
+body.gray-theme .fixed-hours-field {
+  background: #e5e7e9;
+
+  border-color: #cbd0d5;
+}
+
+
+/* =========================================================
+   TEMA OSCURO
+   ========================================================= */
+
+html.dark-theme,
+body.dark-theme {
+  background: #111820 !important;
+}
+
+body.dark-theme .configuracion-page {
+  background: #111820;
+}
+
+body.dark-theme .breadcrumb,
+body.dark-theme .page-header {
+  background: #1b2632;
+
+  border-color: #303e4c;
+}
+
+body.dark-theme .breadcrumb {
+  color: #9aaabd;
+}
+
+body.dark-theme .page-header h1,
+body.dark-theme .section-header h2 {
+  color: #e8eef5;
+}
+
+body.dark-theme .page-header p,
+body.dark-theme .section-header p {
+  color: #94a4b6;
+}
+
+body.dark-theme .config-sidebar,
+body.dark-theme .filter-card,
+body.dark-theme .table-card,
+body.dark-theme .appearance-card {
+  background: #1b2632;
+
+  border-color: #303e4c;
+}
+
+body.dark-theme .config-sidebar button {
+  color: #a6b4c3;
+}
+
+body.dark-theme .config-sidebar button:hover {
+  background: #253240;
+}
+
+body.dark-theme .config-sidebar button.active {
+  background: #263d5b;
+
+  color: #72a4ff;
+}
+
+body.dark-theme .filter-title,
+body.dark-theme .filter-field label,
+body.dark-theme .catalog-name,
+body.dark-theme .employee-name strong {
+  color: #d9e2ec;
+}
+
+body.dark-theme .search-select > input,
+body.dark-theme .employee-search input,
+body.dark-theme .form-field input,
+body.dark-theme .form-field select {
+  background: #1b2632;
+
+  border-color: #3a4857;
+
+  color: #c5d0dc;
+}
+
+body.dark-theme .search-select-menu {
+  background: #1b2632;
+
+  border-color: #3a4857;
+}
+
+body.dark-theme .search-select-menu button {
+  color: #bdc8d4;
+}
+
+body.dark-theme .search-select-menu button:hover {
+  background: #263b52;
+
+  color: #79a9ff;
+}
+
+body.dark-theme .table-card thead {
+  background: #202d3a;
+}
+
+body.dark-theme .table-card th {
+  color: #8999ab;
+
+  border-color: #303e4c;
+}
+
+body.dark-theme .table-card td {
+  color: #a7b5c4;
+
+  border-color: #2c3946;
+}
+
+body.dark-theme .table-card tbody tr:hover {
+  background: #202d3a;
+}
+
+body.dark-theme .employee-avatar {
+  background: #263d5b;
+
+  color: #79a9ff;
+}
+
+body.dark-theme .fixed-hours {
+  background: #263d5b;
+
+  color: #79a9ff;
+}
+
+body.dark-theme .department-tag {
+  background: #273541;
+
+  color: #a2b0bf;
+}
+
+body.dark-theme .icon-button {
+  background: #1b2632;
+
+  border-color: #3a4857;
+}
+
+body.dark-theme .icon-button.edit:hover {
+  background: #263b52;
+}
+
+body.dark-theme .icon-button.delete:hover {
+  background: #432b2e;
+}
+
+body.dark-theme .clear-button,
+body.dark-theme .secondary-button,
+body.dark-theme .reset-theme {
+  background: #1b2632;
+
+  border-color: #3a4857;
+
+  color: #aebbc8;
+}
+
+body.dark-theme .modal {
+  background: #1b2632;
+}
+
+body.dark-theme .modal-header {
+  border-color: #303e4c;
+}
+
+body.dark-theme .modal-header h2 {
+  color: #e8eef5;
+}
+
+body.dark-theme .modal-header p {
+  color: #94a4b6;
+}
+
+body.dark-theme .modal-body {
+  color: #d9e2ec;
+}
+
+body.dark-theme .form-section-title {
+  color: #d9e2ec;
+
+  border-color: #303e4c;
+}
+
+body.dark-theme .form-field label {
+  color: #a7b5c4;
+}
+
+body.dark-theme .form-field input,
+body.dark-theme .form-field select,
+body.dark-theme .form-search-select > input {
+  background: #18232e;
+
+  border-color: #3a4857;
+
+  color: #d0dae4;
+}
+
+body.dark-theme .fixed-hours-field {
+  background: #18232e;
+
+  border-color: #3a4857;
+}
+
+body.dark-theme .modal-footer {
+  background: #17222d;
+
+  border-color: #303e4c;
+}
+
+body.dark-theme .modal-close:hover {
+  background: #283541;
+}
+
+body.dark-theme .theme-option {
+  background: #1b2632;
+
+  border-color: #354352;
+}
+
+body.dark-theme .theme-name {
+  color: #d9e2ec;
+}
+
+body.dark-theme .theme-information {
+  background: #1e3042;
+}
+
+body.dark-theme .theme-information p {
+  color: #9aabba;
+}
+
+body.dark-theme .search-select-menu {
+  background: #18232e;
+
+  border-color: #3a4857;
+}
+
+body.dark-theme .search-select-menu button {
+  color: #d0dae4;
+}
+
+body.dark-theme .search-select-menu button:hover {
+  background: #263747;
+
+  color: #ffffff;
+}
+
+body.dark-theme .search-select-empty {
+  color: #8fa0b1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .filters-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 1000px) {
+
+  .configuracion-content {
+    grid-template-columns: 1fr;
+  }
+
+  .config-sidebar {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .configuracion-content {
+    padding: 15px;
+  }
+
+  .page-header {
+    padding: 15px;
+  }
+
+  .config-sidebar {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .theme-options {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field-full {
+    grid-column: auto;
+  }
+
+  .section-header-row {
+    flex-direction: column;
+  }
+
+}
+
+
+/* =========================================================
+   CORRECCIÓN DEFINITIVA DE CAPAS DE LOS DROPDOWNS
+   ========================================================= */
+
+/*
+   El problema era que cada fila del CSS Grid podía
+   quedar por encima de la anterior.
+
+   Departamento y Especialidad deben estar por encima
+   de Tipo de contrato y de los campos posteriores.
+*/
+
+.form-grid {
+  position: relative;
+
+  overflow: visible !important;
+
+  isolation: isolate;
+}
+
+
+/* Departamento */
+
+.form-grid > .form-field:nth-child(1) {
+  position: relative;
+
+  z-index: 300;
+}
+
+
+/* Especialidad */
+
+.form-grid > .form-field:nth-child(2) {
+  position: relative;
+
+  z-index: 300;
+}
+
+
+/* Tipo de contrato */
+
+.form-grid > .form-field:nth-child(3) {
+  position: relative;
+
+  z-index: 100;
+}
+
+
+/* Meta mensual */
+
+.form-grid > .form-field:nth-child(4) {
+  position: relative;
+
+  z-index: 50;
+}
+
+
+/* Estado */
+
+.form-grid > .form-field:nth-child(5) {
+  position: relative;
+
+  z-index: 40;
+}
+
+
+/* =========================================================
+   SELECTOR DEL FORMULARIO
+   ========================================================= */
+
+.form-field {
+  position: relative;
+
+  min-width: 0;
+
+  overflow: visible !important;
+}
+
+
+/*
+   El selector completo sube de nivel cuando está
+   siendo utilizado.
+*/
+
+.form-search-select {
+  position: relative;
+
+  width: 100%;
+
+  z-index: 500;
+}
+
+.form-search-select:focus-within {
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   DROPDOWN DEL FORMULARIO
+   ========================================================= */
+
+.form-search-select .search-select-menu {
+  position: absolute;
+
+  top: calc(100% + 4px);
+
+  left: 0;
+
+  right: 0;
+
+  width: 100%;
+
+  max-height: 190px;
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+
+  padding: 4px 0;
+
+  background: #ffffff;
+
+  border: 1px solid #d5deeb;
+
+  border-radius: 7px;
+
+  box-shadow:
+    0 8px 22px
+    rgba(15, 23, 42, 0.18);
+
+  z-index: 99999;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OPCIONES
+   ========================================================= */
+
+.form-search-select .search-select-menu button {
+  display: block;
+
+  width: 100%;
+
+  min-height: 34px;
+
+  padding:
+    8px
+    12px;
+
+  border: none;
+
+  background: #ffffff;
+
+  color: #334e73;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  line-height: 1.3;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.form-search-select .search-select-menu button:hover {
+  background: #eef5ff;
+
+  color: #1d4ed8;
+}
+
+
+/* =========================================================
+   CONTENEDORES DEL MODAL
+   ========================================================= */
+
+.modal {
+  overflow: hidden;
+
+  position: relative;
+
+  z-index: 10001;
+}
+
+.modal-body {
+  position: relative;
+
+  overflow-x: visible;
+
+  overflow-y: auto;
+}
+
+
+/*
+   Los contenedores del formulario no deben cortar
+   los dropdowns.
+*/
+
+.modal-body,
+.form-section-title,
+.form-grid,
+.form-field {
+  overflow: visible;
+}
+
+
+/*
+   El scroll vertical sigue disponible en el modal.
+*/
+
+.modal-body {
+  overflow-y: auto;
+}
+
+
+/* =========================================================
+   CORRECCIÓN PARA EL ORDEN DE LOS CAMPOS
+   ========================================================= */
+
+.form-grid > .form-field:nth-child(1) .form-search-select,
+.form-grid > .form-field:nth-child(2) .form-search-select {
+  z-index: 1000;
+}
+
+.form-grid > .form-field:nth-child(1) .search-select-menu,
+.form-grid > .form-field:nth-child(2) .search-select-menu {
+  z-index: 100000;
+}
+
+
+/*
+   Tipo de contrato queda debajo cuando Departamento
+   o Especialidad tienen abierto su menú.
+*/
+
+.form-grid > .form-field:nth-child(3) {
+  z-index: 10;
+}
+
+
+/* =========================================================
+   TEMA GRIS - DROPDOWN
+   ========================================================= */
+
+body.gray-theme .form-search-select .search-select-menu {
+  background: #f1f2f3;
+
+  border-color: #c7ccd1;
+}
+
+body.gray-theme .form-search-select .search-select-menu button {
+  background: #f1f2f3;
+
+  color: #52657b;
+}
+
+body.gray-theme .form-search-select .search-select-menu button:hover {
+  background: #dfe7f2;
+
+  color: #2867d7;
+}
+
+
+/* =========================================================
+   TEMA OSCURO - DROPDOWN
+   ========================================================= */
+
+body.dark-theme .form-search-select .search-select-menu {
+  background: #18232e;
+
+  border-color: #3a4857;
+
+  box-shadow:
+    0 8px 22px
+    rgba(0, 0, 0, 0.35);
+}
+
+body.dark-theme .form-search-select .search-select-menu button {
+  background: #18232e;
+
+  color: #d0dae4;
+}
+
+body.dark-theme .form-search-select .search-select-menu button:hover {
+  background: #263747;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   SCROLL DEL DROPDOWN
+   ========================================================= */
+
+.form-search-select .search-select-menu::-webkit-scrollbar {
+  width: 7px;
+}
+
+.form-search-select .search-select-menu::-webkit-scrollbar-track {
+  background: #f1f4f7;
+
+  border-radius: 10px;
+}
+
+.form-search-select .search-select-menu::-webkit-scrollbar-thumb {
+  background: #b9c4d0;
+
+  border-radius: 10px;
+}
+
+.form-search-select .search-select-menu::-webkit-scrollbar-thumb:hover {
+  background: #96a4b3;
+}
+
+body.dark-theme
+.form-search-select
+.search-select-menu::-webkit-scrollbar-track {
+  background: #202c38;
+}
+
+body.dark-theme
+.form-search-select
+.search-select-menu::-webkit-scrollbar-thumb {
+  background: #536476;
+}
+
+body.gray-theme
+.form-search-select
+.search-select-menu::-webkit-scrollbar-track {
+  background: #e3e5e7;
+}
+
+body.gray-theme
+.form-search-select
+.search-select-menu::-webkit-scrollbar-thumb {
+  background: #b6bbc0;
+}
+
+/* =========================================================
+   CORRECCIÓN FINAL - ORDEN DE DROPDOWNS DEL FORMULARIO
+   ========================================================= */
+
+/* Todos los campos del formulario permiten que
+   los dropdowns sobresalgan */
+.form-grid {
+  position: relative;
+  overflow: visible !important;
+}
+
+.form-field {
+  position: relative;
+  overflow: visible !important;
+}
+
+
+/* =========================================================
+   DEPARTAMENTO
+   ========================================================= */
+
+.form-grid > .form-field:nth-child(1) {
+  position: relative;
+  z-index: 400;
+}
+
+
+/* =========================================================
+   ESPECIALIDAD
+   ========================================================= */
+
+.form-grid > .form-field:nth-child(2) {
+  position: relative;
+  z-index: 400;
+}
+
+
+/* =========================================================
+   TIPO DE CONTRATO
+   ========================================================= */
+
+.form-grid > .form-field:nth-child(3) {
+  position: relative;
+  z-index: 300;
+}
+
+
+/* =========================================================
+   META MENSUAL
+   ========================================================= */
+
+.form-grid > .form-field:nth-child(4) {
+  position: relative;
+  z-index: 100;
+}
+
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+
+.form-grid > .form-field:nth-child(5) {
+  position: relative;
+  z-index: 50;
+}
+
+
+/* =========================================================
+   SELECTOR BUSCABLE
+   ========================================================= */
+
+.form-search-select {
+  position: relative;
+  width: 100%;
+  z-index: 500;
+}
+
+.form-search-select:focus-within {
+  z-index: 5000;
+}
+
+
+/* =========================================================
+   MENÚ DROPDOWN
+   ========================================================= */
+
+.form-search-select .search-select-menu {
+  position: absolute;
+
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+
+  width: 100%;
+
+  max-height: 190px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 4px 0;
+
+  background: #ffffff;
+
+  border: 1px solid #d5deeb;
+
+  border-radius: 7px;
+
+  box-shadow:
+    0 8px 22px
+    rgba(15, 23, 42, 0.18);
+
+  z-index: 999999;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   OPCIONES DEL DROPDOWN
+   ========================================================= */
+
+.form-search-select .search-select-menu button {
+  display: block;
+
+  width: 100%;
+
+  min-height: 34px;
+
+  padding: 8px 12px;
+
+  border: none;
+
+  background: #ffffff;
+
+  color: #334e73;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  line-height: 1.3;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.form-search-select .search-select-menu button:hover {
+  background: #eef5ff;
+
+  color: #1d4ed8;
+}
+
+
+/* =========================================================
+   ASEGURAR QUE DEPARTAMENTO Y ESPECIALIDAD
+   QUEDEN SOBRE TODO LO QUE ESTÁ DEBAJO
+   ========================================================= */
+
+.form-grid > .form-field:nth-child(1) .form-search-select,
+.form-grid > .form-field:nth-child(2) .form-search-select,
+.form-grid > .form-field:nth-child(3) .form-search-select {
+  z-index: 10000;
+}
+
+
+/* =========================================================
+   TEMA GRIS
+   ========================================================= */
+
+body.gray-theme .form-search-select .search-select-menu {
+  background: #f1f2f3;
+  border-color: #c7ccd1;
+}
+
+body.gray-theme
+.form-search-select
+.search-select-menu
+button {
+  background: #f1f2f3;
+  color: #52657b;
+}
+
+body.gray-theme
+.form-search-select
+.search-select-menu
+button:hover {
+  background: #dfe7f2;
+  color: #2867d7;
+}
+
+
+/* =========================================================
+   TEMA OSCURO
+   ========================================================= */
+
+body.dark-theme .form-search-select .search-select-menu {
+  background: #18232e;
+
+  border-color: #3a4857;
+
+  box-shadow:
+    0 8px 22px
+    rgba(0, 0, 0, 0.35);
+}
+
+body.dark-theme
+.form-search-select
+.search-select-menu
+button {
+  background: #18232e;
+
+  color: #d0dae4;
+}
+
+body.dark-theme
+.form-search-select
+.search-select-menu
+button:hover {
+  background: #263747;
+
+  color: #ffffff;
+}
