@@ -1,0 +1,25 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { EspecialidadesController } from './especialidades.controller.js';
+import { EspecialidadesService } from './especialidades.service.js';
+import { Especialidad } from './entities/especialidad.entity.js';
+
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([Especialidad]),
+  ],
+
+  controllers: [
+    EspecialidadesController,
+  ],
+
+  providers: [
+    EspecialidadesService,
+  ],
+
+  exports: [
+    EspecialidadesService,
+  ],
+})
+export class EspecialidadesModule {}

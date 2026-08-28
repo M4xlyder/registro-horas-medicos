@@ -1,5 +1,7 @@
 import {
   Component,
+  HostBinding,
+  HostListener,
   OnInit
 } from '@angular/core';
 
@@ -11,29 +13,52 @@ import {
   FormsModule
 } from '@angular/forms';
 
+import {
+  HorariosService,
+  HorarioMedicoBackend
+} from '../core/services/horarios.service';
+
+
 /* =========================================================
    MODELOS
    ========================================================= */
 
 interface Personal {
+
   id: number;
+
   nombres: string;
+
   apellidos: string;
+
   especialidad: string;
+
   activo: boolean;
+
   iniciales: string;
+
 }
+
 
 interface Turno {
+
   id: number;
+
   siglas: string;
+
   nombre: string;
+
   observacion: string;
+
   duracion: number;
+
   color: string;
+
 }
 
+
 interface ProgramacionData {
+
   id: string;
 
   personalId: number;
@@ -59,13 +84,16 @@ interface ProgramacionData {
   archivoNombre: string;
 
   archivoUrl: string;
+
 }
+
 
 /* =========================================================
    COMPONENTE
    ========================================================= */
 
 @Component({
+
   selector: 'app-programacion',
 
   standalone: true,
@@ -78,27 +106,127 @@ interface ProgramacionData {
   templateUrl: './programacion.html',
 
   styleUrl: './programacion.css'
+
 })
-export class ProgramacionComponent implements OnInit {
+export class ProgramacionComponent
+  implements OnInit {
+
+
+  /* =======================================================
+     CAPA DEL COMPONENTE CUANDO HAY MODAL
+     ======================================================= */
+
+  /*
+    IMPORTANTE:
+
+    El layout principal tiene un .page-content
+    con z-index propio.
+
+    Cuando abrimos un modal elevamos solamente
+    este componente por encima del topbar.
+
+    Cuando no hay modal, vuelve a su posición normal.
+  */
+
+  @HostBinding('class.modal-open')
+  get modalOpen(): boolean {
+
+    return (
+      this.mostrarModal ||
+      this.mostrarModalModificar
+    );
+
+  }
+
+
+  /* =======================================================
+     CERRAR MENÚ AL HACER CLICK FUERA
+     ======================================================= */
+
+  @HostListener(
+    'document:click',
+    ['$event']
+  )
+  cerrarMenuAlHacerClickFuera(
+    event: MouseEvent
+  ): void {
+
+    const target =
+      event.target as HTMLElement;
+
+    if (
+      this.mostrarMenuContextual &&
+      !target.closest('.context-menu')
+    ) {
+
+      this.cerrarMenuContextual();
+
+    }
+
+  }
+
+
+  /* =======================================================
+     CERRAR MENÚ CON ESC
+     ======================================================= */
+
+  @HostListener(
+    'document:keydown.escape'
+  )
+  cerrarMenuConEscape(): void {
+
+    if (
+      this.mostrarMenuContextual
+    ) {
+
+      this.cerrarMenuContextual();
+
+      return;
+
+    }
+
+    if (
+      this.mostrarModal
+    ) {
+
+      this.cerrarModal();
+
+      return;
+
+    }
+
+    if (
+      this.mostrarModalModificar
+    ) {
+
+      this.cerrarModalModificar();
+
+    }
+
+  }
+
 
   /* =======================================================
      CONFIGURACIÓN
      ======================================================= */
 
-  readonly MAX_FILE_SIZE = 7 * 1024 * 1024;
+  readonly MAX_FILE_SIZE =
+    7 * 1024 * 1024;
+
 
   /* =======================================================
      PERSONAL
      ======================================================= */
 
   personal: Personal[] = [
+
     {
       id: 1,
       nombres: 'Marcelo',
-      apellidos: 'Pérez',
+      apellidos: 'Ubia Alzamora',
       especialidad: 'Cirugía General',
       activo: true,
-      iniciales: 'MP'
+      iniciales: 'MU'
     },
 
     {
@@ -136,13 +264,19 @@ export class ProgramacionComponent implements OnInit {
       activo: true,
       iniciales: 'KO'
     }
+
   ];
 
-  personalSeleccionado: Personal | null = this.personal[0];
+
+  personalSeleccionado:
+    Personal | null =
+      this.personal[0];
+
 
   buscarPersonal = '';
 
   mostrarActivos = true;
+
 
   /* =======================================================
      FILTROS
@@ -152,21 +286,36 @@ export class ProgramacionComponent implements OnInit {
 
   especialidadSeleccionada = '';
 
+
   departamentos: string[] = [
+
     'Medicina',
+
     'Cirugía',
+
     'Pediatría',
+
     'Ginecología',
+
     'Emergencia'
+
   ];
 
+
   especialidades: string[] = [
+
     'Cirugía General',
+
     'Cirugía Pediátrica',
+
     'Anestesiología',
+
     'Ginecología',
+
     'Medicina Interna'
+
   ];
+
 
   /* =======================================================
      CALENDARIO
@@ -178,7 +327,9 @@ export class ProgramacionComponent implements OnInit {
     26
   );
 
+
   diasSemana: string[] = [
+
     'DOM',
     'LUN',
     'MAR',
@@ -186,18 +337,22 @@ export class ProgramacionComponent implements OnInit {
     'JUE',
     'VIE',
     'SÁB'
+
   ];
+
 
   diasCalendario: Date[] = [];
 
+
   /* =======================================================
-     SELECCIÓN DE DÍAS
+     SELECCIÓN
      ======================================================= */
 
   fechasSeleccionadas: string[] = [];
 
+
   /* =======================================================
-     TURNOS BASE
+     TURNOS
      ======================================================= */
 
   turnos: Turno[] = [
@@ -255,25 +410,26 @@ export class ProgramacionComponent implements OnInit {
       duracion: 6,
       color: 'rojo'
     }
+
   ];
+
 
   /* =======================================================
      PROGRAMACIONES
      ======================================================= */
 
-  programaciones: ProgramacionData[] = [];
+  programaciones:
+    ProgramacionData[] = [];
+
 
   /* =======================================================
-     MODAL REGISTRAR
+     MODALES
      ======================================================= */
 
   mostrarModal = false;
 
-  /* =======================================================
-     MODAL MODIFICAR
-     ======================================================= */
-
   mostrarModalModificar = false;
+
 
   /* =======================================================
      FORMULARIO
@@ -289,21 +445,26 @@ export class ProgramacionComponent implements OnInit {
 
   usarDuracionPersonalizada = false;
 
+
   /* =======================================================
-     PROGRAMACIÓN QUE SE ESTÁ MODIFICANDO
+     EDICIÓN
      ======================================================= */
 
-  programacionesEditando: ProgramacionData[] = [];
+  programacionesEditando:
+    ProgramacionData[] = [];
+
 
   /* =======================================================
      ARCHIVO
      ======================================================= */
 
-  archivoSeleccionado: File | null = null;
+  archivoSeleccionado:
+    File | null = null;
 
   archivoNombre = '';
 
   archivoUrl = '';
+
 
   /* =======================================================
      MENÚ CONTEXTUAL
@@ -315,19 +476,277 @@ export class ProgramacionComponent implements OnInit {
 
   menuY = 0;
 
-  programacionContextual: ProgramacionData | null = null;
+  programacionContextual:
+    ProgramacionData | null = null;
+
+  fechaContextual:
+    string | null = null;
+
 
   /* =======================================================
-     CONSTRUCTOR / INIT
+     CONSTRUCTOR
+     ======================================================= */
+
+  constructor(
+    private readonly horariosService:
+      HorariosService
+  ) {}
+
+
+  /* =======================================================
+     INIT
      ======================================================= */
 
   ngOnInit(): void {
 
     this.generarCalendario();
 
-    this.cargarDatosDemo();
+    this.cargarHorariosBackend();
 
   }
+
+
+  /* =======================================================
+     CARGAR HORARIOS
+     ======================================================= */
+
+  private cargarHorariosBackend(): void {
+
+    this.horariosService
+      .obtenerTodos()
+      .subscribe({
+
+        next: (
+          horarios:
+            HorarioMedicoBackend[]
+        ) => {
+
+          this.programaciones =
+            horarios.map(
+              horario =>
+                this.convertirHorarioBackend(
+                  horario
+                )
+            );
+
+          console.log(
+            'Horarios cargados desde PostgreSQL:',
+            this.programaciones
+          );
+
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Error al cargar horarios:',
+            error
+          );
+
+        }
+
+      });
+
+  }
+
+
+  /* =======================================================
+     CONVERTIR BACKEND → FRONTEND
+     ======================================================= */
+
+  private convertirHorarioBackend(
+    horario:
+      HorarioMedicoBackend
+  ): ProgramacionData {
+
+    const duracion =
+      this.calcularDuracion(
+        horario.horaInicio,
+        horario.horaFin
+      );
+
+
+    const turno =
+      this.obtenerTurnoPorHorario(
+        horario.horaInicio,
+        horario.horaFin,
+        duracion
+      );
+
+
+    return {
+
+      id:
+        String(horario.id),
+
+      personalId:
+        horario.empleado.id,
+
+      fecha:
+        horario.fecha,
+
+      turnoId:
+        turno.id,
+
+      turnoBaseId:
+        turno.id,
+
+      tipo:
+        'ORIGINAL',
+
+      siglas:
+        turno.siglas,
+
+      nombreTurno:
+        turno.nombre,
+
+      duracion,
+
+      observacion:
+        turno.observacion,
+
+      justificacion:
+        '',
+
+      archivoNombre:
+        '',
+
+      archivoUrl:
+        ''
+
+    };
+
+  }
+
+
+  /* =======================================================
+     IDENTIFICAR TURNO
+     ======================================================= */
+
+  private obtenerTurnoPorHorario(
+    horaInicio: string,
+    horaFin: string,
+    duracion: number
+  ): Turno {
+
+    const inicio =
+      horaInicio.substring(
+        0,
+        5
+      );
+
+    const fin =
+      horaFin.substring(
+        0,
+        5
+      );
+
+
+    if (
+      inicio === '08:00' &&
+      fin === '20:00'
+    ) {
+
+      return this.turnos[0];
+
+    }
+
+
+    if (
+      inicio === '20:00' &&
+      fin === '08:00'
+    ) {
+
+      return this.turnos[1];
+
+    }
+
+
+    if (
+      inicio === '08:00' &&
+      fin === '14:00'
+    ) {
+
+      return this.turnos[4];
+
+    }
+
+
+    if (
+      inicio === '14:00' &&
+      fin === '20:00'
+    ) {
+
+      return this.turnos[5];
+
+    }
+
+
+    const encontrado =
+      this.turnos.find(
+        turno =>
+          turno.duracion ===
+          duracion
+      );
+
+
+    return (
+      encontrado ??
+      this.turnos[0]
+    );
+
+  }
+
+
+  /* =======================================================
+     CALCULAR DURACIÓN
+     ======================================================= */
+
+  private calcularDuracion(
+    horaInicio: string,
+    horaFin: string
+  ): number {
+
+    const inicioPartes =
+      horaInicio
+        .substring(0, 5)
+        .split(':')
+        .map(Number);
+
+
+    const finPartes =
+      horaFin
+        .substring(0, 5)
+        .split(':')
+        .map(Number);
+
+
+    const inicio =
+      inicioPartes[0] * 60 +
+      inicioPartes[1];
+
+
+    let fin =
+      finPartes[0] * 60 +
+      finPartes[1];
+
+
+    if (
+      fin <= inicio
+    ) {
+
+      fin +=
+        24 * 60;
+
+    }
+
+
+    return (
+      fin - inicio
+    ) / 60;
+
+  }
+
 
   /* =======================================================
      GENERAR ID
@@ -344,6 +763,7 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     return (
       Date.now().toString(36) +
       Math.random()
@@ -353,95 +773,120 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   /* =======================================================
      CALENDARIO
      ======================================================= */
 
   generarCalendario(): void {
 
-    const year = this.fechaActual.getFullYear();
+    const year =
+      this.fechaActual.getFullYear();
 
-    const month = this.fechaActual.getMonth();
+    const month =
+      this.fechaActual.getMonth();
 
-    const primerDia = new Date(
-      year,
-      month,
-      1
-    );
 
-    const ultimoDia = new Date(
-      year,
-      month + 1,
-      0
-    );
+    const primerDia =
+      new Date(
+        year,
+        month,
+        1
+      );
 
-    const primerDiaSemana = primerDia.getDay();
 
-    const diasMes = ultimoDia.getDate();
+    const ultimoDia =
+      new Date(
+        year,
+        month + 1,
+        0
+      );
 
-    const diasMesAnterior = new Date(
-      year,
-      month,
-      0
-    ).getDate();
+
+    const primerDiaSemana =
+      primerDia.getDay();
+
+
+    const diasMes =
+      ultimoDia.getDate();
+
+
+    const diasMesAnterior =
+      new Date(
+        year,
+        month,
+        0
+      ).getDate();
+
 
     this.diasCalendario = [];
 
-    /* Días anteriores */
 
     for (
-      let i = primerDiaSemana - 1;
+      let i =
+        primerDiaSemana - 1;
+
       i >= 0;
+
       i--
     ) {
 
       this.diasCalendario.push(
+
         new Date(
           year,
           month - 1,
           diasMesAnterior - i
         )
+
       );
 
     }
 
-    /* Días del mes */
 
     for (
       let dia = 1;
+
       dia <= diasMes;
+
       dia++
     ) {
 
       this.diasCalendario.push(
+
         new Date(
           year,
           month,
           dia
         )
+
       );
 
     }
 
-    /* Días siguientes */
 
     let siguiente = 1;
 
+
     while (
-      this.diasCalendario.length < 42
+      this.diasCalendario.length <
+      42
     ) {
 
       this.diasCalendario.push(
+
         new Date(
           year,
           month + 1,
           siguiente++
         )
+
       );
 
     }
 
   }
+
 
   /* =======================================================
      NOMBRE DEL MES
@@ -449,15 +894,17 @@ export class ProgramacionComponent implements OnInit {
 
   get nombreMes(): string {
 
-    return this.fechaActual.toLocaleDateString(
-      'es-PE',
-      {
-        month: 'long',
-        year: 'numeric'
-      }
-    );
+    return this.fechaActual
+      .toLocaleDateString(
+        'es-PE',
+        {
+          month: 'long',
+          year: 'numeric'
+        }
+      );
 
   }
+
 
   /* =======================================================
      CAMBIAR MES
@@ -465,47 +912,61 @@ export class ProgramacionComponent implements OnInit {
 
   mesAnterior(): void {
 
-    this.fechaActual = new Date(
-      this.fechaActual.getFullYear(),
-      this.fechaActual.getMonth() - 1,
-      1
-    );
+    this.fechaActual =
+      new Date(
+        this.fechaActual.getFullYear(),
+        this.fechaActual.getMonth() - 1,
+        1
+      );
 
     this.generarCalendario();
 
     this.limpiarSeleccion();
 
+    this.cerrarMenuContextual();
+
   }
+
 
   mesSiguiente(): void {
 
-    this.fechaActual = new Date(
-      this.fechaActual.getFullYear(),
-      this.fechaActual.getMonth() + 1,
-      1
-    );
+    this.fechaActual =
+      new Date(
+        this.fechaActual.getFullYear(),
+        this.fechaActual.getMonth() + 1,
+        1
+      );
 
     this.generarCalendario();
 
     this.limpiarSeleccion();
 
+    this.cerrarMenuContextual();
+
   }
+
 
   irHoy(): void {
 
-    this.fechaActual = new Date();
+    this.fechaActual =
+      new Date();
 
     this.generarCalendario();
 
     this.limpiarSeleccion();
 
+    this.cerrarMenuContextual();
+
   }
 
+
   /* =======================================================
-     FECHA
+     FECHA KEY
      ======================================================= */
 
-  fechaKey(fecha: Date): string {
+  fechaKey(
+    fecha: Date
+  ): string {
 
     const year =
       fecha.getFullYear();
@@ -520,25 +981,65 @@ export class ProgramacionComponent implements OnInit {
         fecha.getDate()
       ).padStart(2, '0');
 
+
     return `${year}-${month}-${day}`;
 
   }
 
+
   /* =======================================================
-     COMPROBAR DÍA DEL MES ACTUAL
+     MES ACTUAL
      ======================================================= */
 
-  esMesActual(fecha: Date): boolean {
+  esMesActual(
+    fecha: Date
+  ): boolean {
 
     return (
+
       fecha.getMonth() ===
-      this.fechaActual.getMonth() &&
+      this.fechaActual.getMonth()
+
+      &&
 
       fecha.getFullYear() ===
       this.fechaActual.getFullYear()
+
     );
 
   }
+
+
+  /* =======================================================
+     HOY
+     ======================================================= */
+
+  esHoy(
+    fecha: Date
+  ): boolean {
+
+    const hoy =
+      new Date();
+
+    return (
+
+      fecha.getDate() ===
+      hoy.getDate()
+
+      &&
+
+      fecha.getMonth() ===
+      hoy.getMonth()
+
+      &&
+
+      fecha.getFullYear() ===
+      hoy.getFullYear()
+
+    );
+
+  }
+
 
   /* =======================================================
      SELECCIONAR DÍA
@@ -555,11 +1056,19 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
+    this.cerrarMenuContextual();
+
+
     const key =
       this.fechaKey(fecha);
 
+
     const index =
-      this.fechasSeleccionadas.indexOf(key);
+      this.fechasSeleccionadas.indexOf(
+        key
+      );
+
 
     if (index >= 0) {
 
@@ -570,25 +1079,30 @@ export class ProgramacionComponent implements OnInit {
 
     } else {
 
-      this.fechasSeleccionadas.push(key);
+      this.fechasSeleccionadas.push(
+        key
+      );
 
     }
 
   }
 
+
   /* =======================================================
-     SABER SI ESTÁ SELECCIONADO
+     COMPROBAR SELECCIÓN
      ======================================================= */
 
   estaSeleccionado(
     fecha: Date
   ): boolean {
 
-    return this.fechasSeleccionadas.includes(
-      this.fechaKey(fecha)
-    );
+    return this.fechasSeleccionadas
+      .includes(
+        this.fechaKey(fecha)
+      );
 
   }
+
 
   /* =======================================================
      LIMPIAR SELECCIÓN
@@ -599,6 +1113,7 @@ export class ProgramacionComponent implements OnInit {
     this.fechasSeleccionadas = [];
 
   }
+
 
   /* =======================================================
      PERSONAL
@@ -613,7 +1128,59 @@ export class ProgramacionComponent implements OnInit {
 
     this.limpiarSeleccion();
 
+    this.cargarHorariosEmpleado(
+      persona.id
+    );
+
   }
+
+
+  /* =======================================================
+     CARGAR HORARIOS DEL EMPLEADO
+     ======================================================= */
+
+  private cargarHorariosEmpleado(
+    empleadoId: number
+  ): void {
+
+    this.horariosService
+      .obtenerPorEmpleado(
+        empleadoId
+      )
+      .subscribe({
+
+        next: (
+          horarios:
+            HorarioMedicoBackend[]
+        ) => {
+
+          this.programaciones =
+            horarios.map(
+              horario =>
+                this.convertirHorarioBackend(
+                  horario
+                )
+            );
+
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Error al cargar horarios:',
+            error
+          );
+
+        }
+
+      });
+
+  }
+
+
+  /* =======================================================
+     PERSONAL FILTRADO
+     ======================================================= */
 
   get personalFiltrado(): Personal[] {
 
@@ -624,24 +1191,43 @@ export class ProgramacionComponent implements OnInit {
           !this.mostrarActivos ||
           persona.activo;
 
+
         const texto =
           this.buscarPersonal
             .toLowerCase()
             .trim();
 
+
         const nombre =
           `${persona.nombres} ${persona.apellidos}`
             .toLowerCase();
 
+
         return (
-          activoCorrecto &&
+
+          activoCorrecto
+
+          &&
+
           (
-            texto === '' ||
-            nombre.includes(texto) ||
+            texto === ''
+
+            ||
+
+            nombre.includes(
+              texto
+            )
+
+            ||
+
             persona.especialidad
               .toLowerCase()
-              .includes(texto)
+              .includes(
+                texto
+              )
+
           )
+
         );
 
       }
@@ -649,24 +1235,30 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   /* =======================================================
-     TURNOS
+     TURNO SELECCIONADO
      ======================================================= */
 
-  get turnoSeleccionado(): Turno | undefined {
+  get turnoSeleccionado():
+    Turno | undefined {
 
     return this.turnos.find(
       turno =>
         turno.id ===
-        Number(this.turnoSeleccionadoId)
+        Number(
+          this.turnoSeleccionadoId
+        )
     );
 
   }
+
 
   cambioTurno(): void {
 
     const turno =
       this.turnoSeleccionado;
+
 
     if (!turno) {
 
@@ -674,7 +1266,10 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
-    if (!this.usarDuracionPersonalizada) {
+
+    if (
+      !this.usarDuracionPersonalizada
+    ) {
 
       this.duracionPersonalizada =
         turno.duracion;
@@ -683,8 +1278,9 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   /* =======================================================
-     ABRIR MODAL REGISTRAR
+     ABRIR MODAL REGISTRO
      ======================================================= */
 
   abrirModalRegistro(): void {
@@ -699,6 +1295,7 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     if (
       this.fechasSeleccionadas.length === 0
     ) {
@@ -711,37 +1308,55 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
-    this.mostrarModal = true;
 
-    this.turnoSeleccionadoId = 1;
+    this.cerrarMenuContextual();
 
-    this.observacion = '';
 
-    this.justificacion = '';
+    this.mostrarModal =
+      true;
 
-    this.usarDuracionPersonalizada = false;
+
+    this.turnoSeleccionadoId =
+      1;
+
+
+    this.observacion =
+      '';
+
+
+    this.justificacion =
+      '';
+
+
+    this.usarDuracionPersonalizada =
+      false;
+
 
     this.duracionPersonalizada =
       this.turnos[0].duracion;
 
+
     this.limpiarArchivo();
 
   }
 
+
   /* =======================================================
-     CERRAR MODAL
+     CERRAR MODAL REGISTRO
      ======================================================= */
 
   cerrarModal(): void {
 
-    this.mostrarModal = false;
+    this.mostrarModal =
+      false;
 
     this.limpiarArchivo();
 
   }
 
+
   /* =======================================================
-     REGISTRAR PROGRAMACIÓN
+     GUARDAR PROGRAMACIÓN
      ======================================================= */
 
   guardarProgramacion(): void {
@@ -756,6 +1371,7 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     if (
       this.fechasSeleccionadas.length === 0
     ) {
@@ -768,8 +1384,10 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     const turno =
       this.turnoSeleccionado;
+
 
     if (!turno) {
 
@@ -781,10 +1399,16 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     const duracion =
       this.usarDuracionPersonalizada
-        ? Number(this.duracionPersonalizada)
+
+        ? Number(
+            this.duracionPersonalizada
+          )
+
         : turno.duracion;
+
 
     if (
       !duracion ||
@@ -800,122 +1424,183 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
-    /*
-      Si se utiliza la duración original,
-      se mantiene el ID del turno base.
 
-      Si se cambia la duración,
-      se crea un NUEVO ID para la variante.
+    const horas =
+      this.obtenerHorasTurno(
+        turno,
+        duracion
+      );
 
-      De esta manera:
 
-      Turno ID 1 = Guardia Diurna - 12 horas
+    this.horariosService
+      .crearMultiple({
 
-      Variante ID X =
-      Guardia Diurna - 10 horas
-
-      El turno original NO se modifica.
-    */
-
-    let turnoId =
-      turno.id;
-
-    let tipo:
-      'ORIGINAL' |
-      'VARIANTE' = 'ORIGINAL';
-
-    if (
-      this.usarDuracionPersonalizada &&
-      duracion !== turno.duracion
-    ) {
-
-      turnoId =
-        this.generarIdTurnoVariante();
-
-      tipo = 'VARIANTE';
-
-    }
-
-    for (
-      const fecha of this.fechasSeleccionadas
-    ) {
-
-      const nuevaProgramacion: ProgramacionData = {
-
-        id:
-          this.generateId(),
-
-        personalId:
+        empleadoId:
           this.personalSeleccionado.id,
 
-        fecha,
+        fechas:
+          [...this.fechasSeleccionadas],
 
-        turnoId,
+        horaInicio:
+          horas.horaInicio,
 
-        turnoBaseId:
-          turno.id,
+        horaFin:
+          horas.horaFin,
 
-        tipo,
+        activo:
+          true
 
-        siglas:
-          turno.siglas,
+      })
+      .subscribe({
 
-        nombreTurno:
-          turno.nombre,
+        next: (
+          horarios
+        ) => {
 
-        duracion,
+          const nuevasProgramaciones =
+            horarios.map(
+              horario =>
+                this.convertirHorarioBackend(
+                  horario
+                )
+            );
 
-        observacion:
-          this.observacion,
 
-        justificacion:
-          this.justificacion,
+          this.programaciones.push(
+            ...nuevasProgramaciones
+          );
 
-        archivoNombre:
-          this.archivoNombre,
 
-        archivoUrl:
-          this.archivoUrl
+          this.cerrarModal();
 
-      };
+          this.limpiarSeleccion();
 
-      /*
-        Permite tener DOS turnos
-        en el mismo día.
-      */
 
-      const existeMismoTurno =
-        this.programaciones.some(
-          programacion =>
+          alert(
+            `${horarios.length} programación(es) registrada(s) correctamente.`
+          );
 
-            programacion.personalId ===
-              this.personalSeleccionado!.id &&
+        },
 
-            programacion.fecha ===
-              fecha &&
 
-            programacion.turnoId ===
-              turnoId
-        );
+        error: (error) => {
 
-      if (!existeMismoTurno) {
+          console.error(
+            'Error al guardar horario:',
+            error
+          );
 
-        this.programaciones.push(
-          nuevaProgramacion
-        );
 
-      }
+          const mensaje =
+            error?.error?.message ??
+            'No se pudo registrar el horario.';
 
-    }
 
-    this.cerrarModal();
+          alert(mensaje);
 
-    this.limpiarSeleccion();
+        }
+
+      });
 
   }
 
+
   /* =======================================================
-     ID DE VARIANTE
+     OBTENER HORAS
+     ======================================================= */
+
+  private obtenerHorasTurno(
+    turno: Turno,
+    duracion: number
+  ): {
+    horaInicio: string;
+    horaFin: string;
+  } {
+
+    let horaInicio =
+      '08:00';
+
+
+    if (
+      turno.siglas === 'GN' ||
+      turno.siglas === 'TN'
+    ) {
+
+      horaInicio =
+        '20:00';
+
+    }
+
+
+    if (
+      turno.siglas === 'T'
+    ) {
+
+      horaInicio =
+        '14:00';
+
+    }
+
+
+    if (
+      turno.siglas === 'M'
+    ) {
+
+      horaInicio =
+        '08:00';
+
+    }
+
+
+    const [
+      inicioHora,
+      inicioMinuto
+    ] =
+      horaInicio
+        .split(':')
+        .map(Number);
+
+
+    let finMinutos =
+      inicioHora * 60 +
+      inicioMinuto +
+      duracion * 60;
+
+
+    if (
+      finMinutos >=
+      24 * 60
+    ) {
+
+      finMinutos -=
+        24 * 60;
+
+    }
+
+
+    const horaFin =
+      `${String(
+        Math.floor(
+          finMinutos / 60
+        )
+      ).padStart(2, '0')}:${String(
+        finMinutos % 60
+      ).padStart(2, '0')}`;
+
+
+    return {
+
+      horaInicio,
+
+      horaFin
+
+    };
+
+  }
+
+
+  /* =======================================================
+     GENERAR ID DE VARIANTE
      ======================================================= */
 
   private generarIdTurnoVariante(): number {
@@ -931,47 +1616,99 @@ export class ProgramacionComponent implements OnInit {
             id > 100
         );
 
-    if (ids.length === 0) {
+
+    if (
+      ids.length === 0
+    ) {
 
       return 1001;
 
     }
 
-    return Math.max(...ids) + 1;
+
+    return (
+      Math.max(...ids) + 1
+    );
 
   }
 
+
   /* =======================================================
-     PROGRAMACIONES DE UN DÍA
+     PROGRAMACIONES DEL DÍA
      ======================================================= */
 
   getProgramaciones(
     fecha: Date
   ): ProgramacionData[] {
 
-    if (!this.personalSeleccionado) {
+    if (
+      !this.personalSeleccionado
+    ) {
 
       return [];
 
     }
 
+
     const key =
       this.fechaKey(fecha);
+
 
     return this.programaciones.filter(
       programacion =>
 
         programacion.personalId ===
-          this.personalSeleccionado!.id &&
+        this.personalSeleccionado!.id
+
+        &&
 
         programacion.fecha ===
-          key
+        key
+
     );
 
   }
 
+
   /* =======================================================
-     OBTENER COLOR
+     OBTENER PROGRAMACIÓN CONTEXTUAL
+     ======================================================= */
+
+  obtenerProgramacionContextual(
+    fecha: Date
+  ): ProgramacionData | undefined {
+
+    if (
+      !this.personalSeleccionado
+    ) {
+
+      return undefined;
+
+    }
+
+
+    const key =
+      this.fechaKey(fecha);
+
+
+    return this.programaciones.find(
+      programacion =>
+
+        programacion.personalId ===
+        this.personalSeleccionado!.id
+
+        &&
+
+        programacion.fecha ===
+        key
+
+    );
+
+  }
+
+
+  /* =======================================================
+     COLOR DEL TURNO
      ======================================================= */
 
   obtenerClaseTurno(
@@ -985,25 +1722,30 @@ export class ProgramacionComponent implements OnInit {
           programacion.turnoBaseId
       );
 
+
     if (!turno) {
 
       return 'turno-default';
 
     }
 
+
     return `turno-${turno.color}`;
 
   }
 
+
   /* =======================================================
-     MODIFICAR PROGRAMACIÓN
+     MODIFICAR TURNO
      ======================================================= */
 
   modificarTurno(
     programacion?: ProgramacionData
   ): void {
 
-    let registros: ProgramacionData[] = [];
+    let registros:
+      ProgramacionData[] = [];
+
 
     if (programacion) {
 
@@ -1018,6 +1760,7 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     if (
       registros.length === 0
     ) {
@@ -1030,23 +1773,33 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
+    this.cerrarMenuContextual();
+
+
     this.programacionesEditando =
       registros;
+
 
     const primero =
       registros[0];
 
+
     this.turnoSeleccionadoId =
       primero.turnoBaseId;
+
 
     this.observacion =
       primero.observacion;
 
+
     this.justificacion =
       primero.justificacion;
 
+
     this.duracionPersonalizada =
       primero.duracion;
+
 
     const turnoBase =
       this.turnos.find(
@@ -1055,41 +1808,53 @@ export class ProgramacionComponent implements OnInit {
           primero.turnoBaseId
       );
 
+
     this.usarDuracionPersonalizada =
       !!turnoBase &&
       primero.duracion !==
-        turnoBase.duracion;
+      turnoBase.duracion;
+
 
     this.archivoNombre =
       primero.archivoNombre;
 
+
     this.archivoUrl =
       primero.archivoUrl;
+
 
     this.mostrarModalModificar =
       true;
 
   }
 
+
   /* =======================================================
-     GUARDAR MODIFICACIÓN
+     GUARDAR CAMBIOS
      ======================================================= */
 
   guardarCambios(): void {
 
-    if (
-      this.programacionesEditando.length ===
-      0
-    ) {
+    /*
+      El PATCH del backend se implementará
+      en el siguiente paso.
 
-      this.cerrarModalModificar();
+      Por ahora mantenemos la edición
+      preparada sin modificar la base.
+    */
+
+    if (
+      this.programacionesEditando.length === 0
+    ) {
 
       return;
 
     }
 
+
     const turno =
       this.turnoSeleccionado;
+
 
     if (!turno) {
 
@@ -1101,10 +1866,12 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     const duracion =
       this.usarDuracionPersonalizada
         ? Number(this.duracionPersonalizada)
         : turno.duracion;
+
 
     if (
       !duracion ||
@@ -1120,44 +1887,10 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     /*
-      IMPORTANTE:
-
-      Nunca modificamos el turno base.
-
-      Si cambiamos las horas:
-
-      ID 1
-      Guardia Diurna
-      12 horas
-
-      pasa a existir una variante:
-
-      ID 1001
-      Guardia Diurna
-      10 horas
-
-      El ID 1 sigue intacto.
+      Actualización local del frontend.
     */
-
-    let nuevoTurnoId =
-      turno.id;
-
-    let tipo:
-      'ORIGINAL' |
-      'VARIANTE' = 'ORIGINAL';
-
-    if (
-      this.usarDuracionPersonalizada &&
-      duracion !== turno.duracion
-    ) {
-
-      nuevoTurnoId =
-        this.generarIdTurnoVariante();
-
-      tipo = 'VARIANTE';
-
-    }
 
     for (
       const registro of
@@ -1171,23 +1904,28 @@ export class ProgramacionComponent implements OnInit {
             registro.id
         );
 
-      if (indice === -1) {
+
+      if (
+        indice === -1
+      ) {
 
         continue;
 
       }
+
 
       this.programaciones[indice] = {
 
         ...this.programaciones[indice],
 
         turnoId:
-          nuevoTurnoId,
+          turno.id,
 
         turnoBaseId:
           turno.id,
 
-        tipo,
+        tipo:
+          'ORIGINAL',
 
         siglas:
           turno.siglas,
@@ -1213,12 +1951,14 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     this.cerrarModalModificar();
 
   }
 
+
   /* =======================================================
-     CERRAR MODIFICAR
+     CERRAR MODAL MODIFICAR
      ======================================================= */
 
   cerrarModalModificar(): void {
@@ -1226,82 +1966,15 @@ export class ProgramacionComponent implements OnInit {
     this.mostrarModalModificar =
       false;
 
+
     this.programacionesEditando =
       [];
+
 
     this.limpiarArchivo();
 
   }
 
-  /* =======================================================
-     ELIMINAR TURNO
-     ======================================================= */
-
-  eliminarTurno(
-    programacion?: ProgramacionData
-  ): void {
-
-    let registros: ProgramacionData[] = [];
-
-    if (programacion) {
-
-      registros = [
-        programacion
-      ];
-
-    } else {
-
-      registros =
-        this.obtenerProgramacionesSeleccionadas();
-
-    }
-
-    if (
-      registros.length === 0
-    ) {
-
-      alert(
-        'Seleccione un turno para eliminar.'
-      );
-
-      return;
-
-    }
-
-    const confirmar =
-      confirm(
-        registros.length === 1
-          ? '¿Desea eliminar este turno?'
-          : `¿Desea eliminar los ${registros.length} turnos seleccionados?`
-      );
-
-    if (!confirmar) {
-
-      return;
-
-    }
-
-    const ids =
-      new Set(
-        registros.map(
-          registro =>
-            registro.id
-        )
-      );
-
-    this.programaciones =
-      this.programaciones.filter(
-        programacion =>
-          !ids.has(
-            programacion.id
-          )
-      );
-
-    this.limpiarSeleccion();
-
-    this.cerrarMenuContextual();
-
-  }
 
   /* =======================================================
      OBTENER PROGRAMACIONES SELECCIONADAS
@@ -1319,70 +1992,202 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
-    if (!this.personalSeleccionado) {
+
+    if (
+      !this.personalSeleccionado
+    ) {
 
       return [];
 
     }
 
+
     return this.programaciones.filter(
       programacion =>
 
         programacion.personalId ===
-          this.personalSeleccionado!.id &&
+        this.personalSeleccionado!.id
+
+        &&
 
         this.fechasSeleccionadas.includes(
           programacion.fecha
         )
+
     );
 
   }
 
+
   /* =======================================================
-     CLICK DERECHO
+     CLICK DERECHO SOBRE EL CALENDARIO
      ======================================================= */
 
-  mostrarMenu(
+  mostrarMenuContextualCalendario(
     event: MouseEvent,
-    programacion: ProgramacionData
+    fecha: Date,
+    programacion?: ProgramacionData
   ): void {
 
     event.preventDefault();
 
     event.stopPropagation();
 
-    this.programacionContextual =
-      programacion;
 
-    this.menuX =
+    /*
+      Guardamos la fecha exacta.
+    */
+
+    this.fechaContextual =
+      this.fechaKey(fecha);
+
+
+    /*
+      Guardamos el turno si existe.
+    */
+
+    this.programacionContextual =
+      programacion ?? null;
+
+
+    /*
+      Tamaño aproximado del menú.
+    */
+
+    const anchoMenu =
+      220;
+
+    const altoMenu =
+      170;
+
+
+    let x =
       event.clientX;
 
-    this.menuY =
+    let y =
       event.clientY;
+
+
+    /*
+      Evitar desbordamiento derecho.
+    */
+
+    if (
+      x + anchoMenu >
+      window.innerWidth
+    ) {
+
+      x =
+        window.innerWidth -
+        anchoMenu -
+        10;
+
+    }
+
+
+    /*
+      Evitar desbordamiento inferior.
+    */
+
+    if (
+      y + altoMenu >
+      window.innerHeight
+    ) {
+
+      y =
+        window.innerHeight -
+        altoMenu -
+        10;
+
+    }
+
+
+    this.menuX =
+      Math.max(
+        10,
+        x
+      );
+
+
+    this.menuY =
+      Math.max(
+        10,
+        y
+      );
+
 
     this.mostrarMenuContextual =
       true;
 
   }
 
+
   /* =======================================================
-     MODIFICAR DESDE MENÚ
+     AGREGAR TURNO DESDE MENÚ
      ======================================================= */
 
-  modificarDesdeMenu(): void {
+  agregarTurnoContextual(): void {
 
     if (
-      !this.programacionContextual
+      !this.fechaContextual
     ) {
+
+      this.cerrarMenuContextual();
 
       return;
 
     }
 
+
+    const fecha =
+      this.fechaContextual;
+
+
+    this.cerrarMenuContextual();
+
+
+    /*
+      Seleccionamos solamente
+      el día donde se hizo click derecho.
+    */
+
+    this.fechasSeleccionadas = [
+      fecha
+    ];
+
+
+    this.abrirModalRegistro();
+
+  }
+
+
+  /* =======================================================
+     MODIFICAR DESDE MENÚ
+     ======================================================= */
+
+  modificarTurnoContextual(): void {
+
+    if (
+      !this.programacionContextual
+    ) {
+
+      alert(
+        'El día seleccionado no tiene un turno registrado para modificar.'
+      );
+
+      this.cerrarMenuContextual();
+
+      return;
+
+    }
+
+
     const programacion =
       this.programacionContextual;
 
+
     this.cerrarMenuContextual();
+
 
     this.modificarTurno(
       programacion
@@ -1390,30 +2195,41 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   /* =======================================================
      ELIMINAR DESDE MENÚ
      ======================================================= */
 
-  eliminarDesdeMenu(): void {
+  eliminarTurnoContextual(): void {
 
     if (
       !this.programacionContextual
     ) {
 
+      alert(
+        'El día seleccionado no tiene un turno registrado para eliminar.'
+      );
+
+      this.cerrarMenuContextual();
+
       return;
 
     }
 
+
     const programacion =
       this.programacionContextual;
 
+
     this.cerrarMenuContextual();
+
 
     this.eliminarTurno(
       programacion
     );
 
   }
+
 
   /* =======================================================
      CERRAR MENÚ
@@ -1424,13 +2240,190 @@ export class ProgramacionComponent implements OnInit {
     this.mostrarMenuContextual =
       false;
 
+
     this.programacionContextual =
+      null;
+
+
+    this.fechaContextual =
       null;
 
   }
 
+
   /* =======================================================
-     ARCHIVO
+     ELIMINAR TURNO
+     ======================================================= */
+
+  eliminarTurno(
+    programacion?: ProgramacionData
+  ): void {
+
+    let registros:
+      ProgramacionData[] = [];
+
+
+    if (programacion) {
+
+      registros = [
+        programacion
+      ];
+
+    } else {
+
+      registros =
+        this.obtenerProgramacionesSeleccionadas();
+
+    }
+
+
+    if (
+      registros.length === 0
+    ) {
+
+      alert(
+        'Seleccione un turno para eliminar.'
+      );
+
+      return;
+
+    }
+
+
+    const confirmar =
+      confirm(
+
+        registros.length === 1
+
+          ? '¿Desea eliminar este turno?'
+
+          : `¿Desea eliminar los ${registros.length} turnos seleccionados?`
+
+      );
+
+
+    if (!confirmar) {
+
+      return;
+
+    }
+
+
+    let procesados =
+      0;
+
+    let eliminados =
+      0;
+
+    let errores =
+      0;
+
+
+    for (
+      const registro of registros
+    ) {
+
+      const id =
+        Number(
+          registro.id
+        );
+
+
+      if (
+        !Number.isInteger(id)
+      ) {
+
+        errores++;
+
+        procesados++;
+
+        continue;
+
+      }
+
+
+      this.horariosService
+        .eliminar(id)
+        .subscribe({
+
+          next: () => {
+
+            eliminados++;
+
+            procesados++;
+
+
+            this.programaciones =
+              this.programaciones.filter(
+                item =>
+                  item.id !==
+                  registro.id
+              );
+
+
+            if (
+              procesados ===
+              registros.length
+            ) {
+
+              this.limpiarSeleccion();
+
+              this.cerrarMenuContextual();
+
+
+              if (
+                errores === 0
+              ) {
+
+                alert(
+                  `${eliminados} programación(es) eliminada(s) correctamente.`
+                );
+
+              }
+
+            }
+
+          },
+
+
+          error: (error) => {
+
+            errores++;
+
+            procesados++;
+
+
+            console.error(
+              'Error al eliminar horario:',
+              error
+            );
+
+
+            if (
+              procesados ===
+              registros.length
+            ) {
+
+              this.cerrarMenuContextual();
+
+
+              alert(
+                `Se eliminaron ${eliminados} programación(es), pero ${errores} no pudieron eliminarse.`
+              );
+
+            }
+
+          }
+
+        });
+
+    }
+
+  }
+
+
+  /* =======================================================
+     ARCHIVOS
      ======================================================= */
 
   seleccionarArchivo(
@@ -1439,6 +2432,7 @@ export class ProgramacionComponent implements OnInit {
 
     const input =
       event.target as HTMLInputElement;
+
 
     if (
       !input.files ||
@@ -1449,8 +2443,10 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     const archivo =
       input.files[0];
+
 
     if (
       archivo.size >
@@ -1461,25 +2457,22 @@ export class ProgramacionComponent implements OnInit {
         'El archivo no puede superar los 7 MB.'
       );
 
-      input.value = '';
+
+      input.value =
+        '';
 
       return;
 
     }
 
+
     this.archivoSeleccionado =
       archivo;
+
 
     this.archivoNombre =
       archivo.name;
 
-    /*
-      Para esta versión frontend
-      generamos una URL local.
-
-      Posteriormente esta URL será
-      reemplazada por la URL del backend.
-    */
 
     this.archivoUrl =
       URL.createObjectURL(
@@ -1488,9 +2481,6 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
-  /* =======================================================
-     ELIMINAR ARCHIVO
-     ======================================================= */
 
   eliminarArchivo(): void {
 
@@ -1498,9 +2488,6 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
-  /* =======================================================
-     LIMPIAR ARCHIVO
-     ======================================================= */
 
   limpiarArchivo(): void {
 
@@ -1517,6 +2504,7 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     this.archivoSeleccionado =
       null;
 
@@ -1528,9 +2516,6 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
-  /* =======================================================
-     ABRIR DOCUMENTO
-     ======================================================= */
 
   abrirDocumento(
     programacion: ProgramacionData
@@ -1544,6 +2529,7 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     window.open(
       programacion.archivoUrl,
       '_blank'
@@ -1551,8 +2537,9 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   /* =======================================================
-     DATOS PARA LA INFORMACIÓN DEL TURNO
+     INFORMACIÓN DEL TURNO
      ======================================================= */
 
   get turnoActual(): Turno | undefined {
@@ -1567,6 +2554,7 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   get siglasTurno(): string {
 
     return (
@@ -1575,6 +2563,7 @@ export class ProgramacionComponent implements OnInit {
     );
 
   }
+
 
   get nombreTurno(): string {
 
@@ -1585,6 +2574,7 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   get observacionTurno(): string {
 
     return (
@@ -1593,6 +2583,7 @@ export class ProgramacionComponent implements OnInit {
     );
 
   }
+
 
   get duracionTurno(): number {
 
@@ -1606,12 +2597,14 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     return (
       this.turnoActual?.duracion ??
       0
     );
 
   }
+
 
   /* =======================================================
      EXPORTAR
@@ -1626,6 +2619,7 @@ export class ProgramacionComponent implements OnInit {
         2
       );
 
+
     const blob =
       new Blob(
         [datos],
@@ -1635,28 +2629,36 @@ export class ProgramacionComponent implements OnInit {
         }
       );
 
+
     const url =
       URL.createObjectURL(
         blob
       );
+
 
     const enlace =
       document.createElement(
         'a'
       );
 
-    enlace.href = url;
+
+    enlace.href =
+      url;
+
 
     enlace.download =
       'programacion.json';
 
+
     enlace.click();
+
 
     URL.revokeObjectURL(
       url
     );
 
   }
+
 
   /* =======================================================
      IMPRIMIR
@@ -1667,6 +2669,7 @@ export class ProgramacionComponent implements OnInit {
     window.print();
 
   }
+
 
   /* =======================================================
      PROGRAMACIONES DEL MES
@@ -1683,11 +2686,14 @@ export class ProgramacionComponent implements OnInit {
 
     }
 
+
     const year =
       this.fechaActual.getFullYear();
 
+
     const month =
       this.fechaActual.getMonth();
+
 
     return this.programaciones.filter(
       programacion => {
@@ -1697,15 +2703,22 @@ export class ProgramacionComponent implements OnInit {
             `${programacion.fecha}T00:00:00`
           );
 
+
         return (
+
           programacion.personalId ===
-            this.personalSeleccionado!.id &&
+          this.personalSeleccionado!.id
+
+          &&
 
           fecha.getFullYear() ===
-            year &&
+          year
+
+          &&
 
           fecha.getMonth() ===
-            month
+          month
+
         );
 
       }
@@ -1713,33 +2726,40 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   /* =======================================================
-     TOTAL DE HORAS DEL MES
+     HORAS MENSUALES
      ======================================================= */
 
   get horasMensuales(): number {
 
     return this.programacionesDelMes
       .reduce(
+
         (
           total,
           programacion
         ) =>
+
           total +
           Number(
             programacion.duracion
           ),
+
         0
+
       );
 
   }
 
+
   /* =======================================================
-     HORAS FALTANTES / EXCESO
+     META MENSUAL
      ======================================================= */
 
   readonly HORAS_MENSUALES =
     150;
+
 
   get diferenciaMensual(): number {
 
@@ -1750,80 +2770,13 @@ export class ProgramacionComponent implements OnInit {
 
   }
 
+
   get cumpleHorasMensuales(): boolean {
 
     return (
       this.horasMensuales >=
       this.HORAS_MENSUALES
     );
-
-  }
-
-  /* =======================================================
-     CARGAR DATOS DE PRUEBA
-     ======================================================= */
-
-  private cargarDatosDemo(): void {
-
-    /*
-      Solo datos visuales para comprobar
-      que el calendario funciona.
-
-      Posteriormente serán reemplazados
-      por información proveniente del backend.
-    */
-
-    this.programaciones = [
-
-      {
-        id: this.generateId(),
-        personalId: 1,
-        fecha: '2026-08-18',
-        turnoId: 6,
-        turnoBaseId: 6,
-        tipo: 'ORIGINAL',
-        siglas: 'T',
-        nombreTurno: 'Tarde',
-        duracion: 6,
-        observacion: 'Turno tarde',
-        justificacion: '',
-        archivoNombre: '',
-        archivoUrl: ''
-      },
-
-      {
-        id: this.generateId(),
-        personalId: 1,
-        fecha: '2026-08-18',
-        turnoId: 1,
-        turnoBaseId: 1,
-        tipo: 'ORIGINAL',
-        siglas: 'GD',
-        nombreTurno: 'Guardia Diurna',
-        duracion: 12,
-        observacion: 'Guardia diurna',
-        justificacion: '',
-        archivoNombre: '',
-        archivoUrl: ''
-      },
-
-      {
-        id: this.generateId(),
-        personalId: 1,
-        fecha: '2026-08-19',
-        turnoId: 4,
-        turnoBaseId: 4,
-        tipo: 'ORIGINAL',
-        siglas: 'TN',
-        nombreTurno: 'Turno Noche',
-        duracion: 12,
-        observacion: 'Turno noche',
-        justificacion: '',
-        archivoNombre: '',
-        archivoUrl: ''
-      }
-
-    ];
 
   }
 

@@ -1,0 +1,711 @@
+<div
+  class="app-layout"
+  [class.sidebar-is-collapsed]="sidebarColapsado"
+>
+
+
+  <!-- =====================================================
+       SIDEBAR
+       ===================================================== -->
+
+  <aside
+    class="sidebar"
+    [class.sidebar-collapsed]="sidebarColapsado"
+  >
+
+
+    <!-- ===================================================
+         CABECERA
+         =================================================== -->
+
+    <div class="sidebar-header">
+
+      <div class="hospital-logo">
+        HG
+      </div>
+
+
+      <div
+        class="hospital-name"
+        *ngIf="!sidebarColapsado"
+      >
+
+        <strong>
+          HOSPITAL HUARAL
+        </strong>
+
+        <span>
+          Registro y Control
+        </span>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="collapse-button"
+        (click)="alternarSidebar()"
+      >
+
+        <svg
+          *ngIf="!sidebarColapsado"
+          viewBox="0 0 24 24"
+        >
+
+          <path
+            d="M15 6L9 12L15 18"
+          ></path>
+
+        </svg>
+
+
+        <svg
+          *ngIf="sidebarColapsado"
+          viewBox="0 0 24 24"
+        >
+
+          <path
+            d="M9 6L15 12L9 18"
+          ></path>
+
+        </svg>
+
+      </button>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         MENÚ
+         =================================================== -->
+
+    <nav class="sidebar-menu">
+
+
+      <!-- DASHBOARD -->
+
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="menu-active"
+        [routerLinkActiveOptions]="{
+          exact: true
+        }"
+        class="menu-item"
+        title="Dashboard"
+      >
+
+        <span class="menu-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <rect
+              x="4"
+              y="4"
+              width="6"
+              height="6"
+              rx="1"
+            ></rect>
+
+            <rect
+              x="14"
+              y="4"
+              width="6"
+              height="6"
+              rx="1"
+            ></rect>
+
+            <rect
+              x="4"
+              y="14"
+              width="6"
+              height="6"
+              rx="1"
+            ></rect>
+
+            <rect
+              x="14"
+              y="14"
+              width="6"
+              height="6"
+              rx="1"
+            ></rect>
+
+          </svg>
+
+        </span>
+
+
+        <span
+          class="menu-text"
+          *ngIf="!sidebarColapsado"
+        >
+          Dashboard
+        </span>
+
+      </a>
+
+
+
+      <!-- GESTIÓN DOCUMENTOS -->
+
+      <a
+        routerLink="/gestion-documentos"
+        routerLinkActive="menu-active"
+        class="menu-item"
+        title="Gestión de documentos"
+      >
+
+        <span class="menu-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path
+              d="M6 3H14L18 7V21H6Z"
+            ></path>
+
+            <path
+              d="M14 3V8H19"
+            ></path>
+
+            <path
+              d="M9 13H15"
+            ></path>
+
+            <path
+              d="M9 17H15"
+            ></path>
+
+          </svg>
+
+        </span>
+
+
+        <span
+          class="menu-text"
+          *ngIf="!sidebarColapsado"
+        >
+          Gestión de documentos
+        </span>
+
+      </a>
+
+
+
+      <!-- PROGRAMACIÓN -->
+
+      <div class="menu-group">
+
+        <button
+          type="button"
+          class="menu-item menu-button"
+          [class.menu-active]="programacionAbierta"
+          (click)="alternarProgramacion()"
+          title="Programación"
+        >
+
+          <span class="menu-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <rect
+                x="4"
+                y="5"
+                width="16"
+                height="15"
+                rx="2"
+              ></rect>
+
+              <path
+                d="M8 3V7"
+              ></path>
+
+              <path
+                d="M16 3V7"
+              ></path>
+
+              <path
+                d="M4 10H20"
+              ></path>
+
+              <path
+                d="M8 14H8.01"
+              ></path>
+
+              <path
+                d="M12 14H12.01"
+              ></path>
+
+              <path
+                d="M16 14H16.01"
+              ></path>
+
+            </svg>
+
+          </span>
+
+
+          <span
+            class="menu-text"
+            *ngIf="!sidebarColapsado"
+          >
+            Programación
+          </span>
+
+
+          <svg
+            *ngIf="!sidebarColapsado"
+            class="menu-arrow"
+            [class.arrow-open]="programacionAbierta"
+            viewBox="0 0 24 24"
+          >
+
+            <path
+              d="M6 9L12 15L18 9"
+            ></path>
+
+          </svg>
+
+        </button>
+
+
+        <div
+          class="submenu"
+          *ngIf="
+            programacionAbierta &&
+            !sidebarColapsado
+          "
+        >
+
+          <a
+            routerLink="/programacion"
+            routerLinkActive="submenu-active"
+            class="submenu-item"
+          >
+
+            Programación
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- REPORTES -->
+
+      <a
+        routerLink="/reportes"
+        routerLinkActive="menu-active"
+        class="menu-item"
+        title="Reportes"
+      >
+
+        <span class="menu-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path
+              d="M5 20V10"
+            ></path>
+
+            <path
+              d="M12 20V4"
+            ></path>
+
+            <path
+              d="M19 20V13"
+            ></path>
+
+            <path
+              d="M3 20H21"
+            ></path>
+
+          </svg>
+
+        </span>
+
+
+        <span
+          class="menu-text"
+          *ngIf="!sidebarColapsado"
+        >
+          Reportes
+        </span>
+
+      </a>
+
+
+
+      <!-- CONFIGURACIÓN -->
+
+      <a
+        routerLink="/configuracion"
+        routerLinkActive="menu-active"
+        class="menu-item"
+        title="Configuración"
+      >
+
+        <span class="menu-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="12"
+              r="3"
+            ></circle>
+
+            <path
+              d="M12 2V5"
+            ></path>
+
+            <path
+              d="M12 19V22"
+            ></path>
+
+            <path
+              d="M2 12H5"
+            ></path>
+
+            <path
+              d="M19 12H22"
+            ></path>
+
+            <path
+              d="M4.9 4.9L7 7"
+            ></path>
+
+            <path
+              d="M17 17L19.1 19.1"
+            ></path>
+
+            <path
+              d="M19.1 4.9L17 7"
+            ></path>
+
+            <path
+              d="M7 17L4.9 19.1"
+            ></path>
+
+          </svg>
+
+        </span>
+
+
+        <span
+          class="menu-text"
+          *ngIf="!sidebarColapsado"
+        >
+          Configuración
+        </span>
+
+      </a>
+
+    </nav>
+
+
+
+    <!-- ===================================================
+         PERFIL SIDEBAR
+         =================================================== -->
+
+    <div class="sidebar-profile">
+
+
+      <!-- BOTÓN -->
+
+      <button
+        type="button"
+        class="profile-button"
+        [class.profile-button-open]="perfilMenuAbierto"
+        (click)="alternarPerfilSidebar()"
+      >
+
+        <div class="profile-avatar">
+
+          {{ inicialesUsuario }}
+
+        </div>
+
+
+        <div
+          class="profile-info"
+          *ngIf="!sidebarColapsado"
+        >
+
+          <strong>
+            {{ nombreUsuario }}
+          </strong>
+
+          <span>
+            {{ cargoUsuario }}
+          </span>
+
+        </div>
+
+
+        <svg
+          *ngIf="!sidebarColapsado"
+          class="profile-chevron"
+          [class.profile-chevron-open]="perfilMenuAbierto"
+          viewBox="0 0 24 24"
+        >
+
+          <path
+            d="M6 9L12 15L18 9"
+          ></path>
+
+        </svg>
+
+      </button>
+
+
+
+      <!-- MENÚ SIDEBAR -->
+
+      <div
+        class="profile-actions sidebar-profile-menu"
+        *ngIf="
+          perfilMenuAbierto &&
+          !sidebarColapsado
+        "
+      >
+
+        <button
+          type="button"
+          class="profile-action"
+          (click)="irPerfil()"
+        >
+
+          <span class="profile-action-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <circle
+                cx="12"
+                cy="8"
+                r="3"
+              ></circle>
+
+              <path
+                d="M5 20C5.8 16.7 8.1 15 12 15C15.9 15 18.2 16.7 19 20"
+              ></path>
+
+            </svg>
+
+          </span>
+
+          <span>
+            Ver perfil
+          </span>
+
+        </button>
+
+
+        <button
+          type="button"
+          class="profile-action logout-action"
+          (click)="cerrarSesion()"
+        >
+
+          <span class="profile-action-icon">
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M10 17L15 12L10 7"
+              ></path>
+
+              <path
+                d="M15 12H3"
+              ></path>
+
+              <path
+                d="M21 19V5C21 3.9 20.1 3 19 3H14"
+              ></path>
+
+            </svg>
+
+          </span>
+
+          <span>
+            Cerrar sesión
+          </span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- =====================================================
+       CONTENIDO
+       ===================================================== -->
+
+  <main class="main-content">
+
+
+    <!-- ===================================================
+         TOPBAR
+         =================================================== -->
+
+    <header class="topbar">
+
+
+      <div class="page-title">
+
+        <span>
+          Hospital Huaral
+        </span>
+
+      </div>
+
+
+
+      <!-- USUARIO SUPERIOR -->
+
+      <div class="top-profile-container">
+
+
+        <button
+          type="button"
+          class="top-profile"
+          [class.top-profile-open]="topPerfilMenuAbierto"
+          (click)="alternarPerfilTopbar()"
+        >
+
+          <div class="top-avatar">
+
+            {{ inicialesUsuario }}
+
+          </div>
+
+
+          <div class="top-profile-info">
+
+            <strong>
+              {{ nombreUsuario }}
+            </strong>
+
+            <span>
+              {{ cargoUsuario }}
+            </span>
+
+          </div>
+
+
+          <svg
+            class="top-profile-chevron"
+            [class.top-profile-chevron-open]="
+              topPerfilMenuAbierto
+            "
+            viewBox="0 0 24 24"
+          >
+
+            <path
+              d="M6 9L12 15L18 9"
+            ></path>
+
+          </svg>
+
+        </button>
+
+
+
+        <!-- MENÚ TOPBAR -->
+
+        <div
+          class="top-profile-menu"
+          *ngIf="topPerfilMenuAbierto"
+        >
+
+          <button
+            type="button"
+            class="profile-action"
+            (click)="irPerfil()"
+          >
+
+            <span class="profile-action-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <circle
+                  cx="12"
+                  cy="8"
+                  r="3"
+                ></circle>
+
+                <path
+                  d="M5 20C5.8 16.7 8.1 15 12 15C15.9 15 18.2 16.7 19 20"
+                ></path>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Ver perfil
+            </span>
+
+          </button>
+
+
+          <button
+            type="button"
+            class="profile-action logout-action"
+            (click)="cerrarSesion()"
+          >
+
+            <span class="profile-action-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path
+                  d="M10 17L15 12L10 7"
+                ></path>
+
+                <path
+                  d="M15 12H3"
+                ></path>
+
+                <path
+                  d="M21 19V5C21 3.9 20.1 3 19 3H14"
+                ></path>
+
+              </svg>
+
+            </span>
+
+            <span>
+              Cerrar sesión
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- ===================================================
+         PÁGINA
+         =================================================== -->
+
+    <section class="page-content">
+
+      <router-outlet></router-outlet>
+
+    </section>
+
+  </main>
+
+</div>

@@ -1,1039 +1,804 @@
-<!-- ============================================================
-     PÁGINA DE REPORTES
-============================================================= -->
-
-<div class="reportes-page">
+<div class="reports-page">
 
 
-    <!-- ========================================================
-         BREADCRUMB
-    ========================================================= -->
+  <!-- =====================================================
+       ENCABEZADO
+       ===================================================== -->
 
-    <div class="breadcrumb">
+  <div class="reports-header">
 
-        <span>
-            Hospital San Juan Bautista de Huaral
-        </span>
+    <div>
 
-        <span>
-            /
-        </span>
+      <span class="section-label">
+        CONTROL Y SEGUIMIENTO
+      </span>
 
-        <span>
-            Reportes
-        </span>
+      <h1>
+        Reportes
+      </h1>
+
+      <p>
+        Consulta el cumplimiento mensual de horas del personal.
+      </p>
 
     </div>
 
 
-    <!-- ========================================================
-         HEADER
-    ========================================================= -->
+    <button
+      type="button"
+      class="export-button"
+      (click)="exportarReporte()"
+    >
 
-    <header class="page-header">
+      <svg viewBox="0 0 24 24">
 
-        <div>
+        <path
+          d="M12 3V15"
+        ></path>
 
-            <h1>
-                Reportes
-            </h1>
+        <path
+          d="M7 10L12 15L17 10"
+        ></path>
 
-            <p>
-                Control mensual de horas programadas del personal.
-            </p>
+        <path
+          d="M5 21H19"
+        ></path>
+
+        <path
+          d="M5 17V21"
+        ></path>
+
+        <path
+          d="M19 17V21"
+        ></path>
+
+      </svg>
+
+      Exportar
+
+    </button>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       TARJETAS RESUMEN
+       ===================================================== -->
+
+  <div class="summary-grid">
+
+
+    <!-- PERSONAL -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon blue">
+
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="9"
+            cy="8"
+            r="3"
+          ></circle>
+
+          <path
+            d="M3 20C3.6 16.5 5.6 15 9 15C12.4 15 14.4 16.5 15 20"
+          ></path>
+
+          <path
+            d="M16 5.5C18.2 5.8 20 7.3 20 9.5"
+          ></path>
+
+          <path
+            d="M17 15.5C19.1 16.1 20.4 17.6 21 20"
+          ></path>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <span>
+          Personal
+        </span>
+
+        <strong>
+          {{ totalPersonal }}
+        </strong>
+
+        <small>
+          registrados
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- META -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon purple">
+
+        <svg viewBox="0 0 24 24">
+
+          <circle
+            cx="12"
+            cy="12"
+            r="8"
+          ></circle>
+
+          <circle
+            cx="12"
+            cy="12"
+            r="3"
+          ></circle>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <span>
+          Meta mensual
+        </span>
+
+        <strong>
+          {{ META_MENSUAL }} h
+        </strong>
+
+        <small>
+          por persona
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- CUMPLEN -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon green">
+
+        <svg viewBox="0 0 24 24">
+
+          <path
+            d="M5 12L10 17L20 7"
+          ></path>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <span>
+          Cumplen
+        </span>
+
+        <strong>
+          {{ totalCumplen }}
+        </strong>
+
+        <small>
+          meta mensual
+        </small>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- PENDIENTES -->
+
+    <div class="summary-card">
+
+      <div class="summary-icon warning">
+
+        <svg viewBox="0 0 24 24">
+
+          <path
+            d="M12 4L21 20H3L12 4Z"
+          ></path>
+
+          <path
+            d="M12 9V13"
+          ></path>
+
+          <path
+            d="M12 17V17.1"
+          ></path>
+
+        </svg>
+
+      </div>
+
+      <div>
+
+        <span>
+          Pendientes
+        </span>
+
+        <strong>
+          {{ totalPendientes }}
+        </strong>
+
+        <small>
+          requieren atención
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       CUMPLIMIENTO GENERAL
+       ===================================================== -->
+
+  <div class="general-card">
+
+    <div class="general-top">
+
+      <div>
+
+        <strong>
+          Cumplimiento general
+        </strong>
+
+        <span>
+          Resultado del personal registrado
+        </span>
+
+      </div>
+
+      <strong class="general-percent">
+        {{ cumplimientoGeneral }}%
+      </strong>
+
+    </div>
+
+
+    <div class="progress-container">
+
+      <div
+        class="progress-bar"
+        [style.width.%]="cumplimientoGeneral"
+      ></div>
+
+    </div>
+
+
+    <div class="general-bottom">
+
+      <span>
+        {{ totalProgramadas }} horas programadas
+      </span>
+
+      <span
+        [class.red-text]="totalFaltantes > 0"
+      >
+        {{ totalFaltantes }} horas faltantes
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       REPORTE
+       ===================================================== -->
+
+  <section class="report-card">
+
+
+    <!-- CABECERA -->
+
+    <div class="report-card-header">
+
+      <div>
+
+        <h2>
+          Reporte mensual
+        </h2>
+
+        <p>
+          Cumplimiento de la meta mensual de {{ META_MENSUAL }} horas.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         FILTROS
+         =================================================== -->
+
+    <div class="filters">
+
+
+      <!-- BÚSQUEDA -->
+
+      <div class="filter search-filter">
+
+        <label>
+          Personal
+        </label>
+
+        <div class="search-box">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="11"
+              cy="11"
+              r="6"
+            ></circle>
+
+            <path
+              d="M16 16L21 21"
+            ></path>
+
+          </svg>
+
+          <input
+            type="text"
+            [(ngModel)]="busqueda"
+            placeholder="Buscar por nombre o apellido..."
+          />
 
         </div>
 
-
-        <!-- PERIODO -->
-
-        <div class="header-period">
-
-            <span>
-                PERIODO
-            </span>
-
-            <strong>
-                {{ periodo }}
-            </strong>
-
-        </div>
-
-    </header>
+      </div>
 
 
-    <!-- ========================================================
-         CONTENIDO PRINCIPAL
-    ========================================================= -->
 
-    <main class="reportes-content">
+      <!-- CONTRATO -->
+
+      <div class="filter">
+
+        <label>
+          Tipo de contrato
+        </label>
+
+        <select
+          [(ngModel)]="filtroContrato"
+        >
+
+          <option value="">
+            Todos
+          </option>
+
+          <option
+            *ngFor="let contrato of tiposContrato"
+            [value]="contrato"
+          >
+            {{ contrato }}
+          </option>
+
+        </select>
+
+      </div>
 
 
-        <!-- ====================================================
-             ESTADÍSTICAS
-        ===================================================== -->
 
-        <section class="stats-grid">
+      <!-- DEPARTAMENTO -->
+
+      <div class="filter">
+
+        <label>
+          Departamento
+        </label>
+
+        <select
+          [(ngModel)]="filtroDepartamento"
+        >
+
+          <option value="">
+            Todos
+          </option>
+
+          <option
+            *ngFor="let departamento of departamentos"
+            [value]="departamento"
+          >
+            {{ departamento }}
+          </option>
+
+        </select>
+
+      </div>
 
 
-            <!-- PERSONAL -->
 
-            <article class="stat-card">
+      <!-- ESPECIALIDAD -->
 
-                <div class="stat-icon blue">
+      <div class="filter">
 
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        aria-hidden="true"
-                    >
+        <label>
+          Especialidad
+        </label>
 
-                        <path
-                            d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-                        />
+        <select
+          [(ngModel)]="filtroEspecialidad"
+        >
 
-                        <circle
-                            cx="9"
-                            cy="7"
-                            r="4"
-                        />
+          <option value="">
+            Todas
+          </option>
 
-                        <path
-                            d="M22 21v-2a4 4 0 0 0-3-3.87"
-                        />
+          <option
+            *ngFor="let especialidad of especialidades"
+            [value]="especialidad"
+          >
+            {{ especialidad }}
+          </option>
 
-                        <path
-                            d="M16 3.13a4 4 0 0 1 0 7.75"
-                        />
+        </select>
 
-                    </svg>
+      </div>
+
+
+
+      <!-- ESTADO -->
+
+      <div class="filter">
+
+        <label>
+          Estado
+        </label>
+
+        <select
+          [(ngModel)]="filtroEstado"
+        >
+
+          <option value="">
+            Todos
+          </option>
+
+          <option value="Activo">
+            Activos
+          </option>
+
+          <option value="Inactivo">
+            Inactivos
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- LIMPIAR -->
+
+      <div class="filter-action">
+
+        <button
+          type="button"
+          (click)="limpiarFiltros()"
+        >
+
+          Limpiar filtros
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         TABLA
+         =================================================== -->
+
+    <div class="table-wrapper">
+
+      <table>
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              TIPO DE CONTRATO
+            </th>
+
+            <th>
+              DEPARTAMENTO
+            </th>
+
+            <th>
+              ESPECIALIDAD
+            </th>
+
+            <th>
+              NOMBRE Y PRIMER APELLIDO
+            </th>
+
+            <th>
+              META
+            </th>
+
+            <th>
+              PROGRAMADAS
+            </th>
+
+            <th>
+              FALTANTES
+            </th>
+
+            <th>
+              CUMPLIMIENTO
+            </th>
+
+            <th>
+              ESTADO
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+          <!-- SIN RESULTADOS -->
+
+          <tr
+            *ngIf="reportesFiltrados.length === 0"
+          >
+
+            <td
+              colspan="9"
+              class="empty-row"
+            >
+
+              No se encontraron resultados.
+
+            </td>
+
+          </tr>
+
+
+
+          <!-- RESULTADOS -->
+
+          <tr
+            *ngFor="
+              let reporte of reportesFiltrados;
+              trackBy: trackById
+            "
+          >
+
+
+            <!-- CONTRATO -->
+
+            <td>
+
+              <span class="contract-badge">
+
+                {{ reporte.tipoContrato }}
+
+              </span>
+
+            </td>
+
+
+            <!-- DEPARTAMENTO -->
+
+            <td>
+
+              <span class="department-text">
+
+                {{ reporte.departamento }}
+
+              </span>
+
+            </td>
+
+
+            <!-- ESPECIALIDAD -->
+
+            <td>
+
+              <span class="specialty-text">
+
+                {{ reporte.especialidad }}
+
+              </span>
+
+            </td>
+
+
+            <!-- NOMBRE -->
+
+            <td>
+
+              <div class="employee">
+
+                <div class="employee-avatar">
+
+                  {{
+                    reporte.nombre.charAt(0)
+                  }}{{
+                    reporte.apellido.charAt(0)
+                  }}
 
                 </div>
-
-
-                <div>
-
-                    <span>
-                        Personal
-                    </span>
-
-                    <strong>
-                        {{ totalPersonal }}
-                    </strong>
-
-                    <small>
-                        registrados
-                    </small>
-
-                </div>
-
-            </article>
-
-
-            <!-- META MENSUAL -->
-
-            <article class="stat-card">
-
-                <div class="stat-icon purple">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        aria-hidden="true"
-                    >
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="9"
-                        />
-
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="4"
-                        />
-
-                    </svg>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Meta mensual
-                    </span>
-
-                    <strong>
-                        {{ metaTotal }} h
-                    </strong>
-
-                    <small>
-                        150 horas por persona
-                    </small>
-
-                </div>
-
-            </article>
-
-
-            <!-- CUMPLEN -->
-
-            <article class="stat-card">
-
-                <div class="stat-icon green">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        aria-hidden="true"
-                    >
-
-                        <path
-                            d="M20 6 9 17l-5-5"
-                        />
-
-                    </svg>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Cumplen
-                    </span>
-
-                    <strong>
-                        {{ totalCumplen }}
-                    </strong>
-
-                    <small>
-                        meta mensual
-                    </small>
-
-                </div>
-
-            </article>
-
-
-            <!-- PENDIENTES -->
-
-            <article class="stat-card">
-
-                <div class="stat-icon yellow">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        aria-hidden="true"
-                    >
-
-                        <path
-                            d="M10.3 3.2 2.4 17a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.2a2 2 0 0 0-3.4 0Z"
-                        />
-
-                        <path
-                            d="M12 9v4"
-                        />
-
-                        <path
-                            d="M12 17h.01"
-                        />
-
-                    </svg>
-
-                </div>
-
-
-                <div>
-
-                    <span>
-                        Pendientes
-                    </span>
-
-                    <strong>
-                        {{ totalPendientes }}
-                    </strong>
-
-                    <small>
-                        requieren atención
-                    </small>
-
-                </div>
-
-            </article>
-
-        </section>
-
-
-        <!-- ====================================================
-             RESUMEN GENERAL
-        ===================================================== -->
-
-        <section class="general-summary">
-
-
-            <!-- INFORMACIÓN -->
-
-            <div class="general-information">
-
-                <span>
-                    Cumplimiento general
-                </span>
 
                 <strong>
-                    {{ cumplimientoGeneral }}%
+
+                  {{ reporte.nombre }}
+                  {{ reporte.apellido }}
+
                 </strong>
 
-            </div>
+              </div>
+
+            </td>
 
 
-            <!-- BARRA DE PROGRESO -->
+            <!-- META -->
 
-            <div class="general-progress">
+            <td>
 
-                <div
-                    class="general-progress-value"
-                    [style.width.%]="cumplimientoGeneral"
-                ></div>
+              <strong class="hours">
 
-            </div>
+                {{ reporte.meta }} h
 
+              </strong>
 
-            <!-- HORAS -->
-
-            <div class="general-hours">
-
-                <span>
-                    {{ horasProgramadasTotal }} horas programadas
-                </span>
-
-                <span>
-                    {{ horasFaltantesTotal }} horas faltantes
-                </span>
-
-            </div>
-
-        </section>
+            </td>
 
 
-        <!-- ====================================================
-             REPORTE MENSUAL / FILTROS
-        ===================================================== -->
+            <!-- PROGRAMADAS -->
 
-        <section class="filter-card">
+            <td>
 
+              <strong class="hours">
 
-            <!-- CABECERA -->
+                {{ reporte.programadas }} h
 
-            <div class="filter-header">
+              </strong>
 
-                <div>
-
-                    <h2>
-                        Reporte mensual
-                    </h2>
-
-                    <p>
-                        Cumplimiento de la meta mensual de 150 horas.
-                    </p>
-
-                </div>
+            </td>
 
 
-                <!-- EXPORTAR -->
+            <!-- FALTANTES -->
 
-                <button
-                    type="button"
-                    class="export-button"
-                    (click)="exportarReporte()"
-                >
+            <td>
 
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        aria-hidden="true"
-                    >
+              <strong
+                class="hours missing"
+                [class.no-missing]="
+                  reporte.faltantes === 0
+                "
+              >
 
-                        <path
-                            d="M12 3v12"
-                        />
+                {{ reporte.faltantes }} h
 
-                        <path
-                            d="m7 10 5 5 5-5"
-                        />
+              </strong>
 
-                        <path
-                            d="M4 21h16"
-                        />
-
-                    </svg>
-
-                    Exportar
-
-                </button>
-
-            </div>
+            </td>
 
 
-            <!-- ==================================================
-                 FILTROS
-            =================================================== -->
+            <!-- CUMPLIMIENTO -->
 
-            <div class="filters">
+            <td>
 
+              <div class="compliance">
 
-                <!-- BUSCAR -->
+                <div class="compliance-value">
 
-                <div class="search-box">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        aria-hidden="true"
-                    >
-
-                        <circle
-                            cx="11"
-                            cy="11"
-                            r="7"
-                        />
-
-                        <path
-                            d="m20 20-4-4"
-                        />
-
-                    </svg>
-
-
-                    <input
-                        type="text"
-                        placeholder="Buscar por nombre o apellido..."
-                        [(ngModel)]="busqueda"
-                    />
+                  {{ reporte.cumplimiento }}%
 
                 </div>
 
+                <div class="mini-progress">
 
-                <!-- TIPO DE CONTRATO -->
-
-                <div class="filter-field">
-
-                    <label>
-                        Tipo de contrato
-                    </label>
-
-
-                    <select
-                        [(ngModel)]="filtroContrato"
-                    >
-
-                        <option
-                            *ngFor="
-                                let tipo of tiposContrato
-                            "
-                            [value]="tipo"
-                        >
-
-                            {{ tipo }}
-
-                        </option>
-
-                    </select>
+                  <div
+                    class="mini-progress-bar"
+                    [class.complete]="
+                      reporte.cumplimiento >= 100
+                    "
+                    [style.width.%]="
+                      reporte.cumplimiento > 100
+                        ? 100
+                        : reporte.cumplimiento
+                    "
+                  ></div>
 
                 </div>
 
+              </div>
 
-                <!-- DEPARTAMENTO -->
+            </td>
 
-                <div class="filter-field">
 
-                    <label>
-                        Departamento
-                    </label>
+            <!-- ESTADO -->
 
+            <td>
 
-                    <select
-                        [(ngModel)]="filtroDepartamento"
-                        (ngModelChange)="cambioDepartamento()"
-                    >
+              <span
+                class="status"
+                [class.active]="
+                  reporte.estado === 'Activo'
+                "
+                [class.inactive]="
+                  reporte.estado === 'Inactivo'
+                "
+              >
 
-                        <option
-                            *ngFor="
-                                let departamento of departamentos
-                            "
-                            [value]="departamento"
-                        >
+                <span class="status-icon">
 
-                            {{ departamento }}
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- ESPECIALIDAD -->
-
-                <div class="filter-field">
-
-                    <label>
-                        Especialidad
-                    </label>
-
-
-                    <select
-                        [(ngModel)]="filtroEspecialidad"
-                    >
-
-                        <option
-                            *ngFor="
-                                let especialidad of especialidadesDisponibles
-                            "
-                            [value]="especialidad"
-                        >
-
-                            {{ especialidad }}
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- ESTADO -->
-
-                <div class="filter-field">
-
-                    <label>
-                        Estado
-                    </label>
-
-
-                    <select
-                        [(ngModel)]="filtroEstado"
-                    >
-
-                        <option value="Todos">
-                            Todos
-                        </option>
-
-                        <option value="Cumple">
-                            Cumple
-                        </option>
-
-                        <option value="Pendiente">
-                            Pendiente
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- LIMPIAR FILTROS -->
-
-                <button
-                    type="button"
-                    class="clear-button"
-                    (click)="limpiarFiltros()"
-                >
-
-                    Limpiar filtros
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ====================================================
-             TABLA
-        ===================================================== -->
-
-        <section class="table-card">
-
-            <div class="table-container">
-
-                <table>
-
-
-                    <!-- ==================================================
-                         CABECERA
-                    =================================================== -->
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                TIPO DE CONTRATO
-                            </th>
-
-                            <th>
-                                DEPARTAMENTO
-                            </th>
-
-                            <th>
-                                ESPECIALIDAD
-                            </th>
-
-                            <th>
-                                NOMBRE Y PRIMER APELLIDO
-                            </th>
-
-                            <th>
-                                META
-                            </th>
-
-                            <th>
-                                PROGRAMADAS
-                            </th>
-
-                            <th>
-                                FALTANTES
-                            </th>
-
-                            <th>
-                                CUMPLIMIENTO
-                            </th>
-
-                            <th>
-                                ESTADO
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <!-- ==================================================
-                         CUERPO
-                    =================================================== -->
-
-                    <tbody>
-
-
-                        <!-- ==================================================
-                             FILAS DE REPORTES
-                        =================================================== -->
-
-                        <tr
-                            *ngFor="
-                                let reporte of reportesFiltrados
-                            "
-                        >
-
-
-                            <!-- TIPO DE CONTRATO -->
-
-                            <td>
-
-                                <span
-                                    class="contract-badge"
-                                    [ngClass]="{
-
-                                        'nombrado':
-                                            reporte.tipoContrato === 'Nombrado',
-
-                                        'cas':
-                                            reporte.tipoContrato === 'CAS',
-
-                                        'residente':
-                                            reporte.tipoContrato === 'Residente',
-
-                                        'tercero':
-                                            reporte.tipoContrato === 'Tercero',
-
-                                        'plazo-fijo':
-                                            reporte.tipoContrato === 'Contrato a plazo fijo',
-
-                                        'suplencia':
-                                            reporte.tipoContrato === 'Contrato a suplencia'
-
-                                    }"
-                                >
-
-                                    {{ reporte.tipoContrato }}
-
-                                </span>
-
-                            </td>
-
-
-                            <!-- DEPARTAMENTO -->
-
-                            <td>
-
-                                <span class="department-text">
-
-                                    {{ reporte.departamento }}
-
-                                </span>
-
-                            </td>
-
-
-                            <!-- ESPECIALIDAD -->
-
-                            <td>
-
-                                <span class="specialty-text">
-
-                                    {{ reporte.especialidad }}
-
-                                </span>
-
-                            </td>
-
-
-                            <!-- NOMBRE -->
-
-                            <td>
-
-                                <div class="person-cell">
-
-
-                                    <!-- AVATAR -->
-
-                                    <div class="person-avatar">
-
-                                        {{
-                                            reporte.nombre.charAt(0)
-                                        }}{{
-                                            reporte.primerApellido.charAt(0)
-                                        }}
-
-                                    </div>
-
-
-                                    <!-- NOMBRE COMPLETO -->
-
-                                    <strong>
-
-                                        {{ nombreCompleto(reporte) }}
-
-                                    </strong>
-
-                                </div>
-
-                            </td>
-
-
-                            <!-- META -->
-
-                            <td>
-
-                                <strong class="hours-value">
-
-                                    {{ reporte.meta }} h
-
-                                </strong>
-
-                            </td>
-
-
-                            <!-- HORAS PROGRAMADAS -->
-
-                            <td>
-
-                                <strong class="hours-value">
-
-                                    {{ reporte.programadas }} h
-
-                                </strong>
-
-                            </td>
-
-
-                            <!-- HORAS FALTANTES -->
-
-                            <td>
-
-                                <strong
-                                    class="hours-value"
-                                    [class.zero-hours]="
-                                        horasFaltantes(reporte) === 0
-                                    "
-                                    [class.missing-hours]="
-                                        horasFaltantes(reporte) > 0
-                                    "
-                                >
-
-                                    {{ horasFaltantes(reporte) }} h
-
-                                </strong>
-
-                            </td>
-
-
-                            <!-- ==================================================
-                                 CUMPLIMIENTO
-                            =================================================== -->
-
-                            <td>
-
-                                <div class="compliance-cell">
-
-
-                                    <!-- PORCENTAJE -->
-
-                                    <div class="compliance-information">
-
-                                        <strong>
-
-                                            {{ porcentajeCumplimiento(reporte) }}%
-
-                                        </strong>
-
-                                    </div>
-
-
-                                    <!-- BARRA -->
-
-                                    <div class="compliance-bar">
-
-                                        <div
-                                            class="compliance-value"
-                                            [class.complete]="
-                                                cumpleMeta(reporte)
-                                            "
-                                            [style.width.%]="
-
-                                                porcentajeCumplimiento(reporte) > 100
-                                                    ? 100
-                                                    : porcentajeCumplimiento(reporte)
-
-                                            "
-                                        ></div>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-
-                            <!-- ==================================================
-                                 ESTADO
-                            =================================================== -->
-
-                            <td>
-
-                                <div
-                                    class="status-badge"
-
-                                    [class.status-complete]="
-                                        cumpleMeta(reporte)
-                                    "
-
-                                    [class.status-pending]="
-                                        !cumpleMeta(reporte)
-                                    "
-                                >
-
-
-                                    <!-- CUMPLE -->
-
-                                    <svg
-                                        *ngIf="
-                                            cumpleMeta(reporte)
-                                        "
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        aria-hidden="true"
-                                    >
-
-                                        <path
-                                            d="M20 6 9 17l-5-5"
-                                        />
-
-                                    </svg>
-
-
-                                    <!-- PENDIENTE -->
-
-                                    <svg
-                                        *ngIf="
-                                            !cumpleMeta(reporte)
-                                        "
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.8"
-                                        aria-hidden="true"
-                                    >
-
-                                        <path
-                                            d="M10.3 3.2 2.4 17a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.2a2 2 0 0 0-3.4 0Z"
-                                        />
-
-                                        <path
-                                            d="M12 9v4"
-                                        />
-
-                                        <path
-                                            d="M12 17h.01"
-                                        />
-
-                                    </svg>
-
-
-                                    {{ textoEstado(reporte) }}
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-
-                        <!-- ==================================================
-                             SIN RESULTADOS
-                        =================================================== -->
-
-                        <tr
-                            *ngIf="
-                                reportesFiltrados.length === 0
-                            "
-                        >
-
-                            <td
-                                colspan="9"
-                                class="empty-state"
-                            >
-
-                                <div>
-
-
-                                    <!-- ICONO -->
-
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.8"
-                                        aria-hidden="true"
-                                    >
-
-                                        <path
-                                            d="M4 20V10"
-                                        />
-
-                                        <path
-                                            d="M10 20V4"
-                                        />
-
-                                        <path
-                                            d="M16 20v-7"
-                                        />
-
-                                        <path
-                                            d="M22 20H2"
-                                        />
-
-                                    </svg>
-
-
-                                    <strong>
-                                        No se encontraron resultados
-                                    </strong>
-
-
-                                    <small>
-                                        Prueba modificando los filtros.
-                                    </small>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-
-        <!-- ====================================================
-             NOTA INFORMATIVA
-        ===================================================== -->
-
-        <div class="information-note">
-
-
-            <!-- ICONO INFORMACIÓN -->
-
-            <span class="information-icon">
-
-                <svg
+                  <svg
+                    *ngIf="
+                      reporte.estado === 'Activo'
+                    "
                     viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    aria-hidden="true"
-                >
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="9"
-                    />
+                  >
 
                     <path
-                        d="M12 11v5"
-                    />
+                      d="M5 12L10 17L20 7"
+                    ></path>
+
+                  </svg>
+
+
+                  <svg
+                    *ngIf="
+                      reporte.estado === 'Inactivo'
+                    "
+                    viewBox="0 0 24 24"
+                  >
 
                     <path
-                        d="M12 8h.01"
-                    />
+                      d="M12 8V13"
+                    ></path>
 
-                </svg>
+                    <path
+                      d="M12 16V16.1"
+                    ></path>
 
-            </span>
+                  </svg>
 
+                </span>
 
-            <!-- TEXTO -->
+                {{ reporte.estado }}
 
-            <div>
+              </span>
 
-                <strong>
-                    Control de horas mensuales
-                </strong>
+            </td>
 
-                <p>
-                    La meta establecida es de 150 horas mensuales
-                    por persona. El estado se determina automáticamente
-                    comparando las horas programadas con dicha meta.
-                </p>
+          </tr>
 
-            </div>
+        </tbody>
 
-        </div>
+      </table>
 
-    </main>
+    </div>
+
+  </section>
 
 </div>

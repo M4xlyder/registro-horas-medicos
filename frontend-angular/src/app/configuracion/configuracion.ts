@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 interface Horario {
   id: number;
@@ -29,7 +29,7 @@ interface TipoContrato {
   activo: boolean;
 }
 
-interface Empleado {
+interface EmpleadoConfiguracion {
   id: number;
   dni: string;
   nombres: string;
@@ -53,6 +53,40 @@ interface Empleado {
   styleUrl: './configuracion.css'
 })
 export class Configuracion implements OnInit {
+
+  // =====================================================
+  // CIERRE GLOBAL DE MODALES CON ESC
+  // =====================================================
+
+  @HostListener('document:keydown.escape')
+  cerrarModalConEscape(): void {
+
+    if (this.mostrarModalEmpleado) {
+      this.cerrarModalEmpleado();
+      return;
+    }
+
+    if (this.mostrarModalHorario) {
+      this.cerrarModalHorario();
+      return;
+    }
+
+    if (this.mostrarModalDepartamento) {
+      this.cerrarModalDepartamento();
+      return;
+    }
+
+    if (this.mostrarModalEspecialidad) {
+      this.cerrarModalEspecialidad();
+      return;
+    }
+
+    if (this.mostrarModalContrato) {
+      this.cerrarModalContrato();
+    }
+
+  }
+
 
   // =====================================================
   // SECCIÓN ACTIVA
@@ -188,7 +222,7 @@ export class Configuracion implements OnInit {
   // FORMULARIOS
   // =====================================================
 
-  empleadoFormulario: Empleado =
+  empleadoFormulario: EmpleadoConfiguracion =
     this.nuevoEmpleado();
 
   horarioFormulario: Horario =
@@ -547,7 +581,7 @@ export class Configuracion implements OnInit {
   // META FIJA: 150 HORAS
   // =====================================================
 
-  empleados: Empleado[] = [
+  empleados: EmpleadoConfiguracion[] = [
 
     {
       id: 1,
@@ -1249,7 +1283,7 @@ export class Configuracion implements OnInit {
   // FILTROS EMPLEADOS
   // =====================================================
 
-  get empleadosFiltrados(): Empleado[] {
+  get empleadosFiltrados(): EmpleadoConfiguracion[] {
 
     const texto =
       this.busquedaEmpleado
@@ -1672,7 +1706,7 @@ export class Configuracion implements OnInit {
 
 
   cambiarEstadoEmpleado(
-    empleado: Empleado
+    empleado: EmpleadoConfiguracion
   ): void {
 
     empleado.activo =
@@ -1685,7 +1719,7 @@ export class Configuracion implements OnInit {
   // NUEVOS OBJETOS
   // =====================================================
 
-  nuevoEmpleado(): Empleado {
+  nuevoEmpleado(): EmpleadoConfiguracion {
 
     return {
 
@@ -1801,7 +1835,7 @@ export class Configuracion implements OnInit {
 
 
   editarEmpleado(
-    empleado: Empleado
+    empleado: EmpleadoConfiguracion
   ): void {
 
     this.modoEdicion = true;
@@ -1922,7 +1956,7 @@ export class Configuracion implements OnInit {
 
 
   eliminarEmpleado(
-    empleado: Empleado
+    empleado: EmpleadoConfiguracion
   ): void {
 
     const confirmar =

@@ -3,6 +3,7 @@
    ========================================================= */
 
 :host {
+
   display: block;
 
   min-height: 100vh;
@@ -19,10 +20,14 @@
   color: #243b5a;
 
   background: #f7f9fc;
+
 }
 
+
 * {
+
   box-sizing: border-box;
+
 }
 
 
@@ -31,9 +36,11 @@
    ========================================================= */
 
 .documentos-page {
+
   min-height: 100vh;
 
   background: #f7f9fc;
+
 }
 
 
@@ -42,9 +49,11 @@
    ========================================================= */
 
 .breadcrumb {
+
   height: 42px;
 
   display: flex;
+
   align-items: center;
 
   gap: 7px;
@@ -53,15 +62,20 @@
 
   background: #ffffff;
 
-  border-bottom: 1px solid #e5eaf0;
+  border-bottom:
+    1px solid #e5eaf0;
 
   color: #66788e;
 
   font-size: 11px;
+
 }
 
+
 .breadcrumb span:nth-child(2) {
+
   color: #a0adbb;
+
 }
 
 
@@ -70,20 +84,27 @@
    ========================================================= */
 
 .page-header {
+
   min-height: 94px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   padding: 18px 28px;
 
   background: #ffffff;
 
-  border-bottom: 1px solid #e4e9ef;
+  border-bottom:
+    1px solid #e4e9ef;
+
 }
 
+
 .page-header h1 {
+
   margin: 0;
 
   color: #193d68;
@@ -91,39 +112,53 @@
   font-size: 25px;
 
   font-weight: 700;
+
 }
 
+
 .page-header p {
+
   margin: 7px 0 0;
 
   color: #718198;
 
   font-size: 12px;
+
 }
 
+
 .header-period {
+
   min-width: 150px;
 
   display: flex;
+
   flex-direction: column;
 
   align-items: flex-end;
 
   gap: 3px;
+
 }
 
+
 .header-period span {
+
   color: #8794a5;
 
   font-size: 9px;
 
   letter-spacing: 0.4px;
+
 }
 
+
 .header-period strong {
+
   color: #294b72;
 
   font-size: 13px;
+
 }
 
 
@@ -132,7 +167,12 @@
    ========================================================= */
 
 .documentos-content {
-  padding: 20px 28px 30px;
+
+  padding:
+    20px
+    28px
+    30px;
+
 }
 
 
@@ -141,6 +181,7 @@
    ========================================================= */
 
 .stats-grid {
+
   display: grid;
 
   grid-template-columns:
@@ -149,36 +190,48 @@
   gap: 14px;
 
   margin-bottom: 18px;
+
 }
 
+
 .stat-card {
+
   min-height: 102px;
 
   display: flex;
+
   align-items: center;
 
   gap: 13px;
 
   padding: 15px;
 
-  border: 1px solid #e0e7ef;
+  border:
+    1px solid #e0e7ef;
 
   border-radius: 9px;
 
   background: #ffffff;
 
   box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.025);
+    0 1px 2px
+    rgba(15, 23, 42, 0.025);
+
 }
 
+
 .stat-icon {
+
   width: 45px;
+
   height: 45px;
 
   flex: 0 0 45px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border-radius: 9px;
@@ -186,46 +239,68 @@
   font-size: 14px;
 
   font-weight: 700;
+
 }
 
+
 .stat-icon.blue {
+
   background: #edf4ff;
 
   color: #2867dc;
+
 }
 
+
 .stat-icon.yellow {
+
   background: #fff6df;
 
   color: #b57a08;
+
 }
 
+
 .stat-icon.green {
+
   background: #eaf8f0;
 
   color: #14914e;
+
 }
 
+
 .stat-icon.purple {
+
   background: #f2efff;
 
   color: #7655d9;
+
 }
+
 
 .stat-card > div:last-child {
+
   display: flex;
+
   flex-direction: column;
+
 }
 
+
 .stat-card span {
+
   color: #7a899b;
 
   font-size: 10px;
 
   font-weight: 600;
+
 }
 
+
 .stat-card strong {
+
   margin-top: 3px;
 
   color: #243e60;
@@ -233,14 +308,18 @@
   font-size: 23px;
 
   line-height: 1.1;
+
 }
 
+
 .stat-card small {
+
   margin-top: 3px;
 
   color: #98a4b3;
 
   font-size: 8px;
+
 }
 
 
@@ -249,154 +328,224 @@
    ========================================================= */
 
 .filter-card {
+
   margin-bottom: 14px;
 
   padding: 15px;
 
-  border: 1px solid #e0e7ef;
+  border:
+    1px solid #e0e7ef;
 
   border-radius: 9px;
 
   background: #ffffff;
+
 }
 
+
 .filter-title {
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   margin-bottom: 13px;
+
 }
 
+
 .filter-title h2 {
+
   margin: 0;
 
   color: #29496d;
 
   font-size: 14px;
+
 }
 
+
 .filter-title span {
+
   color: #8996a6;
 
   font-size: 9px;
+
 }
 
+
 .filters {
+
   display: grid;
 
   grid-template-columns:
-    minmax(250px, 1fr)
-    190px
-    160px
+    minmax(220px, 1.5fr)
+    minmax(180px, 1fr)
+    minmax(180px, 1fr)
     auto;
+
+  gap: 10px;
 
   align-items: end;
 
-  gap: 10px;
 }
 
+
 .search-box {
-  height: 38px;
+
+  min-height: 38px;
 
   display: flex;
+
   align-items: center;
 
   gap: 8px;
 
   padding: 0 11px;
 
-  border: 1px solid #d8e1ea;
+  border:
+    1px solid #d7e0ea;
 
-  border-radius: 7px;
+  border-radius: 6px;
 
   background: #ffffff;
+
 }
+
 
 .search-box span {
-  font-size: 12px;
 
-  color: #718096;
+  color: #7d8da0;
+
+  font-size: 13px;
+
 }
 
+
 .search-box input {
+
   width: 100%;
+
+  height: 36px;
 
   border: none;
 
   outline: none;
 
-  color: #40536b;
+  color: #344d68;
 
   background: transparent;
 
   font-size: 10px;
+
 }
+
 
 .search-box input::placeholder {
-  color: #9aa6b5;
+
+  color: #9ba8b7;
+
 }
 
+
+.filter-field {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+}
+
+
 .filter-field label {
-  display: block;
 
-  margin-bottom: 5px;
-
-  color: #61738a;
+  color: #536b84;
 
   font-size: 9px;
 
   font-weight: 600;
+
 }
 
+
 .filter-field select {
+
   width: 100%;
 
-  height: 38px;
+  min-height: 38px;
 
-  padding: 0 9px;
+  padding:
+    0 10px;
 
-  border: 1px solid #d8e1ea;
+  border:
+    1px solid #d7e0ea;
 
-  border-radius: 7px;
+  border-radius: 6px;
 
   outline: none;
 
   background: #ffffff;
 
-  color: #52657b;
+  color: #526980;
 
   font-size: 10px;
 
   cursor: pointer;
+
 }
+
 
 .filter-field select:focus {
-  border-color: #2867df;
+
+  border-color: #2867d8;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(40, 103, 216, 0.08);
+
 }
 
+
 .clear-button {
-  height: 38px;
 
-  padding: 0 12px;
+  min-height: 38px;
 
-  border: 1px solid #d6dfe8;
+  padding:
+    0 17px;
 
-  border-radius: 7px;
+  border:
+    1px solid #d3dce6;
+
+  border-radius: 6px;
 
   background: #ffffff;
 
-  color: #68798d;
+  color: #5d7085;
 
-  font-size: 9px;
-
-  font-weight: 600;
+  font-size: 10px;
 
   cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+
 }
 
+
 .clear-button:hover {
-  background: #f5f7fa;
+
+  background: #f4f7fa;
+
+  border-color: #c3ceda;
+
+  color: #2867d8;
+
 }
 
 
@@ -405,71 +554,99 @@
    ========================================================= */
 
 .table-card {
-  border: 1px solid #e0e7ef;
+
+  border:
+    1px solid #e0e7ef;
 
   border-radius: 9px;
 
   background: #ffffff;
 
   overflow: hidden;
+
 }
 
-.table-container {
+
+.table-wrapper {
+
   width: 100%;
 
   overflow-x: auto;
+
 }
 
+
 table {
+
   width: 100%;
 
   min-width: 1050px;
 
   border-collapse: collapse;
+
 }
+
 
 thead {
-  background: #f7f9fc;
+
+  background: #f6f8fb;
+
 }
 
+
 th {
+
   height: 43px;
 
-  padding: 0 13px;
+  padding:
+    0 12px;
 
-  border-bottom: 1px solid #dfe6ee;
+  border-bottom:
+    1px solid #dfe6ee;
 
-  color: #748398;
+  color: #718299;
+
+  text-align: left;
 
   font-size: 8px;
 
   font-weight: 700;
 
-  text-align: left;
+  letter-spacing: 0.2px;
 
-  white-space: nowrap;
 }
 
+
 td {
-  min-height: 65px;
 
-  padding: 10px 13px;
+  min-height: 61px;
 
-  border-bottom: 1px solid #edf1f5;
+  padding:
+    10px 12px;
 
-  color: #53677e;
+  border-bottom:
+    1px solid #e7ecf1;
+
+  color: #536a82;
 
   font-size: 9px;
 
   vertical-align: middle;
+
 }
+
 
 tbody tr:last-child td {
+
   border-bottom: none;
+
 }
 
+
 tbody tr:hover {
+
   background: #fbfcfe;
+
 }
 
 
@@ -478,39 +655,49 @@ tbody tr:hover {
    ========================================================= */
 
 .doctor-cell {
+
   display: flex;
+
   align-items: center;
 
-  gap: 8px;
+  gap: 9px;
+
 }
 
+
 .doctor-avatar {
+
   width: 31px;
+
   height: 31px;
 
   flex: 0 0 31px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
 
   background: #edf4ff;
 
-  color: #2867d7;
+  color: #2867d8;
 
   font-size: 8px;
 
   font-weight: 700;
+
 }
 
+
 .doctor-cell strong {
-  color: #344c68;
+
+  color: #36516e;
 
   font-size: 9px;
 
-  white-space: nowrap;
 }
 
 
@@ -519,9 +706,11 @@ tbody tr:hover {
    ========================================================= */
 
 .specialty {
-  color: #65778c;
 
-  font-size: 8px;
+  color: #5e7187;
+
+  font-size: 9px;
+
 }
 
 
@@ -530,11 +719,11 @@ tbody tr:hover {
    ========================================================= */
 
 .date {
-  color: #64758a;
 
-  font-size: 9px;
+  color: #63778d;
 
   white-space: nowrap;
+
 }
 
 
@@ -543,83 +732,100 @@ tbody tr:hover {
    ========================================================= */
 
 .shift-cell {
+
   display: flex;
+
   align-items: center;
 
-  gap: 6px;
+  gap: 7px;
 
-  white-space: nowrap;
 }
+
 
 .shift-code {
-  width: 28px;
+
+  min-width: 30px;
+
   height: 25px;
 
-  display: flex;
+  display: inline-flex;
+
   align-items: center;
+
   justify-content: center;
 
-  border-left: 3px solid;
+  padding:
+    0 7px;
 
-  border-radius: 4px;
-
-  font-size: 8px;
-
-  font-weight: 800;
-}
-
-.shift-cell > span:last-child {
-  color: #65778c;
+  border-radius: 5px;
 
   font-size: 8px;
+
+  font-weight: 700;
+
 }
+
 
 .shift-code.green {
+
   background: #eaf8f0;
 
-  border-color: #13a45b;
+  color: #14914e;
 
-  color: #08723c;
 }
+
 
 .shift-code.blue {
-  background: #eaf2ff;
 
-  border-color: #2166d5;
+  background: #edf4ff;
 
-  color: #174b9c;
+  color: #2867d8;
+
 }
+
 
 .shift-code.cyan {
-  background: #e9f6fb;
 
-  border-color: #1b9ac0;
+  background: #eaf9fb;
 
-  color: #14758f;
+  color: #168ba1;
+
 }
+
 
 .shift-code.teal {
-  background: #e8f5f6;
 
-  border-color: #159aa5;
+  background: #e8f7f5;
 
-  color: #13727a;
+  color: #178f83;
+
 }
+
 
 .shift-code.yellow {
-  background: #fff7df;
 
-  border-color: #e5a51c;
+  background: #fff6df;
 
-  color: #966b09;
+  color: #ad7608;
+
 }
 
+
 .shift-code.red {
+
   background: #fff0f1;
 
-  border-color: #ed3f48;
+  color: #d9363e;
 
-  color: #bd2934;
+}
+
+
+.shift-cell > span:last-child {
+
+  color: #60758b;
+
+  font-size: 8px;
+
 }
 
 
@@ -628,9 +834,11 @@ tbody tr:hover {
    ========================================================= */
 
 .hours {
-  color: #405873;
+
+  color: #3d5872;
 
   font-size: 9px;
+
 }
 
 
@@ -639,60 +847,81 @@ tbody tr:hover {
    ========================================================= */
 
 .file-cell {
+
   display: flex;
+
   align-items: center;
 
-  gap: 7px;
+  gap: 8px;
 
-  max-width: 200px;
+  min-width: 190px;
+
 }
 
-.file-icon {
-  width: 28px;
-  height: 31px;
 
-  flex: 0 0 28px;
+.file-icon {
+
+  width: 30px;
+
+  height: 34px;
+
+  flex: 0 0 30px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
-  border-radius: 4px;
+  border-radius: 5px;
 
   background: #fff0f1;
 
-  color: #d9353e;
+  color: #d9363e;
 
   font-size: 7px;
 
   font-weight: 800;
+
 }
 
+
 .file-information {
+
   min-width: 0;
 
   display: flex;
+
   flex-direction: column;
+
+  gap: 3px;
+
 }
 
-.file-information strong {
-  overflow: hidden;
 
-  white-space: nowrap;
+.file-information strong {
+
+  max-width: 210px;
+
+  overflow: hidden;
 
   text-overflow: ellipsis;
 
-  color: #40566f;
+  white-space: nowrap;
+
+  color: #4a6179;
 
   font-size: 8px;
+
 }
 
-.file-information small {
-  margin-top: 3px;
 
-  color: #929eac;
+.file-information small {
+
+  color: #98a5b3;
 
   font-size: 7px;
+
 }
 
 
@@ -701,34 +930,50 @@ tbody tr:hover {
    ========================================================= */
 
 .status {
+
+  min-width: 85px;
+
+  min-height: 27px;
+
   display: inline-flex;
+
   align-items: center;
 
-  gap: 4px;
+  justify-content: center;
 
-  padding: 5px 7px;
+  gap: 5px;
+
+  padding:
+    0 9px;
 
   border: none;
 
-  border-radius: 5px;
+  border-radius: 14px;
 
   font-size: 8px;
 
   font-weight: 600;
 
   cursor: pointer;
+
 }
+
 
 .status.pending {
+
   background: #fff6df;
 
-  color: #9a6a08;
+  color: #a9740b;
+
 }
 
+
 .status.reviewed {
+
   background: #eaf8f0;
 
-  color: #18864b;
+  color: #14914e;
+
 }
 
 
@@ -737,61 +982,91 @@ tbody tr:hover {
    ========================================================= */
 
 .actions {
+
   display: flex;
+
   align-items: center;
 
-  gap: 4px;
+  gap: 5px;
+
 }
 
+
 .action-button {
-  width: 28px;
-  height: 28px;
+
+  width: 30px;
+
+  height: 30px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
-  border: 1px solid #dbe3eb;
+  border:
+    1px solid #dce4ec;
 
   border-radius: 5px;
 
   background: #ffffff;
 
-  cursor: pointer;
+  font-size: 12px;
 
-  font-size: 10px;
+  cursor: pointer;
 
   transition:
     background 0.15s ease,
-    transform 0.15s ease;
+    border-color 0.15s ease;
+
 }
 
-.action-button:hover {
-  transform: translateY(-1px);
-}
 
 .action-button.view {
-  color: #2867d7;
+
+  color: #2867d8;
+
 }
+
 
 .action-button.view:hover {
+
   background: #edf4ff;
+
+  border-color: #cbdcf6;
+
 }
+
 
 .action-button.download {
+
   color: #18884c;
+
 }
+
 
 .action-button.download:hover {
+
   background: #eaf8f0;
+
+  border-color: #c8ead8;
+
 }
+
 
 .action-button.delete {
+
   color: #d9363e;
+
 }
 
+
 .action-button.delete:hover {
+
   background: #fff0f1;
+
+  border-color: #f0cdd0;
+
 }
 
 
@@ -800,39 +1075,55 @@ tbody tr:hover {
    ========================================================= */
 
 .empty-state {
+
   height: 240px;
 
   text-align: center;
+
 }
 
+
 .empty-state > div {
+
+  height: 100%;
+
   display: flex;
+
   flex-direction: column;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 6px;
 
-  height: 100%;
 }
 
+
 .empty-state span {
+
   font-size: 27px;
 
   opacity: 0.65;
+
 }
 
+
 .empty-state strong {
+
   color: #52677f;
 
   font-size: 11px;
+
 }
 
+
 .empty-state small {
+
   color: #929eac;
 
   font-size: 8px;
+
 }
 
 
@@ -841,6 +1132,7 @@ tbody tr:hover {
    ========================================================= */
 
 .information-note {
+
   display: flex;
 
   align-items: flex-start;
@@ -849,23 +1141,31 @@ tbody tr:hover {
 
   margin-top: 14px;
 
-  padding: 12px 14px;
+  padding:
+    12px 14px;
 
-  border: 1px solid #dbe5f0;
+  border:
+    1px solid #dbe5f0;
 
   border-radius: 7px;
 
   background: #f4f8fd;
+
 }
 
+
 .information-note > span {
+
   width: 21px;
+
   height: 21px;
 
   flex: 0 0 21px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border-radius: 50%;
@@ -877,15 +1177,21 @@ tbody tr:hover {
   font-size: 9px;
 
   font-weight: 700;
+
 }
 
+
 .information-note strong {
+
   color: #405a76;
 
   font-size: 9px;
+
 }
 
+
 .information-note p {
+
   margin: 3px 0 0;
 
   color: #7c8b9d;
@@ -893,6 +1199,7 @@ tbody tr:hover {
   font-size: 8px;
 
   line-height: 1.5;
+
 }
 
 
@@ -900,76 +1207,174 @@ tbody tr:hover {
    MODAL
    ========================================================= */
 
-.modal-overlay {
-  position: fixed;
+/*
+   CORRECCIÓN DEFINITIVA
 
-  inset: 0;
+   El overlay NO depende del tamaño
+   del componente.
 
-  z-index: 10000;
+   Ocupa absolutamente toda
+   la ventana del navegador.
+*/
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+:host.modal-open {
 
-  padding: 20px;
+  position: relative !important;
 
-  background: rgba(20, 37, 58, 0.48);
+  z-index: 2147483646 !important;
 
-  backdrop-filter: blur(2px);
 }
 
-.modal {
-  width: min(550px, 100%);
 
-  max-height: 90vh;
+/*
+   CAPA DEL FONDO
+*/
 
-  display: flex;
-  flex-direction: column;
+.modal-overlay {
+
+  position: fixed !important;
+
+  inset: 0 !important;
+
+  width: 100vw !important;
+
+  height: 100vh !important;
+
+  min-width: 100vw !important;
+
+  min-height: 100vh !important;
+
+  margin: 0 !important;
+
+  padding: 20px !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  overflow: hidden !important;
+
+  z-index: 2147483647 !important;
+
+  background:
+    rgba(28, 42, 58, 0.55) !important;
+
+  backdrop-filter:
+    blur(7px) !important;
+
+  -webkit-backdrop-filter:
+    blur(7px) !important;
+
+}
+
+
+/*
+   MODAL NÍTIDO
+*/
+
+.modal-overlay .modal {
+
+  position: relative !important;
+
+  z-index: 2147483647 !important;
+
+  width:
+    min(650px, calc(100vw - 40px)) !important;
+
+  max-height:
+    calc(100vh - 40px) !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  overflow: hidden !important;
 
   border-radius: 10px;
 
   background: #ffffff;
 
-  overflow: hidden;
-
   box-shadow:
-    0 20px 50px rgba(15, 23, 42, 0.22);
+    0 22px 60px
+    rgba(15, 23, 42, 0.30);
+
 }
 
 
-/* =========================================================
-   MODAL HEADER
-   ========================================================= */
+/*
+   HEADER
+*/
 
-.modal-header {
+.modal-overlay .modal-header {
+
+  flex:
+    0 0 auto !important;
+
   display: flex;
+
   align-items: flex-start;
+
   justify-content: space-between;
 
-  padding: 17px 18px;
+  padding:
+    17px 18px;
 
-  border-bottom: 1px solid #e3e8ee;
+  border-bottom:
+    1px solid #e3e8ee;
+
+  background: #ffffff;
+
 }
 
+
 .modal-header h2 {
+
   margin: 0;
 
   color: #203d61;
 
   font-size: 17px;
+
+  font-weight: 700;
+
 }
 
+
 .modal-header p {
-  margin: 4px 0 0;
+
+  margin:
+    4px 0 0;
 
   color: #8290a1;
 
   font-size: 9px;
+
 }
 
+
+/*
+   BOTÓN X
+*/
+
 .close-button {
+
   width: 29px;
+
   height: 29px;
+
+  flex: 0 0 29px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 
   border: none;
 
@@ -981,35 +1386,100 @@ tbody tr:hover {
 
   font-size: 20px;
 
+  line-height: 1;
+
   cursor: pointer;
+
 }
+
 
 .close-button:hover {
+
   background: #f1f5f9;
+
+  color: #3f5268;
+
 }
 
 
-/* =========================================================
-   MODAL BODY
-   ========================================================= */
+/*
+   BODY
 
-.modal-body {
+   Solamente esta zona hace scroll.
+*/
+
+.modal-overlay .modal-body {
+
+  min-height: 0 !important;
+
+  flex:
+    1 1 auto !important;
+
   padding: 20px;
 
-  overflow-y: auto;
+  overflow-y: auto !important;
+
+  overflow-x: hidden !important;
 
   text-align: center;
+
+  background: #ffffff;
+
 }
 
+
+/*
+   SCROLL
+*/
+
+.modal-body::-webkit-scrollbar {
+
+  width: 7px;
+
+}
+
+
+.modal-body::-webkit-scrollbar-track {
+
+  background: transparent;
+
+}
+
+
+.modal-body::-webkit-scrollbar-thumb {
+
+  background: #cbd5e1;
+
+  border-radius: 10px;
+
+}
+
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+
+  background: #96a4b3;
+
+}
+
+
+/*
+   ICONO PDF
+*/
+
 .preview-icon {
+
   width: 62px;
+
   height: 72px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
-  margin: 0 auto 12px;
+  margin:
+    0 auto 12px;
 
   border-radius: 8px;
 
@@ -1020,30 +1490,47 @@ tbody tr:hover {
   font-size: 13px;
 
   font-weight: 800;
+
 }
 
+
+/*
+   NOMBRE
+*/
+
 .modal-body h3 {
+
   margin: 0;
 
   color: #40566f;
 
   font-size: 12px;
+
+  font-weight: 700;
+
+  word-break: break-word;
+
 }
 
+
 .preview-size {
-  margin: 5px 0 17px;
+
+  margin:
+    5px 0 17px;
 
   color: #929eac;
 
   font-size: 8px;
+
 }
 
 
-/* =========================================================
+/*
    DETALLES
-   ========================================================= */
+*/
 
 .document-details {
+
   display: grid;
 
   grid-template-columns:
@@ -1052,112 +1539,179 @@ tbody tr:hover {
   gap: 8px;
 
   text-align: left;
+
 }
 
+
 .document-details > div {
+
   min-height: 48px;
 
   display: flex;
+
   flex-direction: column;
 
   justify-content: center;
 
-  padding: 8px 10px;
+  gap: 4px;
 
-  border: 1px solid #e3e9ef;
+  padding:
+    8px 10px;
+
+  border:
+    1px solid #dfe7ef;
 
   border-radius: 6px;
 
   background: #f9fbfd;
+
 }
 
+
 .document-details span {
-  color: #8a97a7;
+
+  color: #8493a3;
 
   font-size: 7px;
 
   text-transform: uppercase;
 
-  letter-spacing: 0.3px;
 }
+
 
 .document-details strong {
-  margin-top: 3px;
 
-  color: #40566f;
+  color: #405873;
 
   font-size: 9px;
+
+  line-height: 1.3;
+
+  word-break: break-word;
+
 }
 
 
-/* =========================================================
-   PLACEHOLDER
-   ========================================================= */
+/*
+   VISTA PREVIA DEL ARCHIVO
+*/
 
-.preview-placeholder {
-  min-height: 125px;
+.document-preview {
+
+  min-height: 130px;
 
   display: flex;
+
   flex-direction: column;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 6px;
 
   margin-top: 13px;
 
-  border: 1px dashed #cbd7e4;
+  padding:
+    18px;
+
+  border:
+    1px dashed #cbd8e5;
 
   border-radius: 7px;
 
-  background: #fafbfd;
+  background: #fbfcfe;
+
 }
 
-.preview-placeholder span {
-  font-size: 24px;
+
+.preview-document-icon {
+
+  width: 38px;
+
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #536b84;
+
+  font-size: 20px;
+
 }
 
-.preview-placeholder strong {
+
+.document-preview strong {
+
   color: #52677f;
 
   font-size: 9px;
-}
 
-.preview-placeholder small {
-  max-width: 350px;
-
-  color: #929eac;
-
-  font-size: 8px;
-
-  line-height: 1.4;
 }
 
 
-/* =========================================================
-   MODAL FOOTER
-   ========================================================= */
+.document-preview small {
 
-.modal-footer {
+  max-width: 440px;
+
+  color: #99a6b4;
+
+  font-size: 7px;
+
+  line-height: 1.5;
+
+}
+
+
+/*
+   FOOTER
+*/
+
+.modal-overlay .modal-footer {
+
+  flex:
+    0 0 auto !important;
+
   display: flex;
+
+  align-items: center;
 
   justify-content: flex-end;
 
-  gap: 7px;
+  gap: 8px;
 
-  padding: 12px 18px;
+  padding:
+    12px 18px;
 
-  border-top: 1px solid #e3e8ee;
+  border-top:
+    1px solid #e3e8ee;
 
-  background: #fbfcfd;
+  background: #ffffff;
+
 }
 
-.cancel-button,
-.download-button {
-  height: 36px;
 
-  padding: 0 13px;
+/*
+   BOTONES
+*/
+
+.btn {
+
+  min-height: 37px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  padding:
+    0 15px;
 
   border-radius: 6px;
 
@@ -1166,30 +1720,67 @@ tbody tr:hover {
   font-weight: 600;
 
   cursor: pointer;
+
 }
 
-.cancel-button {
-  border: 1px solid #d6dfe8;
+
+.btn-light {
+
+  border:
+    1px solid #d5dfe9;
 
   background: #ffffff;
 
-  color: #65758a;
+  color: #586e84;
+
 }
 
-.download-button {
-  border: 1px solid #2867df;
 
-  background: #2867df;
+.btn-light:hover {
+
+  background: #f5f7fa;
+
+}
+
+
+.btn-primary {
+
+  border:
+    1px solid #2867d8;
+
+  background: #2867d8;
 
   color: #ffffff;
+
 }
 
-.cancel-button:hover {
-  background: #f5f7fa;
+
+.btn-primary:hover {
+
+  background: #205bc4;
+
 }
 
-.download-button:hover {
-  background: #225dcc;
+
+/* =========================================================
+   BLOQUEAR SCROLL DE LA PÁGINA CUANDO HAY MODAL
+   ========================================================= */
+
+:host.modal-open {
+
+  overflow: visible;
+
+}
+
+
+/*
+   El overlay captura los eventos.
+*/
+
+:host.modal-open .documentos-page {
+
+  pointer-events: auto;
+
 }
 
 
@@ -1199,49 +1790,115 @@ tbody tr:hover {
 
 @media (max-width: 1100px) {
 
-  .stats-grid {
+  .filters {
+
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
+
   }
 
-  .filters {
-    grid-template-columns:
-      1fr 1fr;
+  .clear-button {
+
+    width: 100%;
+
   }
 
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
+
+  .stats-grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+  }
 
   .documentos-content {
-    padding: 15px;
+
+    padding:
+      15px;
+
   }
 
   .page-header {
-    padding: 15px;
+
+    padding:
+      15px;
+
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .stats-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .filters {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .page-header {
 
     align-items: flex-start;
 
     flex-direction: column;
 
     gap: 12px;
+
   }
 
   .header-period {
+
     align-items: flex-start;
-  }
 
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .filters {
-    grid-template-columns: 1fr;
   }
 
   .document-details {
+
     grid-template-columns: 1fr;
+
+  }
+
+  .modal-overlay {
+
+    padding: 10px !important;
+
+  }
+
+  .modal-overlay .modal {
+
+    width:
+      calc(100vw - 20px) !important;
+
+    max-width:
+      calc(100vw - 20px) !important;
+
+    max-height:
+      calc(100vh - 20px) !important;
+
+  }
+
+  .modal-overlay .modal-body {
+
+    padding:
+      15px;
+
+  }
+
+  .modal-overlay .modal-footer {
+
+    padding:
+      10px 15px;
+
   }
 
 }

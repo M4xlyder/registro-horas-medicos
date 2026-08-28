@@ -10,7 +10,9 @@
       Hospital San Juan Bautista de Huaral
     </span>
 
-    <span>/</span>
+    <span>
+      /
+    </span>
 
     <span>
       Gestión de documentos
@@ -191,7 +193,8 @@
         </h2>
 
         <span>
-          {{ documentosFiltrados.length }} resultados
+          {{ documentosFiltrados.length }}
+          resultados
         </span>
 
       </div>
@@ -233,7 +236,9 @@
               *ngFor="let especialidad of especialidades"
               [value]="especialidad"
             >
+
               {{ especialidad }}
+
             </option>
 
           </select>
@@ -273,11 +278,13 @@
         <!-- LIMPIAR -->
 
         <button
-          class="clear-button"
           type="button"
+          class="clear-button"
           (click)="limpiarFiltros()"
         >
+
           Limpiar filtros
+
         </button>
 
       </div>
@@ -291,7 +298,7 @@
 
     <section class="table-card">
 
-      <div class="table-container">
+      <div class="table-wrapper">
 
         <table>
 
@@ -338,6 +345,11 @@
 
           <tbody>
 
+
+            <!-- =================================================
+                 DOCUMENTOS
+                 ================================================= -->
+
             <tr
               *ngFor="
                 let documento of documentosFiltrados
@@ -352,11 +364,15 @@
                 <div class="doctor-cell">
 
                   <div class="doctor-avatar">
+
                     {{ documento.iniciales }}
+
                   </div>
 
                   <strong>
+
                     {{ documento.medico }}
+
                   </strong>
 
                 </div>
@@ -369,7 +385,9 @@
               <td>
 
                 <span class="specialty">
+
                   {{ documento.especialidad }}
+
                 </span>
 
               </td>
@@ -380,7 +398,9 @@
               <td>
 
                 <span class="date">
+
                   {{ documento.fecha }}
+
                 </span>
 
               </td>
@@ -395,19 +415,36 @@
                   <span
                     class="shift-code"
                     [ngClass]="{
-                      'green': documento.turno === 'GD',
-                      'blue': documento.turno === 'GN',
-                      'cyan': documento.turno === 'TD',
-                      'teal': documento.turno === 'TN',
-                      'yellow': documento.turno === 'M',
-                      'red': documento.turno === 'T'
+
+                      'green':
+                        documento.turno === 'GD',
+
+                      'blue':
+                        documento.turno === 'GN',
+
+                      'cyan':
+                        documento.turno === 'TD',
+
+                      'teal':
+                        documento.turno === 'TN',
+
+                      'yellow':
+                        documento.turno === 'M',
+
+                      'red':
+                        documento.turno === 'T'
+
                     }"
                   >
+
                     {{ documento.turno }}
+
                   </span>
 
                   <span>
+
                     {{ documento.nombreTurno }}
+
                   </span>
 
                 </div>
@@ -420,7 +457,9 @@
               <td>
 
                 <strong class="hours">
+
                   {{ documento.horas }} h
+
                 </strong>
 
               </td>
@@ -433,19 +472,27 @@
                 <div class="file-cell">
 
                   <div class="file-icon">
+
                     PDF
+
                   </div>
 
                   <div class="file-information">
 
                     <strong>
+
                       {{ documento.nombreArchivo }}
+
                     </strong>
 
                     <small>
+
                       {{ documento.tipoArchivo }}
+
                       ·
+
                       {{ documento.tamanio }}
+
                     </small>
 
                   </div>
@@ -462,22 +509,30 @@
                 <button
                   type="button"
                   class="status"
+
                   [class.pending]="
                     documento.estado === 'Pendiente'
                   "
+
                   [class.reviewed]="
                     documento.estado === 'Revisado'
                   "
-                  (click)="cambiarEstado(documento)"
+
+                  (click)="
+                    cambiarEstado(documento)
+                  "
+
                   title="Cambiar estado"
                 >
 
                   <span>
+
                     {{
                       documento.estado === 'Revisado'
                         ? '✓'
                         : '!'
                     }}
+
                   </span>
 
                   {{ documento.estado }}
@@ -493,31 +548,58 @@
 
                 <div class="actions">
 
+
+                  <!-- VER -->
+
                   <button
                     type="button"
                     class="action-button view"
+
                     title="Ver documento"
-                    (click)="verDocumento(documento)"
+
+                    (click)="
+                      verDocumento(documento)
+                    "
                   >
+
                     👁
+
                   </button>
+
+
+                  <!-- DESCARGAR -->
 
                   <button
                     type="button"
                     class="action-button download"
+
                     title="Descargar"
-                    (click)="descargarDocumento(documento)"
+
+                    (click)="
+                      descargarDocumento(documento)
+                    "
                   >
+
                     ↓
+
                   </button>
+
+
+                  <!-- ELIMINAR -->
 
                   <button
                     type="button"
                     class="action-button delete"
+
                     title="Eliminar"
-                    (click)="eliminarDocumento(documento)"
+
+                    (click)="
+                      eliminarDocumento(documento)
+                    "
                   >
+
                     🗑
+
                   </button>
 
                 </div>
@@ -532,7 +614,9 @@
                  ================================================= -->
 
             <tr
-              *ngIf="documentosFiltrados.length === 0"
+              *ngIf="
+                documentosFiltrados.length === 0
+              "
             >
 
               <td
@@ -599,28 +683,44 @@
 
 
   <!-- =====================================================
-       MODAL VISTA PREVIA
+       MODAL DE VISTA PREVIA
        ===================================================== -->
 
   <div
-    class="modal-overlay"
     *ngIf="mostrarVistaPrevia"
-    (click)="cerrarVistaPrevia()"
+
+    class="modal-overlay"
+
+    (click)="cerrarSiClickEnOverlay($event)"
   >
 
-    <div
+
+    <!-- ===================================================
+         MODAL
+         =================================================== -->
+
+    <section
       class="modal"
+
+      role="dialog"
+
+      aria-modal="true"
+
+      aria-labelledby="documento-modal-title"
+
       (click)="$event.stopPropagation()"
     >
 
 
-      <!-- HEADER -->
+      <!-- =================================================
+           HEADER DEL MODAL
+           ================================================= -->
 
-      <div class="modal-header">
+      <header class="modal-header">
 
         <div>
 
-          <h2>
+          <h2 id="documento-modal-title">
             Documento
           </h2>
 
@@ -630,123 +730,196 @@
 
         </div>
 
+
         <button
           type="button"
+
           class="close-button"
+
+          title="Cerrar"
+
+          aria-label="Cerrar"
+
           (click)="cerrarVistaPrevia()"
         >
+
           ×
+
         </button>
 
-      </div>
+      </header>
 
 
-      <!-- BODY -->
+      <!-- =================================================
+           BODY
+           ================================================= -->
 
       <div
         class="modal-body"
+
         *ngIf="documentoSeleccionado"
       >
 
+
+        <!-- ICONO PDF -->
+
         <div class="preview-icon">
+
           PDF
+
         </div>
 
 
+        <!-- NOMBRE -->
+
         <h3>
-          {{ documentoSeleccionado.nombreArchivo }}
+
+          {{
+            documentoSeleccionado.nombreArchivo
+          }}
+
         </h3>
 
 
         <p class="preview-size">
 
-          {{ documentoSeleccionado.tipoArchivo }}
+          {{
+            documentoSeleccionado.tipoArchivo
+          }}
 
           ·
 
-          {{ documentoSeleccionado.tamanio }}
+          {{
+            documentoSeleccionado.tamanio
+          }}
 
         </p>
 
 
+        <!-- =================================================
+             DETALLES
+             ================================================= -->
+
         <div class="document-details">
 
 
+          <!-- MÉDICO -->
+
           <div>
 
             <span>
-              Médico
+              MÉDICO
             </span>
 
             <strong>
-              {{ documentoSeleccionado.medico }}
+
+              {{
+                documentoSeleccionado.medico
+              }}
+
             </strong>
 
           </div>
 
 
+          <!-- ESPECIALIDAD -->
+
           <div>
 
             <span>
-              Especialidad
+              ESPECIALIDAD
             </span>
 
             <strong>
-              {{ documentoSeleccionado.especialidad }}
+
+              {{
+                documentoSeleccionado.especialidad
+              }}
+
             </strong>
 
           </div>
 
 
+          <!-- FECHA -->
+
           <div>
 
             <span>
-              Fecha
+              FECHA
             </span>
 
             <strong>
-              {{ documentoSeleccionado.fecha }}
+
+              {{
+                documentoSeleccionado.fecha
+              }}
+
             </strong>
 
           </div>
 
 
+          <!-- TURNO -->
+
           <div>
 
             <span>
-              Turno
+              TURNO
             </span>
 
             <strong>
-              {{ documentoSeleccionado.turno }}
+
+              {{
+                documentoSeleccionado.turno
+              }}
+
               -
-              {{ documentoSeleccionado.nombreTurno }}
+
+              {{
+                documentoSeleccionado.nombreTurno
+              }}
+
             </strong>
 
           </div>
 
 
+          <!-- DURACIÓN -->
+
           <div>
 
             <span>
-              Duración
+              DURACIÓN
             </span>
 
             <strong>
-              {{ documentoSeleccionado.horas }} horas
+
+              {{
+                documentoSeleccionado.horas
+              }}
+
+              horas
+
             </strong>
 
           </div>
 
 
+          <!-- ESTADO -->
+
           <div>
 
             <span>
-              Estado
+              ESTADO
             </span>
 
             <strong>
-              {{ documentoSeleccionado.estado }}
+
+              {{
+                documentoSeleccionado.estado
+              }}
+
             </strong>
 
           </div>
@@ -754,11 +927,19 @@
         </div>
 
 
-        <div class="preview-placeholder">
+        <!-- =================================================
+             VISTA PREVIA
+             ================================================= -->
 
-          <span>
-            📄
-          </span>
+        <div class="document-preview">
+
+          <div class="preview-document-icon">
+
+            <span>
+              ▤
+            </span>
+
+          </div>
 
           <strong>
             Vista previa del documento
@@ -774,30 +955,47 @@
       </div>
 
 
-      <!-- FOOTER -->
+      <!-- =================================================
+           FOOTER
+           ================================================= -->
 
-      <div class="modal-footer">
+      <footer class="modal-footer">
 
         <button
           type="button"
-          class="cancel-button"
+
+          class="btn btn-light"
+
           (click)="cerrarVistaPrevia()"
         >
+
           Cerrar
+
         </button>
+
 
         <button
           type="button"
-          class="download-button"
+
+          class="btn btn-primary"
+
           *ngIf="documentoSeleccionado"
-          (click)="descargarDocumento(documentoSeleccionado)"
+
+          (click)="
+            descargarDocumento(
+              documentoSeleccionado
+            )
+          "
         >
+
+          ↓
           Descargar documento
+
         </button>
 
-      </div>
+      </footer>
 
-    </div>
+    </section>
 
   </div>
 

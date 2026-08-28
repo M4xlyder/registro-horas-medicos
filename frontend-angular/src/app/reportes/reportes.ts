@@ -2,16 +2,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 
-interface ReportePersonal {
+interface ReporteEmpleado {
+
   id: number;
 
-  tipoContrato:
-    | 'Nombrado'
-    | 'CAS'
-    | 'Residente'
-    | 'Tercero'
-    | 'Contrato a plazo fijo'
-    | 'Contrato a suplencia';
+  tipoContrato: string;
 
   departamento: string;
 
@@ -19,514 +14,260 @@ interface ReportePersonal {
 
   nombre: string;
 
-  primerApellido: string;
+  apellido: string;
 
   meta: number;
 
   programadas: number;
+
+  faltantes: number;
+
+  cumplimiento: number;
+
+  estado: 'Activo' | 'Inactivo';
+
 }
 
+
 @Component({
+
   selector: 'app-reportes',
+
   standalone: true,
+
   imports: [
     CommonModule,
     FormsModule
   ],
+
   templateUrl: './reportes.html',
+
   styleUrl: './reportes.css'
+
 })
+
+
 export class Reportes {
 
-  // =====================================================
-  // PERIODO
-  // =====================================================
-
-  periodo = 'Agosto 2026';
-
 
   // =====================================================
-  // BÚSQUEDA
+  // META MENSUAL
   // =====================================================
 
-  busqueda = '';
+  readonly META_MENSUAL = 150;
 
 
   // =====================================================
   // FILTROS
   // =====================================================
 
-  filtroContrato = 'Todos';
+  busqueda = '';
 
-  filtroDepartamento = 'Todos';
+  filtroContrato = '';
 
-  filtroEspecialidad = 'Todas';
+  filtroDepartamento = '';
 
-  filtroEstado = 'Todos';
+  filtroEspecialidad = '';
 
-
-  // =====================================================
-  // TIPOS DE CONTRATO
-  // =====================================================
-
-  tiposContrato: string[] = [
-
-    'Todos',
-
-    'Nombrado',
-
-    'CAS',
-
-    'Residente',
-
-    'Tercero',
-
-    'Contrato a plazo fijo',
-
-    'Contrato a suplencia'
-
-  ];
+  filtroEstado = '';
 
 
   // =====================================================
-  // DEPARTAMENTOS
+  // DATOS
   // =====================================================
 
-  departamentos: string[] = [
-
-    'Todos',
-
-    'Emergencia y Cuidados Críticos',
-
-    'Anestesiología',
-
-    'Ginecología y Obstetricia',
-
-    'Cirugía',
-
-    'Pediatría',
-
-    'Medicina'
-
-  ];
-
-
-  // =====================================================
-  // ESPECIALIDADES POR DEPARTAMENTO
-  // =====================================================
-
-  especialidadesPorDepartamento:
-    Record<string, string[]> = {
-
-      'Emergencia y Cuidados Críticos': [
-
-        'Medicina intensiva',
-
-        'Medicina interna a plazo fijo',
-
-        'Medicina general',
-
-        'Emergenciólogo plazo fijo',
-
-        'Medicina general cont. suplencia',
-
-        'Intensivista',
-
-        'Emergenciólogo'
-
-      ],
-
-      'Anestesiología': [
-
-        'Anestesiólogos'
-
-      ],
-
-      'Ginecología y Obstetricia': [
-
-        'Ginecólogos',
-
-        'Obstetricias'
-
-      ],
-
-      'Cirugía': [
-
-        'Cirujanos',
-
-        'Traumatólogos',
-
-        'Otorrinos',
-
-        'Oftalmólogo',
-
-        'Urólogos'
-
-      ],
-
-      'Pediatría': [
-
-        'Pediatras'
-
-      ],
-
-      'Medicina': [
-
-        'Medicina interna',
-
-        'Neurología',
-
-        'Psiquiatría',
-
-        'Gastro',
-
-        'Medicina física y rehabilitación',
-
-        'Medicina general',
-
-        'Gastroenterólogo',
-
-        'Reumatólogos',
-
-        'Oncólogos',
-
-        'Neumólogos'
-
-      ]
-
-    };
-
-
-  // =====================================================
-  // DATOS DE PRUEBA
-  // =====================================================
-
-  reportes: ReportePersonal[] = [
+  reportes: ReporteEmpleado[] = [
 
     {
       id: 1,
-
       tipoContrato: 'Nombrado',
-
       departamento: 'Medicina',
-
       especialidad: 'Medicina interna',
-
       nombre: 'Marcelo',
-
-      primerApellido: 'Pérez',
-
+      apellido: 'Pérez',
       meta: 150,
-
-      programadas: 150
+      programadas: 150,
+      faltantes: 0,
+      cumplimiento: 100,
+      estado: 'Activo'
     },
 
     {
       id: 2,
-
       tipoContrato: 'CAS',
-
-      departamento: 'Emergencia y Cuidados Críticos',
-
-      especialidad: 'Emergenciólogo',
-
+      departamento: 'Medicina',
+      especialidad: 'Neurología',
       nombre: 'Juan',
-
-      primerApellido: 'García',
-
+      apellido: 'García',
       meta: 150,
-
-      programadas: 138
+      programadas: 138,
+      faltantes: 12,
+      cumplimiento: 92,
+      estado: 'Activo'
     },
 
     {
       id: 3,
-
-      tipoContrato: 'Residente',
-
-      departamento: 'Pediatría',
-
-      especialidad: 'Pediatras',
-
+      tipoContrato: 'Contrato a plazo fijo',
+      departamento: 'Cirugía',
+      especialidad: 'Traumatología',
       nombre: 'Carlos',
-
-      primerApellido: 'Zafra',
-
+      apellido: 'Zafra',
       meta: 150,
-
-      programadas: 150
+      programadas: 150,
+      faltantes: 0,
+      cumplimiento: 100,
+      estado: 'Activo'
     },
 
     {
       id: 4,
-
-      tipoContrato: 'Contrato a plazo fijo',
-
+      tipoContrato: 'Contrato a suplencia',
       departamento: 'Ginecología y Obstetricia',
-
-      especialidad: 'Ginecólogos',
-
+      especialidad: 'Ginecología',
       nombre: 'Ambar',
-
-      primerApellido: 'Barriga',
-
+      apellido: 'Barriga',
       meta: 150,
-
-      programadas: 142
+      programadas: 142,
+      faltantes: 8,
+      cumplimiento: 95,
+      estado: 'Activo'
     },
 
     {
       id: 5,
-
-      tipoContrato: 'Contrato a suplencia',
-
-      departamento: 'Emergencia y Cuidados Críticos',
-
-      especialidad: 'Medicina general cont. suplencia',
-
+      tipoContrato: 'Tercero',
+      departamento: 'Medicina',
+      especialidad: 'Medicina general',
       nombre: 'Kian',
-
-      primerApellido: 'Okuhama',
-
+      apellido: 'Okuhama',
       meta: 150,
-
-      programadas: 130
+      programadas: 130,
+      faltantes: 20,
+      cumplimiento: 87,
+      estado: 'Activo'
     },
 
     {
       id: 6,
-
-      tipoContrato: 'Tercero',
-
-      departamento: 'Cirugía',
-
-      especialidad: 'Traumatólogos',
-
-      nombre: 'Pedro',
-
-      primerApellido: 'Ramírez',
-
+      tipoContrato: 'Nombrado',
+      departamento: 'Emergencia y Cuidados Críticos',
+      especialidad: 'Medicina intensiva',
+      nombre: 'Luis',
+      apellido: 'Ramírez',
       meta: 150,
-
-      programadas: 156
+      programadas: 150,
+      faltantes: 0,
+      cumplimiento: 100,
+      estado: 'Activo'
     },
 
     {
       id: 7,
-
-      tipoContrato: 'Nombrado',
-
-      departamento: 'Anestesiología',
-
-      especialidad: 'Anestesiólogos',
-
-      nombre: 'Luis',
-
-      primerApellido: 'Torres',
-
+      tipoContrato: 'Contrato a plazo fijo',
+      departamento: 'Emergencia y Cuidados Críticos',
+      especialidad: 'Emergenciólogo plazo fijo',
+      nombre: 'Andrea',
+      apellido: 'Torres',
       meta: 150,
-
-      programadas: 150
+      programadas: 135,
+      faltantes: 15,
+      cumplimiento: 90,
+      estado: 'Activo'
     },
 
     {
       id: 8,
-
-      tipoContrato: 'CAS',
-
-      departamento: 'Medicina',
-
-      especialidad: 'Neurología',
-
-      nombre: 'Andrea',
-
-      primerApellido: 'Flores',
-
+      tipoContrato: 'Contrato a suplencia',
+      departamento: 'Anestesiología',
+      especialidad: 'Anestesiología',
+      nombre: 'Daniel',
+      apellido: 'Vargas',
       meta: 150,
-
-      programadas: 145
+      programadas: 150,
+      faltantes: 0,
+      cumplimiento: 100,
+      estado: 'Activo'
     },
 
     {
       id: 9,
-
-      tipoContrato: 'Tercero',
-
-      departamento: 'Cirugía',
-
-      especialidad: 'Urólogos',
-
-      nombre: 'José',
-
-      primerApellido: 'Castillo',
-
+      tipoContrato: 'CAS',
+      departamento: 'Pediatría',
+      especialidad: 'Pediatría',
+      nombre: 'Sofía',
+      apellido: 'Mendoza',
       meta: 150,
-
-      programadas: 125
+      programadas: 145,
+      faltantes: 5,
+      cumplimiento: 97,
+      estado: 'Activo'
     },
 
     {
       id: 10,
-
-      tipoContrato: 'Contrato a plazo fijo',
-
+      tipoContrato: 'Tercero',
       departamento: 'Medicina',
-
-      especialidad: 'Oncólogos',
-
-      nombre: 'Daniel',
-
-      primerApellido: 'Vargas',
-
+      especialidad: 'Reumatología',
+      nombre: 'Pedro',
+      apellido: 'Salazar',
       meta: 150,
-
-      programadas: 150
+      programadas: 120,
+      faltantes: 30,
+      cumplimiento: 80,
+      estado: 'Inactivo'
     }
 
   ];
 
 
   // =====================================================
-  // ESPECIALIDADES DISPONIBLES
+  // CONTRATOS
   // =====================================================
 
-  get especialidadesDisponibles(): string[] {
-
-    if (
-      this.filtroDepartamento === 'Todos'
-    ) {
-
-      const todas = Object.values(
-        this.especialidadesPorDepartamento
-      ).flat();
-
-      return [
-        'Todas',
-        ...todas.filter(
-          (especialidad, index) =>
-            todas.indexOf(especialidad) === index
-        )
-      ];
-
-    }
-
+  get tiposContrato(): string[] {
 
     return [
-
-      'Todas',
-
-      ...(
-        this.especialidadesPorDepartamento[
-          this.filtroDepartamento
-        ] || []
-
+      ...new Set(
+        this.reportes.map(
+          reporte => reporte.tipoContrato
+        )
       )
-
     ];
 
   }
 
 
   // =====================================================
-  // CAMBIO DE DEPARTAMENTO
+  // DEPARTAMENTOS
   // =====================================================
 
-  cambioDepartamento(): void {
+  get departamentos(): string[] {
 
-    this.filtroEspecialidad = 'Todas';
+    return [
+      ...new Set(
+        this.reportes.map(
+          reporte => reporte.departamento
+        )
+      )
+    ];
 
   }
 
 
   // =====================================================
-  // NOMBRE COMPLETO
+  // ESPECIALIDADES
   // =====================================================
 
-  nombreCompleto(
-    reporte: ReportePersonal
-  ): string {
+  get especialidades(): string[] {
 
-    return `${reporte.nombre} ${reporte.primerApellido}`;
-
-  }
-
-
-  // =====================================================
-  // HORAS FALTANTES
-  // =====================================================
-
-  horasFaltantes(
-    reporte: ReportePersonal
-  ): number {
-
-    return Math.max(
-
-      reporte.meta -
-      reporte.programadas,
-
-      0
-
-    );
-
-  }
-
-
-  // =====================================================
-  // CUMPLIMIENTO
-  // =====================================================
-
-  porcentajeCumplimiento(
-    reporte: ReportePersonal
-  ): number {
-
-    if (
-      reporte.meta === 0
-    ) {
-
-      return 0;
-
-    }
-
-    return Math.round(
-
-      (
-        reporte.programadas /
-        reporte.meta
-
-      ) * 100
-
-    );
-
-  }
-
-
-  // =====================================================
-  // ESTADO
-  // =====================================================
-
-  cumpleMeta(
-    reporte: ReportePersonal
-  ): boolean {
-
-    return (
-      reporte.programadas >=
-      reporte.meta
-    );
-
-  }
-
-
-  // =====================================================
-  // TEXTO ESTADO
-  // =====================================================
-
-  textoEstado(
-    reporte: ReportePersonal
-  ): string {
-
-    return this.cumpleMeta(reporte)
-      ? 'Cumple'
-      : 'Pendiente';
+    return [
+      ...new Set(
+        this.reportes.map(
+          reporte => reporte.especialidad
+        )
+      )
+    ];
 
   }
 
@@ -535,7 +276,7 @@ export class Reportes {
   // REPORTES FILTRADOS
   // =====================================================
 
-  get reportesFiltrados(): ReportePersonal[] {
+  get reportesFiltrados(): ReporteEmpleado[] {
 
     const texto =
       this.busqueda
@@ -546,53 +287,53 @@ export class Reportes {
     return this.reportes.filter(
       reporte => {
 
-        const nombre =
-          this.nombreCompleto(
-            reporte
-          ).toLowerCase();
-
-
         const coincideBusqueda =
+
           !texto ||
-          nombre.includes(texto);
+
+          reporte.nombre
+            .toLowerCase()
+            .includes(texto) ||
+
+          reporte.apellido
+            .toLowerCase()
+            .includes(texto) ||
+
+          `${reporte.nombre} ${reporte.apellido}`
+            .toLowerCase()
+            .includes(texto);
 
 
         const coincideContrato =
-          this.filtroContrato === 'Todos' ||
+
+          !this.filtroContrato ||
+
           reporte.tipoContrato ===
           this.filtroContrato;
 
 
         const coincideDepartamento =
-          this.filtroDepartamento === 'Todos' ||
+
+          !this.filtroDepartamento ||
+
           reporte.departamento ===
           this.filtroDepartamento;
 
 
         const coincideEspecialidad =
-          this.filtroEspecialidad === 'Todas' ||
+
+          !this.filtroEspecialidad ||
+
           reporte.especialidad ===
           this.filtroEspecialidad;
 
 
-        const cumple =
-          this.cumpleMeta(
-            reporte
-          );
-
-
         const coincideEstado =
-          this.filtroEstado === 'Todos' ||
 
-          (
-            this.filtroEstado === 'Cumple' &&
-            cumple
-          ) ||
+          !this.filtroEstado ||
 
-          (
-            this.filtroEstado === 'Pendiente' &&
-            !cumple
-          );
+          reporte.estado ===
+          this.filtroEstado;
 
 
         return (
@@ -610,14 +351,13 @@ export class Reportes {
         );
 
       }
-
     );
 
   }
 
 
   // =====================================================
-  // CONTADORES
+  // TOTAL PERSONAL
   // =====================================================
 
   get totalPersonal(): number {
@@ -627,92 +367,70 @@ export class Reportes {
   }
 
 
+  // =====================================================
+  // TOTAL QUE CUMPLE
+  // =====================================================
+
   get totalCumplen(): number {
 
     return this.reportes.filter(
       reporte =>
-        this.cumpleMeta(reporte)
+        reporte.programadas >= this.META_MENSUAL
     ).length;
 
   }
 
+
+  // =====================================================
+  // TOTAL PENDIENTES
+  // =====================================================
 
   get totalPendientes(): number {
 
     return this.reportes.filter(
       reporte =>
-        !this.cumpleMeta(reporte)
+        reporte.programadas <
+        this.META_MENSUAL
     ).length;
 
   }
 
 
   // =====================================================
-  // META TOTAL
+  // HORAS PROGRAMADAS
   // =====================================================
 
-  get metaTotal(): number {
+  get totalProgramadas(): number {
 
     return this.reportes.reduce(
-
       (
         total,
         reporte
       ) =>
-
-        total +
-        reporte.meta,
-
-      0
-
-    );
-
-  }
-
-
-  // =====================================================
-  // HORAS PROGRAMADAS TOTAL
-  // =====================================================
-
-  get horasProgramadasTotal(): number {
-
-    return this.reportes.reduce(
-
-      (
-        total,
-        reporte
-      ) =>
-
         total +
         reporte.programadas,
 
       0
-
     );
 
   }
 
 
   // =====================================================
-  // HORAS FALTANTES TOTAL
+  // HORAS FALTANTES
   // =====================================================
 
-  get horasFaltantesTotal(): number {
+  get totalFaltantes(): number {
 
     return this.reportes.reduce(
-
       (
         total,
         reporte
       ) =>
-
         total +
-        this.horasFaltantes(
-          reporte
-        ),
+        reporte.faltantes,
 
       0
-
     );
 
   }
@@ -724,28 +442,35 @@ export class Reportes {
 
   get cumplimientoGeneral(): number {
 
-    if (
-      this.metaTotal === 0
-    ) {
+    if (!this.reportes.length) {
 
       return 0;
 
     }
 
+
+    const totalMeta =
+      this.reportes.length *
+      this.META_MENSUAL;
+
+
+    if (totalMeta === 0) {
+
+      return 0;
+
+    }
+
+
+    const porcentaje =
+      (
+        this.totalProgramadas /
+        totalMeta
+      ) * 100;
+
+
     return Math.min(
-
-      Math.round(
-
-        (
-          this.horasProgramadasTotal /
-          this.metaTotal
-
-        ) * 100
-
-      ),
-
+      Math.round(porcentaje),
       100
-
     );
 
   }
@@ -759,13 +484,13 @@ export class Reportes {
 
     this.busqueda = '';
 
-    this.filtroContrato = 'Todos';
+    this.filtroContrato = '';
 
-    this.filtroDepartamento = 'Todos';
+    this.filtroDepartamento = '';
 
-    this.filtroEspecialidad = 'Todas';
+    this.filtroEspecialidad = '';
 
-    this.filtroEstado = 'Todos';
+    this.filtroEstado = '';
 
   }
 
@@ -777,8 +502,22 @@ export class Reportes {
   exportarReporte(): void {
 
     alert(
-      'La exportación a Excel/PDF se habilitará cuando conectemos el backend.'
+      'La exportación del reporte estará disponible cuando conectemos el backend.'
     );
+
+  }
+
+
+  // =====================================================
+  // TRACK BY
+  // =====================================================
+
+  trackById(
+    index: number,
+    reporte: ReporteEmpleado
+  ): number {
+
+    return reporte.id;
 
   }
 

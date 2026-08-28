@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+
+    "target": "ES2023",
+
+    "ignoreDeprecations": "6.0",
+
+    "strict": true,
+    "strictPropertyInitialization": false,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "sourceMap": true,
+    "declaration": true,
+    "removeComments": true,
+
+    "incremental": true,
+    "skipLibCheck": true,
+
+    "outDir": "./dist",
+
+    "types": [
+      "vitest/globals",
+      "node"
+    ]
+  }
+}

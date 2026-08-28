@@ -2288,7 +2288,6 @@ body.dark-theme .search-select-empty {
    los dropdowns.
 */
 
-.modal-body,
 .form-section-title,
 .form-grid,
 .form-field {
@@ -2657,4 +2656,132 @@ button:hover {
   background: #263747;
 
   color: #ffffff;
+}
+
+
+/* =========================================================
+   CORRECCIÓN DEFINITIVA DE MODALES
+   ========================================================= */
+
+/*
+   Cuando existe un modal, el componente completo de
+   Configuración sube por encima del header/sidebar de la
+   aplicación. Esto evita que la barra superior quede
+   limpia mientras el resto de la pantalla está desenfocada.
+*/
+:host:has(.modal-overlay) {
+  position: relative !important;
+  z-index: 2147483646 !important;
+}
+
+/*
+   El overlay cubre toda la ventana del navegador.
+*/
+.modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  min-width: 100vw !important;
+  min-height: 100vh !important;
+
+  margin: 0 !important;
+  padding: 20px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  z-index: 2147483647 !important;
+
+  background: rgba(23, 38, 55, 0.60) !important;
+
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+
+  overflow: hidden !important;
+}
+
+/*
+   El modal permanece completamente nítido.
+*/
+.modal-overlay > .modal {
+  position: relative !important;
+  z-index: 2147483647 !important;
+
+  margin: 0 !important;
+
+  max-height: calc(100vh - 40px) !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+}
+
+/*
+   Solo el cuerpo del modal tiene scroll.
+   Header y footer permanecen visibles.
+*/
+.modal-overlay > .modal .modal-body {
+  min-height: 0 !important;
+  overflow-x: visible !important;
+  overflow-y: auto !important;
+}
+
+/*
+   El encabezado y pie permanecen nítidos.
+*/
+.modal-overlay > .modal .modal-header,
+.modal-overlay > .modal .modal-footer {
+  position: relative !important;
+  z-index: 2 !important;
+  flex: 0 0 auto !important;
+}
+
+/*
+   Botón X.
+*/
+.modal-overlay > .modal .modal-close {
+  position: relative !important;
+  z-index: 3 !important;
+  cursor: pointer !important;
+}
+
+/*
+   Los dropdowns del formulario siguen funcionando.
+*/
+.modal-overlay .form-grid,
+.modal-overlay .form-field,
+.modal-overlay .form-search-select,
+.modal-overlay .modal-body {
+  overflow: visible !important;
+}
+
+.modal-overlay > .modal .modal-body {
+  overflow-y: auto !important;
+}
+
+/*
+   Mantener los dropdowns por encima de otros campos.
+*/
+.modal-overlay .form-search-select .search-select-menu {
+  z-index: 2147483647 !important;
+}
+
+/*
+   En pantallas pequeñas.
+*/
+@media (max-width: 700px) {
+  .modal-overlay {
+    padding: 10px !important;
+  }
+
+  .modal-overlay > .modal {
+    width: calc(100vw - 20px) !important;
+    max-width: calc(100vw - 20px) !important;
+    max-height: calc(100vh - 20px) !important;
+  }
 }

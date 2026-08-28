@@ -1,5 +1,24 @@
 :host {
   display: block;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }
